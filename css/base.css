@@ -1,0 +1,112 @@
+/* ===== ESTILOS BASE ===== */
+@import url('variables.css');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-root-dark);
+    color: var(--text-secondary-dark);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    cursor: none; /* Hide default cursor */
+}
+
+/* Aplicar fuentes y tamaños consistentes */
+body, .lateral-nav, .project-card, .cta-btn, .project-btn, .liquid-glass-btn,
+.filter-tab, .mobile-nav-link, .project-card li {
+    font-family: var(--font-family, 'Inter', sans-serif);
+}
+
+body, p, h1, h2, h3, h4, h5, h6,
+.lateral-nav a, .project-card, .cta-btn, .liquid-glass-btn,
+.project-btn, .filter-tab, .mobile-nav-link,
+.access-btn, .project-card li {
+    font-size: var(--font-size);
+}
+
+/* Clases de utilidad */
+.text-content { text-align: var(--text-align); }
+.font-fira-code { font-family: 'Fira Code', monospace; }
+.text-accent { color: var(--accent); }
+
+/* Cursor personalizado */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+    z-index: 10005;
+    mix-blend-mode: difference;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-cursor .cursor-symbol {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    color: var(--accent);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.3s;
+    animation: cursor-blink 1s steps(2, start) infinite;
+}
+
+.custom-cursor.hovered {
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0, 229, 255, 0.2);
+}
+
+.custom-cursor.hovered .cursor-symbol {
+    font-size: 1.3rem;
+    color: var(--bg-dark);
+    animation: none;
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+/* Canvas de fondo */
+#background-canvas { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+}
+
+#skip-intro-prompt {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100vw;
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 768px) {
+    #skip-intro-prompt {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        font-size: 1.1rem;
+        z-index: 10010;
+        width: 100vw;
+        max-width: 100vw;
+        padding: 0 1rem;
+    }
+} 

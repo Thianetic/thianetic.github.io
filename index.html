@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thianetic | Desarrollador de Software</title>
+    
+    <!-- ===== SEO & SOCIAL META TAGS ===== -->
+    <meta name="description" content="Portfolio de Thianetic, desarrollador de software especializado en crear experiencias digitales excepcionales, fluidas y accesibles.">
+    <meta name="author" content="Thianetic">
+    <meta property="og:title" content="Thianetic | Desarrollador de Software">
+    <meta property="og:description" content="Portfolio de un desarrollador de software que combina diseño y código para construir productos memorables.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://thianetic.dev">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <!-- ===== FONT LOADING OPTIMIZATION ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700;900&family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ===== EXTERNAL LIBRARIES ===== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- ===== ICONIFY (GRATUITO PARA USO COMERCIAL) ===== -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    
+    <!-- ===== CSS MODULAR ===== -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- ===== FORMULARIO DE CONTACTO ===== -->
+    <style>
+        .contact-form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+        }
+        
+        .contact-form-input.border-red-500 {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .contact-form-input.border-red-500:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+        }
+        
+        /* ===== NOTIFICACIONES ===== */
+        .notification-enter {
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .notification-exit {
+            animation: slideOutRight 0.3s ease-in;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            #hero {
+                /*margin-top: 80px;*/
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            #theme-toggle-desktop {
+                display: none;
+            }
+            #header-title {
+                z-index: 50;
+            }
+        }
+
+        /* ===== TECH CARDS ===== */
+        .tech-card {
+            background: var(--card-dark);
+            border: 1px solid var(--line-color-dark);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.15);
+            border-color: var(--accent);
+        }
+
+        .tech-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .tech-icon {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover .tech-icon {
+            transform: scale(1.1);
+        }
+
+        .tech-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary-dark);
+            margin-bottom: 0.5rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .tech-category {
+            font-size: 0.85rem;
+            color: var(--text-secondary-dark);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 1024px) {
+            .tech-card {
+                padding: 1.5rem 1rem;
+            }
+            .tech-icon {
+                height: 50px;
+            }
+            .tech-name {
+                font-size: 1rem;
+            }
+            .tech-category {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-device .tech-card {
+                padding: 1.25rem 1rem;
+            }
+            .mobile-device .tech-icon {
+                height: 45px;
+            }
+            .mobile-device .tech-name {
+                font-size: 0.95rem;
+            }
+            .mobile-device .tech-category {
+                font-size: 0.75rem;
+            }
+        }
+
+        .tech-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .tech-card:hover::after {
+            left: 100%;
+        }
+
+        #skip-intro-prompt {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            min-width: 180px;
+            max-width: 95vw;
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10000;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        #skip-intro-prompt.visible {
+            opacity: 0.5;
+            pointer-events: auto;
+        }
+        #skip-intro-prompt.bounce {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        #skip-intro-prompt.blink {
+            animation: blink 0.5s steps(1) 3;
+        }
+        @media (max-width: 768px) {
+            #skip-intro-prompt {
+                position: fixed;
+                bottom: 1.5rem !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: auto;
+                min-width: 180px;
+                max-width: 95vw;
+                text-align: center;
+                font-size: 1rem;
+                z-index: 10000;
+            }
+        }
+
+        .attribution-logo img, .attribution-logo svg {
+          width: 2.5rem;
+          height: 2.5rem;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto;
+        }
+        .attribution-item > div:not(.attribution-logo) {
+          text-align: left !important;
+        }
+
+        .level-indicator {
+          display: block;
+          position: static;
+          text-align: center;
+          font-size: 0.75rem;
+          font-weight: bold;
+          color: var(--accent);
+          text-transform: uppercase;
+          margin-top: 0.25rem;
+        }
+        .access-btn.active .level-indicator {
+          color: var(--bg-dark);
+        }
+
+        .cv-timeline-line {
+          height: 0;
+          transition: height 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .cv-timeline-dot {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: var(--accent);
+          border: 3px solid var(--bg-root-dark);
+          top: 0;
+          transition: top 0.5s cubic-bezier(0.4,0,0.2,1);
+          z-index: 2;
+        }
+        .cv-timeline-future {
+          display: none;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 2px;
+          height: 40px;
+          background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 6px, transparent 6px, transparent 12px);
+          top: 100%;
+          z-index: 1;
+        }
+        .cv-timeline-line.completed .cv-timeline-future {
+          display: block;
+        }
+        .cv-timeline-container {
+          min-height: 1200px;
+        }
+        @media (max-width: 768px) {
+          .cv-timeline-container {
+            min-height: 700px;
+          }
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div class="custom-cursor">
+        <span class="cursor-symbol">&gt;</span>
+    </div>
+    
+    <!-- ===== BACKGROUND CANVAS ===== -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loading-screen" class="fixed inset-0 bg-black font-fira-code text-lg text-[#00e5ff] w-full h-full p-8 z-[9999] flex flex-col justify-center">
+        <div id="terminal-wrapper">
+            <div id="terminal-output" class="whitespace-pre-wrap"></div>
+        </div>
+        <div id="final-animation-container" class="absolute inset-0 flex justify-center items-center text-center">
+            <h1 id="final-thianetic" class="text-4xl md:text-6xl font-black tracking-widest text-accent"></h1>
+        </div>
+        <div id="skip-intro-prompt" class="hidden absolute text-sm">Pulsa [ESPACIO] para continuar</div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="main-content" class="invisible opacity-0 transition-opacity duration-500">
+        
+        <!-- ===== SOCIAL LINKS ===== -->
+        <div id="social-links" class="hidden lg:block">
+            <ul class="flex flex-col items-center space-y-6 fixed bottom-0 left-10 z-10" style="left: 8rem; bottom: 2.6rem;">
+                <li>
+                    <a href="https://github.com/thianetic" target="_blank"  rel="noopener noreferrer"  rel="noopener noreferrer" aria-label="GitHub" class="transition-all duration-300 text-[var(--text-secondary-dark)]">
+                        <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:github"></span>
+                        <span class="social-tooltip tooltip-text" data-text="@thianetic">@thianetic</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="flex flex-col items-center space-y-6 fixed bottom-0 left-10 z-10" style="bottom: 2.6rem;">
+                <li>
+                    <a href="https://linkedin.com/in/thianetic" target="_blank"  rel="noopener noreferrer"  rel="noopener noreferrer" aria-label="LinkedIn" class="transition-all duration-300 text-[var(--text-secondary-dark)]">
+                        <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:linkedin"></span>
+                        <span class="social-tooltip tooltip-text" data-text="@thianetic">@thianetic</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ===== FIXED HEADER ===== -->
+        <h1 id="header-title" class="fixed top-0 text-2xl font-black text-[var(--text-primary-dark)] tracking-tighter py-3 px-8 bg-[var(--bg-dark)]/80 backdrop-blur-sm rounded-b-lg z-50 transition-all duration-300 opacity-0 -translate-y-full pointer-events-none">THIANETIC</h1>
+
+        <!-- ===== MAIN LAYOUT ===== -->
+        <div class="lg:flex">
+            
+            <!-- ===== DESKTOP NAVIGATION ===== -->
+            <nav class="hidden lg:flex flex-col justify-center items-start h-screen w-48 fixed top-0 left-0 p-8 space-y-6 lateral-nav">
+                <a href="#hero" data-nav-link="hero" class="font-fira-code text-sm uppercase" data-scramble-text>Inicio</a>
+                <a href="#about" data-nav-link="about" class="font-fira-code text-sm uppercase" data-scramble-text>Sobre Mí</a>
+                <a href="#cv" data-nav-link="cv" class="font-fira-code text-sm uppercase" data-scramble-text>CV</a>
+                <a href="#projects" data-nav-link="projects" class="font-fira-code text-sm uppercase" data-scramble-text>Proyectos</a>
+                <a href="#contact" data-nav-link="contact" class="font-fira-code text-sm uppercase" data-scramble-text>Contacto</a>
+            </nav>
+
+            <!-- ===== MOBILE HEADER ===== -->
+            <header class="lg:hidden fixed top-0 left-0 right-0 bg-[var(--bg-dark)]/80 backdrop-blur-sm z-40">
+                <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                    <img src="img/Thianetic-logo-web.png" alt="Thianetic Logo" class="h-8 w-auto">
+                    <button id="mobile-menu-btn" class="text-accent text-3xl z-50">&#9776;</button>
+                </div>
+            </header>
+
+            <!-- ===== MOBILE MENU ===== -->
+            <div id="mobile-menu" class="fixed inset-0 bg-[var(--card-dark)] z-40 flex flex-col items-center justify-center space-y-8 text-lg transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+                <button id="theme-toggle" class="absolute top-6 right-6 text-accent p-2 rounded-full hover:bg-accent-hover/20">
+                    <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <a href="#hero" class="mobile-nav-link">Inicio</a>
+                <a href="#about" class="mobile-nav-link">Sobre mí</a>
+                <a href="#cv" class="mobile-nav-link">CV</a>
+                <a href="#projects" class="mobile-nav-link">Proyectos</a>
+                <a href="#contact" class="mobile-nav-link">Contacto</a>
+
+                <div class="flex items-center space-x-8 mt-8">
+                    <a href="https://github.com/thianetic" target="_blank"  rel="noopener noreferrer" aria-label="GitHub" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
+                        <span class="iconify h-7 w-7" data-icon="mdi:github"></span>
+                    </a>
+                    <a href="https://linkedin.com/in/thianetic" target="_blank"  rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
+                        <span class="iconify h-7 w-7" data-icon="mdi:linkedin"></span>
+                    </a>
+                    <a href="https://x.com/thianetic" target="_blank"  rel="noopener noreferrer" aria-label="Twitter" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
+                        <span class="iconify h-6 w-6" data-icon="mdi:twitter-x"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== MAIN CONTENT AREA ===== -->
+            <main class="w-full min-h-screen lg:pl-48">
+                
+                <!-- ===== DESKTOP THEME TOGGLE ===== -->
+                <button id="theme-toggle-desktop" class="hidden lg:block fixed top-6 right-6 z-50 text-accent p-2 rounded-full hover:bg-accent-hover">
+                    <svg id="theme-icon-sun-desktop" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="theme-icon-moon-desktop" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <div class="container mx-auto px-6 md:px-12 lg:px-24">
+                    
+                    <!-- ===== HERO SECTION ===== -->
+                    <section id="hero" class="min-h-screen flex flex-col justify-center animate-on-scroll">
+                        <p class="text-accent font-fira-code mb-4 text-lg animate-fade-up">Hola, mi nombre es</p>
+                        <h1 id="hero-h1" class="text-4xl sm:text-5xl lg:text-8xl font-black text-[var(--text-primary-dark)] tracking-tighter animate-fade-up" style="transition-delay: 100ms;">THIANETIC.</h1>
+                        <h2 class="text-3xl sm:text-4xl lg:text-7xl font-black text-[var(--text-secondary-dark)] mt-2 tracking-tighter animate-fade-up" style="transition-delay: 200ms;">Construyo el futuro de la web.</h2>
+                        <p class="mt-8 max-w-xl text-lg text-content animate-fade-up" style="transition-delay: 300ms;">Soy un desarrollador de software especializado en crear experiencias digitales excepcionales. Mi pasión es combinar diseño y código para construir productos fluidos, accesibles y memorables.</p>
+                        <a href="#" id="contact-btn-hero" class="liquid-glass-btn border-2 border-accent text-accent text-lg font-bold px-10 py-4 rounded-full mt-12 w-fit tracking-widest animate-fade-up" style="transition-delay: 400ms;"><span id="hablemos" data-scramble-text>¡HABLEMOS!</span></a>
+                    </section>
+
+                    <!-- ===== ABOUT SECTION ===== -->
+                    <section id="about" class="py-32 animate-on-scroll is-visible" style="border-radius: 7rem;background: rgba(251, 251, 251, 0);backdrop-filter: blur(2px) brightness(1.1);-webkit-backdrop-filter: blur(1px) brightness(0.8);border: 2.5px solid #ffffff05;box-shadow: 0 5px 0 rgba(0, 229, 255, 0.01);position: relative;overflow: hidden;/*! padding-inline: 39px; */">
+                        <h2 class="flex items-center text-3xl font-bold text-[var(--text-primary-dark)] mb-12 animate-zoom is-visible" style="padding: 0 2.6rem;">
+                            <span class="inline-block bg-accent/10 text-accent font-fira-code text-base font-bold px-4 py-1 rounded-full mr-4">Sobre mí</span>
+                            Sobre mí
+                            <span class="h-px bg-[var(--line-color-dark)] ml-6 flex-grow"></span>
+                        </h2>
+                        <div class="text-lg text-content space-y-4" style="padding: 0 3.6rem;text-align: center;">
+                            <p class="animate-fade-up is-visible" style="transition-delay: 100ms;">Desde que descubrí la magia de una línea de comandos en un viejo monitor de fósforo verde, he estado fascinado por la evolución de la interacción hombre-máquina. Esa chispa inicial me llevó a un viaje sin fin a través de la arquitectura de software, el diseño de interfaces y la creación de productos digitales que no solo funcionan, sino que se sienten vivos.</p>
+                            <p class="animate-fade-up is-visible" style="transition-delay: 100ms;">"Thianetic" representa mi filosofía: una fusión de **pensamiento** metódico y energía **cinética**. Cada proyecto es una oportunidad para diseñar una solución elegante y luego ejecutarla con precisión y dinamismo.</p>
+                        </div>
+                    </section>
+
+                    <!-- ===== TECH STACK SECTION ===== -->
+                    <section id="tech-stack" class="py-32 animate-on-scroll">
+                        <h2 class="flex items-center text-3xl font-bold text-[var(--text-primary-dark)] mb-12 animate-zoom">
+                            <span class="inline-block bg-accent/10 text-accent font-fira-code text-base font-bold px-4 py-1 rounded-full mr-4">Stack</span>
+                            Tecnologías & Herramientas
+                            <span class="h-px bg-[var(--line-color-dark)] ml-6 flex-grow"></span>
+                        </h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                            <!-- Java -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 0ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Java</h3>
+                                <p class="tech-category">Lenguaje de Programación</p>
+                            </div>
+                            <!-- Kotlin -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 50ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Kotlin</h3>
+                                <p class="tech-category">Desarrollo Android</p>
+                            </div>
+                            <!-- C# -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 100ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">C#</h3>
+                                <p class="tech-category">Desarrollo Unity</p>
+                            </div>
+                            <!-- JavaScript -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 150ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">JavaScript</h3>
+                                <p class="tech-category">Desarrollo Web</p>
+                            </div>
+                            <!-- PHP -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 200ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-plain.svg" alt="PHP" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">PHP</h3>
+                                <p class="tech-category">Backend Web</p>
+                            </div>
+                            <!-- HTML5 -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 250ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">HTML5</h3>
+                                <p class="tech-category">Frontend Web</p>
+                            </div>
+                            <!-- CSS3 -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 300ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">CSS3</h3>
+                                <p class="tech-category">Estilos Web</p>
+                            </div>
+                            <!-- SQL -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 350ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">SQL</h3>
+                                <p class="tech-category">Bases de Datos</p>
+                            </div>
+                            <!-- Firebase -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 400ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Firebase</h3>
+                                <p class="tech-category">Backend as a Service</p>
+                            </div>
+                            <!-- Unity -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 450ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Unity</h3>
+                                <p class="tech-category">Desarrollo de Juegos</p>
+                            </div>
+                            <!-- Android -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 500ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Android</h3>
+                                <p class="tech-category">Desarrollo Móvil</p>
+                            </div>
+                            <!-- Linux -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 550ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Linux</h3>
+                                <p class="tech-category">Sistema Operativo</p>
+                            </div>
+                            <!-- Windows -->
+                            <div class="tech-card animate-fade-up" style="transition-delay: 600ms;">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" class="w-12 h-12">
+                                </div>
+                                <h3 class="tech-name">Windows</h3>
+                                <p class="tech-category">Sistema Operativo</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== CV SECTION ===== -->
+                    <section id="cv" class="py-32 animate-on-scroll">
+                        <h2 class="flex items-center text-3xl font-bold text-[var(--text-primary-dark)] mb-16 animate-zoom">
+                            <span class="inline-block bg-accent/10 text-accent font-fira-code text-base font-bold px-4 py-1 rounded-full mr-4">CV</span>
+                            Currículum Vitae
+                            <span class="h-px bg-[var(--line-color-dark)] ml-6 flex-grow"></span>
+                        </h2>
+                        <div class="relative max-w-3xl mx-auto">
+                            <!-- Línea central -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[var(--line-color-dark)] z-0 cv-timeline-line" style="height: 0; transition: height 0.5s cubic-bezier(0.4,0,0.2,1);">
+                              <div class="cv-timeline-dot" style="position: absolute; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-root-dark); top: 0; transition: top 0.5s cubic-bezier(0.4,0,0.2,1); z-index: 2;"></div>
+                              <div class="cv-timeline-future" style="display: none; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 40px; background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 6px, transparent 6px, transparent 12px); top: 100%; z-index: 1;"></div>
+                            </div>
+                            <div class="space-y-16 relative z-10">
+                                <!-- Formación -->
+                                <div class="flex items-center w-full animate-fade-up">
+                                    <div class="w-1/2 pr-8 text-right hidden md:block"></div>
+                                    <div class="w-full md:w-1/2 md:pl-8">
+                                        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg p-6 shadow-lg relative">
+                                            <span class="absolute -left-6 top-6 w-6 h-6 rounded-full bg-accent border-4 border-[var(--bg-dark)] z-10"></span>
+                                            <p class="text-sm text-accent font-fira-code mb-1">Título</p>
+                                            <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
+                                            <p class="text-content">Formación profesional avanzada en desarrollo de software multiplataforma.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Prácticas -->
+                                <div class="flex items-center w-full animate-fade-up" style="transition-delay: 150ms;">
+                                    <div class="w-full md:w-1/2 md:pr-8 text-right">
+                                        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg p-6 shadow-lg relative md:text-right">
+                                            <span class="absolute -right-6 top-6 w-6 h-6 rounded-full bg-accent border-4 border-[var(--bg-dark)] z-10"></span>
+                                            <p class="text-sm text-accent font-fira-code mb-1">Abril 2024 - Actualidad</p>
+                                            <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">Desarrollador en Servicios Informáticos Técnicos & Hardware</h3>
+                                            <p class="text-content">Colaboración en desarrollo de software y experiencia laboral en el sector.</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-1/2 pl-8 hidden md:block"></div>
+                                </div>
+                                <!-- Laberinto -->
+                                <div class="flex items-center w-full animate-fade-up" style="transition-delay: 300ms;">
+                                    <div class="w-1/2 pr-8 text-right hidden md:block"></div>
+                                    <div class="w-full md:w-1/2 md:pl-8">
+                                        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg p-6 shadow-lg relative">
+                                            <span class="absolute -left-6 top-6 w-6 h-6 rounded-full bg-accent border-4 border-[var(--bg-dark)] z-10"></span>
+                                            <p class="text-sm text-accent font-fira-code mb-1">Marzo 2024 - Actualidad</p>
+                                            <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">Laberinto (Unity)</h3>
+                                            <p class="text-content">Desarrollo de videojuego en Unity, desde la idea hasta la implementación.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- TicketApp + Backend -->
+                                <div class="flex items-center w-full animate-fade-up" style="transition-delay: 450ms;">
+                                    <div class="w-full md:w-1/2 md:pr-8 text-right">
+                                        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg p-6 shadow-lg relative md:text-right">
+                                            <span class="absolute -right-6 top-6 w-6 h-6 rounded-full bg-accent border-4 border-[var(--bg-dark)] z-10"></span>
+                                            <p class="text-sm text-accent font-fira-code mb-1">Abril 2024 - Junio 2024</p>
+                                            <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">TicketApp + Backend</h3>
+                                            <p class="text-content">App de gestión de tickets y backend privado con panel de administración.</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-1/2 pl-8 hidden md:block"></div>
+                                </div>
+                                <!-- DermApp -->
+                                <div class="flex items-center w-full animate-fade-up" style="transition-delay: 600ms;">
+                                    <div class="w-1/2 pr-8 text-right hidden md:block"></div>
+                                    <div class="w-full md:w-1/2 md:pl-8">
+                                        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg p-6 shadow-lg relative">
+                                            <span class="absolute -left-6 top-6 w-6 h-6 rounded-full bg-accent border-4 border-[var(--bg-dark)] z-10"></span>
+                                            <p class="text-sm text-accent font-fira-code mb-1">Junio 2024 - Actualidad</p>
+                                            <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">DermApp</h3>
+                                            <p class="text-content">App de seguimiento dermatológico</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== PROJECTS SECTION ===== -->
+                    <section id="projects" class="py-32 animate-on-scroll">
+                        <h2 class="animate-fade-up flex items-center text-3xl font-bold text-[var(--text-primary-dark)] mb-12">
+                            <span class="inline-block bg-accent/10 text-accent font-fira-code text-base font-bold px-4 py-1 rounded-full mr-4">Proyectos</span>
+                            Proyectos Destacados
+                            <span class="h-px bg-[var(--line-color-dark)] ml-6 flex-grow"></span>
+                        </h2>
+
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">Todos</button>
+                            <button class="filter-tab" data-filter="web">Web</button>
+                            <button class="filter-tab" data-filter="android">Android</button>
+                            <button class="filter-tab" data-filter="tools">Herramientas</button>
+                        </div>
+
+                        <div class="projects-grid">
+                            <!-- Proyecto 1: TicketApp (Android) -->
+                            <div class="project-card p-6 rounded-lg category-android" data-category="android">
+                                <div class="project-image-container">
+                                    <span class="project-status status-development">EN DESARROLLO</span>
+                                    <img loading="lazy" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="project-image" alt="TicketApp">
+                                </div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary-dark)] mt-4 mb-2">TicketApp</h3>
+                                <p class="text-sm text-[var(--text-secondary-dark)] mb-4">
+                                    Aplicación móvil para gestión de tickets y soporte técnico con notificaciones en tiempo real.
+                                </p>
+                                <ul class="flex flex-wrap gap-2 mb-4">
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Android SDK</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Kotlin</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Jetpack Compose</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Firebase</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">GoogleCloud</li>
+                                </ul>
+                                <div class="project-buttons">
+                                    <a href="https://github.com/thianetic/ticketapp" target="_blank"  rel="noopener noreferrer" class="project-btn code-btn">
+                                        <i class="fab fa-github"></i> CÓDIGO
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Proyecto 2: TicketAppWeb (Backend) -->
+                            <div class="project-card p-6 rounded-lg category-web" data-category="web">
+                                <div class="project-image-container">
+                                    <span class="project-status status-release">RELEASE</span>
+                                    <img loading="lazy" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="project-image" alt="TicketAppWeb">
+                                </div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary-dark)] mt-4 mb-2">TicketApp (Web)</h3>
+                                <p class="text-sm text-[var(--text-secondary-dark)] mb-4">
+                                    Backend y panel de administración para la aplicación TicketApp con gestión de usuarios y tickets.
+                                </p>
+                                <ul class="flex flex-wrap gap-2 mb-4">
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">HTML</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">JavaScript</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Tailwind CSS</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Chart.js</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">MySQL</li>
+                                </ul>
+                                <div class="project-buttons">
+                                    <a href="https://demo-ticketappweb.com" target="_blank"  rel="noopener noreferrer" class="project-btn demo-btn">
+                                        <i class="fas fa-external-link-alt"></i> DEMO
+                                    </a>
+                                    <a href="https://github.com/thianetic/ticketappweb" target="_blank"  rel="noopener noreferrer" class="project-btn code-btn">
+                                        <i class="fab fa-github"></i> CÓDIGO
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Proyecto 3: DermApp (Android) -->
+                            <div class="project-card p-6 rounded-lg category-android" data-category="android">
+                                <div class="project-image-container">
+                                    <span class="project-status status-beta">BETA TESTER</span>
+                                    <img loading="lazy" src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="project-image" alt="DermApp">
+                                </div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary-dark)] mt-4 mb-2">DermApp</h3>
+                                <p class="text-sm text-[var(--text-secondary-dark)] mb-4">
+                                    Aplicación para seguimiento de condiciones dermatológicas con recordatorios de tratamiento.
+                                </p>
+                                <ul class="flex flex-wrap gap-2 mb-4">
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Android SDK</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Kotlin</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">SQLite</li>
+                                </ul>
+                                <div class="project-buttons">
+                                    <a href="https://github.com/thianetic/dermapp" target="_blank"  rel="noopener noreferrer" class="project-btn code-btn">
+                                        <i class="fab fa-github"></i> CÓDIGO
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Proyecto 4: DiarioApp (Web) -->
+                            <div class="project-card p-6 rounded-lg category-web" data-category="web">
+                                <div class="project-image-container">
+                                    <span class="project-status status-beta">BETA</span>
+                                    <img loading="lazy" src="https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="project-image" alt="DiarioApp Moderno">
+                                </div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary-dark)] mt-4 mb-2">DiarioApp Moderno</h3>
+                                <p class="text-sm text-[var(--text-secondary-dark)] mb-4">
+                                    Diario personal moderno con diseño tipo "Bento Grid", calendario integrado, estadísticas visuales y notas adhesivas interactivas.
+                                </p>
+                                <ul class="flex flex-wrap gap-2 mb-4">
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">HTML</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">JavaScript</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Tailwind CSS</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Chart.js</li>
+                                </ul>
+                                <div class="project-buttons">
+                                    <a href="#" onclick="event.preventDefault(); alert('Demo disponible en el código adjunto');" class="project-btn demo-btn">
+                                        <i class="fas fa-external-link-alt"></i> DEMO
+                                    </a>
+                                    <a href="#" onclick="event.preventDefault(); alert('Este es un ejemplo de código completo');" class="project-btn code-btn">
+                                        <i class="fab fa-github"></i> CÓDIGO
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Proyecto 5: Laberinto de las Monedas (Unity) -->
+                            <div class="project-card p-6 rounded-lg category-tools" data-category="tools">
+                                <div class="project-image-container">
+                                    <span class="project-status status-release">RELEASE</span>
+                                    <img loading="lazy" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="project-image" alt="Laberinto de las Monedas">
+                                </div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary-dark)] mt-4 mb-2">Laberinto de las Monedas</h3>
+                                <p class="text-sm text-[var(--text-secondary-dark)] mb-4">
+                                    Juego de laberinto 3D desarrollado en Unity donde recolectas monedas y evitas obstáculos.
+                                </p>
+                                <ul class="flex flex-wrap gap-2 mb-4">
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">Unity</li>
+                                    <li class="text-xs font-fira-code bg-[#0a192f] px-2 py-1 rounded">C#</li>
+                                </ul>
+                                <div class="project-buttons">
+                                    <a href="https://github.com/thianetic/laberinto-monedas" target="_blank"  rel="noopener noreferrer" class="project-btn code-btn">
+                                        <i class="fab fa-github"></i> CÓDIGO
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== CONTACT SECTION ===== -->
+                    <section id="contact" class="py-32 text-center max-w-2xl mx-auto animate-on-scroll">
+                        <p class="font-fira-code text-accent mb-4 animate-fade-up">¿Cuál es el siguiente paso?</p>
+                        <h2 class="text-5xl font-black text-[var(--text-primary-dark)] mb-6 animate-zoom flex items-center justify-center">
+                            <span class="inline-block bg-accent/10 text-accent font-fira-code text-base font-bold px-4 py-1 rounded-full mr-4">Contacto</span>
+                            Ponte en Contacto
+                        </h2>
+                        <p class="text-lg mb-10 text-content animate-fade-up" style="transition-delay: 100ms;">Mi bandeja de entrada siempre está abierta. Si tienes un proyecto en mente, una pregunta o simplemente quieres conectar, no dudes en escribirme.</p>
+                        <a href="#" id="contact-btn-section" class="liquid-glass-btn border-2 border-accent text-accent text-lg font-bold px-10 py-4 rounded-full inline-block tracking-widest animate-fade-up" style="transition-delay: 200ms;"><span data-scramble-text>ENVIAR MENSAJE</span></a>
+                    </section>
+                </div>
+
+                <!-- ===== FOOTER ===== -->
+                <footer class="font-fira-code text-sm text-[var(--text-secondary-dark)] text-center border-t border-[var(--line-color-dark)]">
+                    <!-- Parte superior del footer -->
+                    <div class="py-8 space-y-4 container mx-auto px-6">
+                        <p class="text-lg">
+                            <a href="https://linkedin.com/in/thianetic" target="_blank"  rel="noopener noreferrer" rel="noopener noreferrer" class="font-bold text-[var(--text-primary-dark)] hover:text-accent transition-colors duration-300">Thianetic</a>
+                            <span class="text-accent">_</span>
+                            <a href="https://github.com/thianetic" target="_blank"  rel="noopener noreferrer" rel="noopener noreferrer" class="font-bold text-[var(--text-primary-dark)] hover:text-accent transition-colors duration-300">Dev</a>
+                        </p>
+                        <p>Diseñado y construido con ☕, ❤️ y mucho código.</p>
+                    </div>
+                    
+                    <!-- Copyright y año -->
+                    <div class="mt-8 text-xs text-[var(--text-secondary-dark)]">
+                        Thianetic &copy; <span id="current-year">2024</span>. Todos los derechos reservados.
+                    </div>
+
+                    <!-- Sección de Atribuciones -->
+                    <div class="attributions mt-12 py-6 border-t border-[var(--line-color-dark)]">
+                        <h3 class="text-center font-fira-code text-accent mb-4">Atribuciones de Bibliotecas</h3>
+                        
+                        <div class="attributions-grid container mx-auto px-6 max-w-5xl">
+                            <!-- Tailwind CSS -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" width="30" height="18" class="w-12 h-12">
+                                </div>
+                                <div>
+                                    <a href="https://tailwindcss.com" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Tailwind CSS</a>
+                                    <div class="text-xs">Licencia MIT</div>
+                                </div>
+                            </div>
+                            <!-- Font Awesome -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30" height="18"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M91.7 96C106.3 86.8 116 70.5 116 52C116 23.3 92.7 0 64 0S12 23.3 12 52c0 16.7 7.8 31.5 20 41l0 3 0 352 0 64 64 0 0-64 373.6 0c14.6 0 26.4-11.8 26.4-26.4c0-3.7-.8-7.3-2.3-10.7L432 272l61.7-138.9c1.5-3.4 2.3-7 2.3-10.7c0-14.6-11.8-26.4-26.4-26.4L91.7 96z"/></svg>
+                                </div>
+                                <div>
+                                    <a href="https://fontawesome.com" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Font Awesome</a>
+                                    <div class="text-xs">Licencia CC BY 4.0</div>
+                                </div>
+                            </div>
+                            <!-- Google Fonts -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="Google Fonts" width="30" height="18" class="w-12 h-12">
+                                </div>
+                                <div>
+                                    <a href="https://fonts.google.com" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Google Fonts</a>
+                                    <div class="text-xs">Licencia SIL Open Font</div>
+                                </div>
+                            </div>
+                            <!-- Devicon -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/devicon/devicon-original.svg" alt="Devicon" width="30" height="18" class="w-12 h-12">
+                                </div>
+                                <div>
+                                    <a href="https://devicon.dev" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Devicon</a>
+                                    <div class="text-xs">Licencia MIT</div>
+                                </div>
+                            </div>
+                            <!-- Inspirado en particles.js de Vincent Garreau -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="Devicon" width="30" height="18" class="w-12 h-12">
+                                </div>
+                                <div>
+                                    <a href="https://vincentgarreau.com/particles.js/" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">particles.js</a>
+                                    <div class="text-xs">Inspiración visual y conceptual. Código propio.</div>
+                                </div>
+                            </div>
+                            <!-- Iconify -->
+                            <div class="attribution-item">
+                                <div class="attribution-logo">
+                                    <img src="https://iconify.design/favicon.svg" alt="Iconify" width="30" height="18" class="w-12">
+                                </div>
+                                <div>
+                                    <a href="https://iconify.design/" target="_blank"  rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Iconify</a>
+                                    <div class="text-xs">Licencia MIT</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-xs text-[var(--text-secondary-dark)] max-w-3xl mx-auto">
+                            Este sitio utiliza bibliotecas de código abierto bajo sus respectivas licencias. <br>
+                            Los íconos de tecnologías son proporcionados por Devicon. <br>
+                            Las animaciones de partículas están inspiradas visual y conceptualmente en el trabajo original de Vincent Garreau (MIT License).
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
+
+        <!-- ===== ACCESSIBILITY WIDGET ===== -->
+        <div id="accessibility-widget">
+            <div id="accessibility-menu">
+                <h4 class="font-bold text-lg text-[var(--text-primary-dark)] mb-4">Ajustes de Accesibilidad</h4>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="access-btn" data-access-action="cycle-contrast" title="Alternar Contraste">
+                        <span class="level-indicator">Normal</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        Contraste
+                    </button>
+                    <button class="access-btn" data-access-action="toggle-colorblind" title="Modo Color">
+                        <span class="level-indicator">off</span>
+                        <span class="iconify w-6 h-6 mb-1" data-icon="mdi:invert-colors-off"></span>
+                        No Color
+                    </button>
+                    <button class="access-btn" data-access-action="toggle-links" title="Resaltar Enlaces">
+                        <span class="level-indicator">off</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                        </svg>
+                        Enlaces
+                    </button>
+                    <button class="access-btn" data-access-action="cycle-textSize" title="Ajustar Texto">
+                        <span class="level-indicator">Normal</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                        </svg>
+                        Tamaño Texto
+                    </button>
+                    <button class="access-btn" data-access-action="cycle-textAlign" title="Alinear Texto">
+                        <span class="level-indicator">Izquierda</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5" />
+                        </svg>
+                        Alineación
+                    </button>
+                    <button class="access-btn" data-access-action="cycle-font" title="Fuente Legible">
+                        <span class="level-indicator">Normal</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                        </svg>
+                        Fuente
+                    </button>
+                    <button class="access-btn" data-access-action="toggle-animations" title="Pausar Animaciones">
+                        <span class="level-indicator">off</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Pausar animaciones
+                    </button>
+                </div>
+                <button id="reset-access" class="w-full text-center text-xs mt-4 text-[var(--text-secondary-dark)] hover:text-accent">Restablecer</button>
+            </div>
+            <button id="accessibility-btn" aria-label="Abrir menú de accesibilidad">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE PROYECTO ===== -->
+    <div id="project-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10003] opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div id="modal-content" class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+                <!-- Header del modal -->
+                <div class="flex justify-between items-start p-6 border-b border-[var(--line-color-dark)]">
+                    <div>
+                        <h2 id="modal-title" class="text-2xl font-bold text-[var(--text-primary-dark)] mb-2"></h2>
+                        <span id="modal-status" class="inline-block px-3 py-1 rounded-full text-xs font-fira-code font-bold"></span>
+                    </div>
+                    <button id="close-modal" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2">
+                        <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    </button>
+                </div>
+                
+                <!-- Contenido del modal -->
+                <div class="p-6">
+                    <!-- Imagen del proyecto -->
+                    <div class="mb-6">
+                        <img id="modal-image" class="w-full h-64 object-cover rounded-lg" alt="Proyecto">
+                    </div>
+                    
+                    <!-- Descripción -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-[var(--text-primary-dark)] mb-3">Descripción</h3>
+                        <p id="modal-description" class="text-[var(--text-secondary-dark)] leading-relaxed"></p>
+                    </div>
+                    
+                    <!-- Tecnologías -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-[var(--text-primary-dark)] mb-3">Tecnologías Utilizadas</h3>
+                        <div id="modal-tech" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    
+                    <!-- Características -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-[var(--text-primary-dark)] mb-3">Características Principales</h3>
+                        <ul id="modal-features" class="list-disc list-inside text-[var(--text-secondary-dark)] space-y-2"></ul>
+                    </div>
+                    
+                    <!-- Enlaces -->
+                    <div class="flex gap-4">
+                        <a id="modal-demo" href="#" target="_blank"  rel="noopener noreferrer" class="project-btn demo-btn flex-1 justify-center">
+                            <span class="iconify w-4 h-4" data-icon="mdi:open-in-new"></span>
+                            VER DEMO
+                        </a>
+                        <a id="modal-code" href="#" target="_blank"  rel="noopener noreferrer" class="project-btn code-btn flex-1 justify-center">
+                            <span class="iconify w-4 h-4" data-icon="mdi:github"></span>
+                            VER CÓDIGO
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE FORMULARIO DE CONTACTO ===== -->
+    <div id="contact-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10003] opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div id="contact-modal-content" class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+                <!-- Header del modal -->
+                <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
+                    <h2 class="text-2xl font-bold text-[var(--text-primary-dark)]">Enviar Mensaje</h2>
+                    <button id="close-contact-modal" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2">
+                        <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    </button>
+                </div>
+                
+                <!-- Formulario -->
+                <form id="contact-form" class="p-6 space-y-6">
+                    <!-- Nombre -->
+                    <div>
+                        <label for="contact-name" class="block text-sm font-medium text-[var(--text-primary-dark)] mb-2">
+                            Nombre completo <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="contact-name" 
+                            name="name" 
+                            required 
+                            class="w-full px-4 py-3 bg-[var(--bg-dark)] border border-[var(--line-color-dark)] rounded-lg text-[var(--text-primary-dark)] focus:border-accent focus:outline-none transition-colors"
+                            placeholder="Tu nombre completo"
+                        >
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="contact-email" class="block text-sm font-medium text-[var(--text-primary-dark)] mb-2">
+                            Correo electrónico <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="contact-email" 
+                            name="email" 
+                            required 
+                            class="w-full px-4 py-3 bg-[var(--bg-dark)] border border-[var(--line-color-dark)] rounded-lg text-[var(--text-primary-dark)] focus:border-accent focus:outline-none transition-colors"
+                            placeholder="tu@email.com"
+                        >
+                    </div>
+
+                    <!-- Asunto -->
+                    <div>
+                        <label for="contact-subject" class="block text-sm font-medium text-[var(--text-primary-dark)] mb-2">
+                            Asunto <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="contact-subject" 
+                            name="subject" 
+                            required 
+                            class="w-full px-4 py-3 bg-[var(--bg-dark)] border border-[var(--line-color-dark)] rounded-lg text-[var(--text-primary-dark)] focus:border-accent focus:outline-none transition-colors"
+                        >
+                            <option value="">Selecciona un asunto</option>
+                            <option value="Solicitar información">Solicitar información</option>
+                            <option value="Propuesta de proyecto">Propuesta de proyecto</option>
+                            <option value="Colaboración">Colaboración</option>
+                            <option value="Consulta técnica">Consulta técnica</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div>
+                        <label for="contact-message" class="block text-sm font-medium text-[var(--text-primary-dark)] mb-2">
+                            Mensaje <span class="text-red-500">*</span>
+                        </label>
+                        <textarea 
+                            id="contact-message" 
+                            name="message" 
+                            required 
+                            rows="6"
+                            class="w-full px-4 py-3 bg-[var(--bg-dark)] border border-[var(--line-color-dark)] rounded-lg text-[var(--text-primary-dark)] focus:border-accent focus:outline-none transition-colors resize-none"
+                            placeholder="Cuéntame sobre tu proyecto o consulta..."
+                        ></textarea>
+                    </div>
+
+                    <!-- GDPR Consent -->
+                    <div class="flex items-start space-x-3">
+                        <input 
+                            type="checkbox" 
+                            id="gdpr-consent" 
+                            name="gdpr-consent" 
+                            required 
+                            class="mt-1 w-4 h-4 text-accent bg-[var(--bg-dark)] border-[var(--line-color-dark)] rounded focus:ring-accent focus:ring-2"
+                        >
+                        <label for="gdpr-consent" class="text-sm text-[var(--text-secondary-dark)]">
+                            Acepto el <button type="button" id="gdpr-terms-link" class="text-accent hover:underline">tratamiento de datos personales</button> según el RGPD y la legislación española. <span class="text-red-500">*</span>
+                        </label>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-4 pt-4">
+                        <button 
+                            type="submit" 
+                            class="flex-1 project-btn demo-btn justify-center"
+                        >
+                            <span class="iconify w-4 h-4" data-icon="mdi:send"></span>
+                            ENVIAR MENSAJE
+                        </button>
+                        <button 
+                            type="button" 
+                            id="cancel-contact" 
+                            class="flex-1 project-btn code-btn justify-center"
+                        >
+                            CANCELAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE TÉRMINOS GDPR ===== -->
+    <div id="gdpr-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10004] opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div id="gdpr-modal-content" class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+                <!-- Header del modal -->
+                <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
+                    <h2 class="text-2xl font-bold text-[var(--text-primary-dark)]">Política de Privacidad y Tratamiento de Datos</h2>
+                    <button id="close-gdpr-modal" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2">
+                        <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    </button>
+                </div>
+                
+                <!-- Contenido -->
+                <div class="p-6 text-[var(--text-secondary-dark)] space-y-4">
+                    <h3 class="text-lg font-bold text-[var(--text-primary-dark)]">Información sobre el tratamiento de datos personales</h3>
+                    
+                    <p><strong>Responsable del tratamiento:</strong> Thianetic (Desarrollador de Software)</p>
+                    
+                    <p><strong>Finalidad del tratamiento:</strong> Los datos personales recopilados a través de este formulario de contacto serán tratados con la finalidad de:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>Responder a las consultas y solicitudes recibidas</li>
+                        <li>Gestionar propuestas de proyectos y colaboraciones</li>
+                        <li>Mantener comunicación profesional con los interesados</li>
+                        <li>Enviar información técnica y comercial relacionada con servicios de desarrollo</li>
+                    </ul>
+                    
+                    <p><strong>Base legal:</strong> El tratamiento se basa en el consentimiento del interesado (Art. 6.1.a RGPD) y en la ejecución de medidas precontractuales (Art. 6.1.b RGPD).</p>
+                    
+                    <p><strong>Conservación de datos:</strong> Los datos se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recabados y para determinar las posibles responsabilidades que se pudieran derivar de dicha finalidad y del tratamiento de los datos.</p>
+                    
+                    <p><strong>Destinatarios:</strong> No se cederán datos a terceros, salvo obligación legal o cuando sea necesario para la prestación del servicio solicitado.</p>
+                    
+                    <p><strong>Derechos:</strong> Puede ejercer sus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición enviando un email a thianetic.dev@email.com.</p>
+                    
+                    <p><strong>Autoridad de control:</strong> Puede presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) si considera que el tratamiento no se ajusta a la normativa vigente.</p>
+                    
+                    <p><strong>Información adicional:</strong> Para más información sobre el tratamiento de sus datos, puede contactar con el responsable a través de thianetic.dev@email.com.</p>
+                </div>
+                
+                <!-- Botón de cierre -->
+                <div class="p-6 border-t border-[var(--line-color-dark)]">
+                    <button id="accept-gdpr" class="w-full project-btn demo-btn justify-center">
+                        ACEPTAR Y CERRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT MODULAR ===== -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+      const timelineSection = document.querySelector('#cv');
+      const timelineLine = document.querySelector('.cv-timeline-line');
+      const timelineDot = document.querySelector('.cv-timeline-dot');
+      const timelineFuture = document.querySelector('.cv-timeline-future');
+      if (!timelineSection || !timelineLine || !timelineDot || !timelineFuture) return;
+      const maxLineHeight = 1200; // px
+      // Variables para almacenar las posiciones
+      let sectionTop, sectionHeight, windowHeight, start, end;
+      function initTimeline() {
+        sectionTop = timelineSection.offsetTop;
+        sectionHeight = timelineSection.offsetHeight;
+        windowHeight = window.innerHeight;
+        // Iniciar la animación cuando la parte superior de la sección esté a 20% del viewport desde arriba
+        start = sectionTop - windowHeight + (windowHeight * 0.2);
+        // Terminar la animación cuando la parte inferior de la sección esté a 20% del viewport desde abajo
+        end = sectionTop + sectionHeight - (windowHeight * 0.2);
+      }
+      function animateTimeline() {
+        const scrollY = window.scrollY;
+        let progress = 0;
+        if (scrollY > start) {
+          progress = (scrollY - start) / (end - start);
+          progress = Math.min(1, Math.max(0, progress));
+        }
+        const lineHeight = progress * maxLineHeight;
+        timelineLine.style.height = lineHeight + 'px';
+        timelineDot.style.top = lineHeight + 'px';
+        timelineFuture.style.top = lineHeight + 'px';
+        if (lineHeight >= maxLineHeight) {
+          timelineFuture.style.display = 'block';
+        } else {
+          timelineFuture.style.display = 'none';
+        }
+      }
+      // Inicializar
+      initTimeline();
+      animateTimeline();
+      // Eventos
+      window.addEventListener('scroll', animateTimeline);
+      window.addEventListener('resize', function() {
+        initTimeline();
+        animateTimeline();
+      });
+   });
+
+    </script>
+</body>
+</html>

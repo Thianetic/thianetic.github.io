@@ -1,0 +1,638 @@
+/* ===== COMPONENTES ===== */
+
+/* Navegación lateral */
+.lateral-nav {
+    background: rgba(251, 251, 251, 0);
+    backdrop-filter: blur(2px) brightness(1.1);
+    -webkit-backdrop-filter: blur(1px) brightness(0.8);
+    border: 2.5px solid #ffffff05;
+    box-shadow: 0 5px 0 rgba(0, 229, 255, 0.01);
+}
+
+.lateral-nav a { 
+    transition: all 0.3s ease; 
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.lateral-nav a:hover, .lateral-nav a.active { 
+    color: var(--accent); 
+    transform: translateX(10px); 
+}
+
+/* Tarjetas de proyecto */
+.project-card {
+    background-color: var(--card-dark);
+    border: 1px solid var(--line-color-dark);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7); 
+}
+
+html.light-mode .project-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.4s ease, transform 0.4s ease; 
+    border: 1px solid var(--line-color-light); 
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05); 
+}
+
+html.light-mode .project-card:hover { 
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); 
+}
+
+/* Bordes de categoría */
+.category-android::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #34d399;
+}
+
+.category-web::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #60a5fa;
+}
+
+.category-tools::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #f472b6;
+}
+
+/* Estado de ocultación con transición */
+.project-card.hide {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Imágenes de proyecto */
+.project-image-container { 
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    height: 250px; 
+}
+
+.project-image { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: transform 0.5s ease; 
+}
+
+.project-card:hover .project-image { 
+    transform: scale(1.05); 
+}
+
+/* Estados de proyecto */
+.project-status { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    font-family: 'Fira Code', monospace; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    z-index: 2; 
+}
+
+.status-development { background-color: #f59e0b; color: #000; }
+.status-alpha { background-color: #8b5cf6; color: #fff; }
+.status-beta { background-color: #3b82f6; color: #fff; }
+.status-release { background-color: #10b981; color: #000; }
+
+/* Botones */
+.cta-btn { 
+    position: relative; 
+    overflow: hidden; 
+    z-index: 1; 
+    transition: color 0.4s ease-in-out !important; 
+}
+
+.cta-btn::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: var(--accent); 
+    transform: translateX(-101%); 
+    transition: transform 0.4s ease-in-out; 
+    z-index: -1; 
+}
+
+.cta-btn:hover::before { 
+    transform: translateX(0); 
+}
+
+html:not(.light-mode) .cta-btn:hover { 
+    color: var(--bg-dark) !important; 
+}
+
+html.light-mode .cta-btn:hover { 
+    color: var(--bg-light) !important; 
+}
+
+/* Botón de cristal líquido */
+.liquid-glass-btn {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-weight: bold;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 9999px;
+    backdrop-filter: blur(1px) saturate(120%);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.liquid-glass-btn:hover {
+    color: var(--bg-dark);
+    background: var(--accent);
+    box-shadow: 0 0 40px var(--accent), inset 0 0 10px #fff3;
+}
+
+/* Filtros de proyectos */
+.filter-tabs { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 30px; 
+    flex-wrap: wrap; 
+}
+
+.filter-tab { 
+    padding: 8px 16px; 
+    border-radius: 30px; 
+    background-color: transparent; 
+    border: 1px solid var(--text-secondary-dark); 
+    color: var(--text-secondary-dark); 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    font-family: 'Fira Code', monospace; 
+    font-size: 0.9rem; 
+}
+
+.filter-tab:hover, .filter-tab.active { 
+    background-color: var(--accent); 
+    color: var(--bg-dark); 
+    border-color: var(--accent); 
+}
+
+/* Grid de proyectos */
+.projects-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 30px; 
+    margin-top: 20px; 
+}
+
+/* Botones de proyecto */
+.project-buttons { 
+    display: flex; 
+    gap: 12px; 
+    margin-top: 20px; 
+}
+
+.project-btn { 
+    flex: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    padding: 10px 15px; 
+    border-radius: 6px; 
+    font-family: 'Fira Code', monospace; 
+    font-weight: 500; 
+    transition: all 0.3s ease; 
+    text-align: center; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.demo-btn { 
+    background-color: var(--accent); 
+    color: var(--bg-dark); 
+    border: 2px solid var(--accent); 
+}
+
+.demo-btn:hover { 
+    background-color: transparent; 
+    color: var(--accent); 
+}
+
+.code-btn { 
+    background-color: transparent; 
+    color: var(--accent); 
+    border: 2px solid var(--accent); 
+}
+
+.code-btn:hover { 
+    background-color: var(--accent); 
+    color: var(--bg-dark); 
+}
+
+/* Widget de accesibilidad */
+#accessibility-widget { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+}
+
+#accessibility-btn { 
+    background-color: var(--card-dark); 
+    border: 1px solid var(--accent); 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+}
+
+#accessibility-btn:hover { 
+    transform: scale(1.1); 
+    box-shadow: 0 0 15px var(--accent); 
+}
+
+#accessibility-menu { 
+    position: absolute; 
+    bottom: 70px; 
+    right: 0; 
+    background-color: var(--card-dark); 
+    border: 1px solid var(--accent); 
+    border-radius: 8px; 
+    padding: 1rem; 
+    width: 320px; 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    pointer-events: none; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+}
+
+#accessibility-menu.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+    pointer-events: auto; 
+}
+
+.access-btn { 
+    background: none; 
+    border: 1px solid var(--text-secondary-dark); 
+    color: var(--text-secondary-dark); 
+    padding: 0.5rem; 
+    border-radius: 6px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    font-size: 0.75rem; 
+    transition: all 0.2s ease; 
+    position: relative; 
+}
+
+.access-btn:hover { 
+    border-color: var(--accent); 
+    color: var(--accent); 
+}
+
+.access-btn.active { 
+    background-color: var(--accent); 
+    color: var(--bg-dark); 
+    border-color: var(--accent); 
+}
+
+.access-btn svg { 
+    width: 24px; 
+    height: 24px; 
+    margin-bottom: 4px; 
+}
+
+.level-indicator { 
+    position: absolute; 
+    top: 2px; 
+    right: 4px; 
+    font-size: 0.6rem; 
+    font-weight: bold; 
+    color: var(--accent); 
+    text-transform: uppercase; 
+}
+
+.access-btn.active .level-indicator { 
+    color: var(--bg-dark); 
+}
+
+/* ===== PANTALLA DE CARGA ===== */
+#terminal-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px;
+    max-width: 90vw;
+    padding: 1.5rem 1.5rem 1.5rem 2.2rem;
+    margin: 0;
+    z-index: 10001;
+    font-size: 1rem;
+    text-align: left;
+}
+
+#terminal-output {
+    min-height: 120px;
+    font-family: 'Fira Code', monospace;
+    color: #00e5ff;
+    text-shadow: 0 0 2px #00e5ff99;
+}
+
+#final-thianetic { 
+    transition: all 0.5s ease-out; 
+    opacity: 0; 
+}
+
+#final-thianetic.visible { 
+    opacity: 1; 
+}
+
+#skip-intro-prompt { 
+    transition: opacity 0.5s ease; 
+}
+
+#loading-screen {
+    display: block;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+#skip-intro-prompt.bounce {
+    animation: bounce 1s infinite;
+}
+
+#skip-intro-prompt.blink {
+    animation: blink 0.5s steps(1) 3;
+}
+
+/* ===== BURBUJAS DE TECNOLOGÍAS ===== */
+.tech-bubble {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(10, 25, 47, 0.9);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    z-index: 1;
+    pointer-events: none;
+    animation: bubble-rise 8s forwards;
+    opacity: 0;
+}
+
+.tech-bubble img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+@keyframes bubble-rise {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    10% { opacity: 1; transform: translateY(-10px) scale(1); }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-200px) scale(0.8); opacity: 0; }
+}
+
+/* ===== TRANSICIONES DE HEADER ===== */
+.hero-h1-transition {
+    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), 
+                font-size 0.7s cubic-bezier(0.4,0,0.2,1), 
+                color 0.7s, opacity 0.7s;
+    will-change: transform, font-size, color, opacity;
+}
+
+.hero-h1-fixed {
+    position: fixed !important;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0.5) !important;
+    font-size: 2rem !important;
+    color: var(--text-primary-dark) !important;
+    z-index: 100;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+/* ===== ATRIBUCIONES ===== */
+.attributions {
+    background: rgba(10, 25, 47, 0.7);
+    border-top: 1px solid var(--accent);
+    padding: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.attributions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.attribution-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.attribution-logo {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+#social-links ul li {
+    position: relative; /* Essential for absolute positioning of tooltip */
+    display: flex; /* Helps align the link and tooltip if needed, though not strictly required */
+    align-items: center; /* Vertically aligns the icon and potential tooltip */
+}
+
+#social-links ul li:hover .tooltip-text {
+    opacity: 1;
+}
+
+
+#social-links ul:after { content: ''; display: block; width: 1px; height: 90px; margin: 0 auto; background-color: var(--text-secondary-dark); }
+#social-links a:hover svg { color: var(--accent); transform: translateY(-3px); }
+
+/* ===== DISEÑO RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    #theme-toggle-desktop {
+        display: none;
+    }
+    #header-title {
+        z-index: 50;
+    }
+}
+
+/* ===== TRANSICIONES DE VISTA ===== */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 9999;
+}
+
+html.light-mode::view-transition-old(root) {
+    z-index: 9999;
+}
+
+html.light-mode::view-transition-new(root) {
+    z-index: 1;
+}
+
+/* ===== SOCIAL TOOLTIPS ===== */
+.social-tooltip {
+    position: absolute;
+    bottom: 100%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    white-space: nowrap;
+    background: var(--card-dark);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#social-links li:hover .social-tooltip {
+    opacity: 1;
+}
+
+/* ===== MODAL DE PROYECTOS ===== */
+#project-modal {
+    backdrop-filter: blur(8px);
+}
+
+#project-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+#modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modal-content::-webkit-scrollbar-track {
+    background: var(--card-dark);
+    border-radius: 4px;
+}
+
+#modal-content::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+#modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-light);
+}
+
+/* Animación de entrada del modal */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+#modal-content {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+/* Estilos para los botones del modal */
+#modal-demo, #modal-code {
+    transition: all 0.3s ease;
+}
+
+#modal-demo:hover, #modal-code:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+}
+
+/* Responsive del modal */
+@media (max-width: 768px) {
+    #modal-content {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+    }
+    
+    #modal-title {
+        font-size: 1.5rem;
+    }
+    
+    #modal-image {
+        height: 200px;
+    }
+} 

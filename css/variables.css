@@ -1,0 +1,53 @@
+/* ===== VARIABLES CSS ===== */
+:root {
+    /* Colores del tema oscuro */
+    --bg-dark: #020c1b;
+    --bg-root-dark: #020c1b;
+    --bg-root-light: #E0E0E0;
+    --bg-light: #eef2f9;
+    --text-primary-dark: #ccd6f6;
+    --text-primary-light: #1d1d1f;
+    --text-secondary-dark: #8892b0;
+    --text-secondary-light: #545456;
+    --accent: #00e5ff;
+    --accent-light: #008C9E;
+    --card-dark: #0a192f;
+    --card-light: #ffffff;
+    --line-color-dark: rgba(136, 146, 176, 0.2);
+    --line-color-light: rgba(229, 231, 235, 1);
+    
+    /* Tipografía */
+    --font-size: 16px;
+    --text-align: left;
+    --line-height: 1.7;
+    --letter-spacing: normal;
+}
+
+/* Tema claro */
+html.light-mode {
+    --bg-dark: var(--bg-light);
+    --bg-root-dark: var(--bg-root-light);
+    --text-primary-dark: var(--text-primary-light);
+    --text-secondary-dark: var(--text-secondary-light);
+    --card-dark: var(--card-light);
+    --line-color-dark: var(--line-color-light);
+    --accent: var(--accent-light);
+}
+
+/* Estilos de accesibilidad */
+html.contrast-1 { filter: contrast(1.25); }
+html.contrast-2 { filter: contrast(1.5); }
+html.contrast-3 { filter: invert(1) hue-rotate(180deg); }
+html.dyslexia-friendly, html.dyslexia-friendly body { font-family: 'Lexend', sans-serif !important; }
+html.colorblind-friendly {
+    filter: grayscale(100%) contrast(1.2);
+}
+html.highlight-links a { 
+    background-color: yellow !important; 
+    color: black !important; 
+    text-decoration: underline !important; 
+}
+html.no-animations * { 
+    animation: none !important; 
+    transition: none !important; 
+} 
