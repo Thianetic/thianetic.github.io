@@ -1,142 +1,176 @@
-// ===== MÓDULO DE NAVEGACIÓN =====
+// Navigation, Mobile Menu (with inert/ARIA), Hover Scramble & CV Modal Print Manager
+import { scrambleText } from './utils.js';
 
 export class NavigationManager {
-    constructor() {
-        this.navLinks = document.querySelectorAll('.lateral-nav a');
-        this.mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        this.mobileMenu = document.getElementById('mobile-menu');
-        this.mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        this.heroH1 = document.getElementById('hero-h1');
-        this.fixedHeader = document.getElementById('header-title');
-        this.init();
+    constructor(bus) {
+        this.bus = bus;
+        this.mobileMenuBtn = null;
+        this.mobileMenu = null;
+        this.cvModal = null;
+        this.printCvBtn = null;
     }
 
     init() {
-        this.setupEventListeners();
-        this.setupScrollAnimations();
-        this.setupNavHighlighting();
-        this.setupFixedHeader();
-    }
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-    setupEventListeners() {
-        // Menú móvil
-        if (this.mobileMenuBtn) {
-            this.mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
+        this.mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        this.mobileMenu = document.getElementById('mobile-menu');
+        this.cvModal = document.getElementById('cv-modal');
+        this.printCvBtn = document.getElementById('print-cv-btn');
+
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear().toString();
         }
 
-        // Enlaces móviles
-        this.mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => this.toggleMobileMenu());
-        });
-
-        // Efecto scramble en enlaces
-        this.setupScrambleEffect();
+        this.setupMobileMenu(signal);
+        this.setupSmoothScroll(signal);
+        this.setupActiveSectionObserver();
+        this.setupHoverScramble(signal);
+        this.setupCvModal(signal);
     }
 
-    toggleMobileMenu() {
-        this.mobileMenu.classList.toggle('translate-x-full');
-        this.mobileMenuBtn.innerHTML = this.mobileMenu.classList.contains('translate-x-full') ? '&#9776;' : '&times;';
-        document.body.classList.toggle('overflow-hidden');
+    setupMobileMenu(signal) {
+        if (!this.mobileMenuBtn || !this.mobileMenu) return;
+
+        this.setMobileMenuOpen(false);
+
+        this.mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = this.mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            this.setMobileMenuOpen(!isOpen);
+        }, { signal });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+                this.setMobileMenuOpen(false);
+                this.mobileMenuBtn.focus();
+            }
+        }, { signal });
+
+        document.addEventListener('click', (e) => {
+            if (
+                this.mobileMenuBtn.getAttribute('aria-expanded') === 'true' &&
+                !this.mobileMenu.contains(e.target) &&
+                !this.mobileMenuBtn.contains(e.target)
+            ) {
+                this.setMobileMenuOpen(false);
+            }
+        }, { signal });
     }
 
-    setupScrambleEffect() {
-        const scrambleChars = '01000110100001101001011000010110111001100101011101000110100101100011';
-        
-        // Aplicar a enlaces de navegación lateral
-        this.navLinks.forEach(el => {
-            const target = el.querySelector('[data-scramble-text]') || el;
-            const originalText = target.textContent;
-            let interval;
-            
-            el.addEventListener('mouseover', () => {
-                let i = 0;
-                clearInterval(interval);
-                interval = setInterval(() => {
-                    target.textContent = originalText.split("").map((l, idx) => 
-                        (idx < i) ? originalText[idx] : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
-                    ).join("");
-                    if (i >= originalText.length) clearInterval(interval);
-                    i += 1/3;
-                }, 30);
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                clearInterval(interval);
-                target.textContent = originalText;
-            });
-        });
+    setMobileMenuOpen(open) {
+        if (!this.mobileMenuBtn || !this.mobileMenu) return;
 
-        // Aplicar a otros elementos con data-scramble-text
-        document.querySelectorAll('.liquid-glass-btn, .project-btn').forEach(el => {
-            const target = el.querySelector('[data-scramble-text]') || el;
-            const originalText = target.textContent;
-            let interval;
-            
-            el.addEventListener('mouseover', () => {
-                let i = 0;
-                clearInterval(interval);
-                interval = setInterval(() => {
-                    target.textContent = originalText.split("").map((l, idx) => 
-                        (idx < i) ? originalText[idx] : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
-                    ).join("");
-                    if (i >= originalText.length) clearInterval(interval);
-                    i += 1/3;
-                }, 30);
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                clearInterval(interval);
-                target.textContent = originalText;
-            });
-        });
+        this.mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        this.mobileMenuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        this.mobileMenuBtn.innerHTML = open ? '&times;' : '&#9776;';
+        this.mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+
+        const mainContent = document.getElementById('main-content');
+        const header = document.querySelector('header');
+
+        if (open) {
+            this.mobileMenu.classList.remove('translate-x-full');
+            this.mobileMenu.removeAttribute('inert');
+            if (mainContent) mainContent.setAttribute('inert', '');
+            if (header) header.setAttribute('inert', '');
+            const firstLink = this.mobileMenu.querySelector('a');
+            if (firstLink) firstLink.focus();
+        } else {
+            this.mobileMenu.classList.add('translate-x-full');
+            this.mobileMenu.setAttribute('inert', '');
+            if (mainContent) mainContent.removeAttribute('inert');
+            if (header) header.removeAttribute('inert');
+            this.mobileMenuBtn.focus();
+        }
     }
 
-    setupScrollAnimations() {
-        const animatedElements = document.querySelectorAll('.animate-fade-up, .animate-zoom, .animate-on-scroll');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                } else {
-                    // Opcional: remover clase para re-animar al hacer scroll hacia arriba
-                    // entry.target.classList.remove('is-visible');
+    setupSmoothScroll(signal) {
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    e.preventDefault();
+                    this.setMobileMenuOpen(false);
+                    const reduceMotion =
+                        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+                        document.documentElement.classList.contains('reduce-motion');
+                    targetEl.scrollIntoView({
+                        behavior: reduceMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
                 }
-            });
-        }, { threshold: 0.1 });
-        
-        animatedElements.forEach(el => observer.observe(el));
+            }, { signal });
+        });
     }
 
-    setupNavHighlighting() {
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
+    setupActiveSectionObserver() {
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = document.querySelectorAll('.lateral-nav a[data-nav-link]');
+        if (!sections.length || !navLinks.length || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    this.navLinks.forEach(link => {
-                        link.classList.toggle('active', 
-                            link.getAttribute('href').substring(1) === entry.target.id
-                        );
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach((link) => {
+                        link.classList.toggle('active', link.getAttribute('data-nav-link') === id);
                     });
                 }
             });
-        }, { rootMargin: "-50% 0px -50% 0px" });
-        
-        sections.forEach(section => observer.observe(section));
+        }, { threshold: 0.25 });
+
+        sections.forEach((sec) => observer.observe(sec));
     }
 
-    setupFixedHeader() {
-        if (!this.heroH1 || !this.fixedHeader) return;
+    setupHoverScramble(signal) {
+        const scrambleElements = document.querySelectorAll(
+            '.lateral-nav a, .mobile-nav-link, .filter-tab, .liquid-glass-btn, .project-btn'
+        );
+        scrambleElements.forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+                if (document.documentElement.classList.contains('reduce-motion')) return;
+                scrambleText(el);
+            }, { signal });
+        });
+    }
 
-        this.heroH1.classList.add('hero-h1-transition');
-        
-        const observer = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) {
-                this.fixedHeader.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
-            } else {
-                this.fixedHeader.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+    setupCvModal(signal) {
+        if (!this.cvModal) return;
+
+        const supportsCommand = 'commandForElement' in HTMLButtonElement.prototype;
+        if (!supportsCommand) {
+            const openBtns = document.querySelectorAll('[commandfor="cv-modal"][command="show-modal"], #cv-header-btn');
+            openBtns.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    if (!this.cvModal.open) this.cvModal.showModal();
+                }, { signal });
+            });
+        }
+
+        const closeBtn = document.getElementById('close-cv-modal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                this.cvModal.close();
+            }, { signal });
+        }
+
+        this.cvModal.addEventListener('click', (e) => {
+            if (e.target === this.cvModal) {
+                this.cvModal.close();
             }
-        }, { rootMargin: "0px 0px 0px 0px", threshold: 0 });
-        
-        observer.observe(this.heroH1);
+        }, { signal });
+
+        if (this.printCvBtn) {
+            this.printCvBtn.addEventListener('click', () => {
+                window.print();
+            }, { signal });
+        }
     }
-} 
+}

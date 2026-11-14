@@ -1,76 +1,62 @@
-# 🌐 Thianetic | Portafolio Web
+# 🌐 Thianetic | Portafolio Profesional & Dossier Técnico
 
-Bienvenido/a al portafolio personal de **Thianetic**. Aquí muestro mis proyectos destacados, habilidades y experiencia como desarrollador de software, con un enfoque en diseño moderno, accesibilidad y animaciones interactivas.
+Portafolio web oficial de **Thianetic** — **Desarrollador de Aplicaciones Multiplataforma & DevSecOps | Fullstack, Cloud & IoT**.
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://thianetic.github.io)
+[![Version](https://img.shields.io/badge/version-1.0.0-00e5ff)](./VERSION)
 
 ---
-
-## ✨ Características
-
-- Animaciones y efectos visuales modernos (Canvas, CSS, JS)
-- Filtro dinámico de proyectos por categoría
-- Accesibilidad avanzada (contraste, tamaño de texto, modo dislexia, etc.)
-- Modo oscuro y claro con transición suave
-- Responsive: se adapta a cualquier dispositivo
-- Pantalla de carga tipo terminal
-- Navegación lateral y menú móvil
-
-## 🛠️ Tecnologías
-
-- **Frontend:** HTML5, CSS3 (Tailwind, variables, animaciones personalizadas)
-- **JavaScript modular:** scripts organizados en `/js/`
-- **Canvas API:** fondo animado de partículas
-- **Font Awesome, Google Fonts, Devicon**
 
 ## 📂 Estructura del Proyecto
 
-```
+```text
 thianetic.github.io/
 ├── index.html
+├── VERSION
+├── robots.txt
+├── ai.txt
+├── llms.txt
+├── sitemap.xml
+├── .nojekyll
+├── .well-known/
+│   ├── tdmrep.json
+│   └── mcp.json
 ├── css/
+│   ├── variables.css
+│   ├── tailwind.min.css
 │   ├── base.css
 │   ├── components.css
-│   ├── variables.css
-│   └── ...
+│   └── animations.css
 ├── js/
 │   ├── main.js
-│   ├── projectFilter.js
+│   ├── config.js
+│   ├── utils.js
+│   ├── loading.js
+│   ├── particles.js
+│   ├── animations.js
 │   ├── theme.js
-│   └── ...
-├── img/
-├── fonts/
-├── webfonts/
-└── README.md
+│   ├── accessibility.js
+│   ├── navigation.js
+│   ├── projectFilter.js
+│   ├── projectModal.js
+│   ├── contactForm.js
+│   ├── console.js
+│   ├── techBubbles.js
+│   └── cursor.js
+├── tests/
+│   └── portfolio-logic.test.mjs
+└── img/
 ```
-
-## 🎨 Personalización
-
-Para añadir o modificar proyectos, edita los archivos JS correspondientes en la carpeta `/js/` (por ejemplo, `projectFilter.js`). Las imágenes de los proyectos deben ir en la carpeta `/img/`.
 
 ## 🌍 Demo en vivo
 
-Puedes ver la versión en vivo aquí:  
 👉 **[https://thianetic.github.io](https://thianetic.github.io)**
 
-## 🤝 Sugerencias
+## 📄 Licencia y Reserva de Derechos (No-Training)
 
-Si tienes ideas para mejorar la accesibilidad, el diseño o la experiencia de usuario, puedes abrir un *issue*.  
-**No se aceptan PRs de código ni redistribuciones.**
-
-## Licencia y uso
-
-El código fuente de este repositorio es público únicamente para fines de consulta y referencia personal.
-
-Queda estrictamente prohibido:
-- Utilizar el material para cualquier finalidad comercial.
-- Remezclar, transformar o crear obras derivadas a partir del material.
-- Redistribuir, publicar o distribuir el material en cualquier otro medio o repositorio, ni total ni parcialmente.
-
-**Nota:** Debido a la naturaleza de los repositorios públicos en GitHub, cualquier usuario puede clonar o descargar este repositorio. Sin embargo, esto no otorga ningún derecho de uso, redistribución, publicación, modificación ni explotación comercial del código aquí contenido.
-
-Para cualquier uso distinto a la consulta personal, se requiere autorización expresa y por escrito de Thianetic.
+El código fuente de este repositorio es público únicamente para fines de consulta profesional y procesos de selección.
+Queda expresamente prohibido su uso para el entrenamiento de modelos de IA conforme a `/ai.txt` y `/.well-known/tdmrep.json` (Art. 4 Directiva UE 2019/790).
 
 ---
 
-Desarrollado con ❤️ por Thianetic | 2025
+Desarrollado por **Thianetic** · [GitHub](https://github.com/Thianetic) · [LinkedIn](https://linkedin.com/in/thianetic-dev)

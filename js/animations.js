@@ -1,73 +1,64 @@
-// ===== MÓDULO DE ANIMACIONES =====
-
+// Unified Scroll Animations & Parallax Manager
 export class AnimationManager {
-    constructor() {
+    constructor(bus) {
+        this.bus = bus;
         this.observer = null;
-        this.animatedElements = [];
-        this.init();
+        this.rafPending = false;
+        this.isAmbientPaused = false;
     }
 
     init() {
-        this.setupScrollAnimations();
-    }
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-    setupScrollAnimations() {
-        // Seleccionar todos los elementos con clases de animación
-        this.animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-fade-up, .animate-zoom');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.isAmbientPaused = prefersReducedMotion || document.documentElement.classList.contains('ambient-paused');
 
-        // Crear el Intersection Observer
-        this.observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    } else {
-                        entry.target.classList.remove('is-visible'); // Oculta al salir
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+        this.setupIntersectionObserver(prefersReducedMotion);
+        this.setupParallaxScroll(signal);
 
-        // Observar todos los elementos animados
-        this.animatedElements.forEach(el => this.observer.observe(el));
-    }
-
-    // Método para agregar nuevos elementos dinámicamente
-    addElement(element) {
-        if (element && this.observer) {
-            this.observer.observe(element);
-            this.animatedElements.push(element);
+        if (this.bus) {
+            this.bus.addEventListener('ambient:changed', (e) => {
+                this.isAmbientPaused = Boolean(e.detail && e.detail.paused);
+            }, { signal });
         }
     }
 
-    // Método para remover elementos
-    removeElement(element) {
-        if (element && this.observer) {
-            this.observer.unobserve(element);
-            const index = this.animatedElements.indexOf(element);
-            if (index > -1) {
-                this.animatedElements.splice(index, 1);
-            }
-        }
-    }
+    setupIntersectionObserver(prefersReducedMotion) {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-fade-up, .animate-zoom');
+        if (!animatedElements.length) return;
 
-    // Método para reiniciar animaciones (útil para accesibilidad)
-    restartAnimations() {
-        this.animatedElements.forEach(el => {
-            // Forzar reflow para reiniciar animaciones
-            el.style.animation = 'none';
-            el.offsetHeight; // Trigger reflow
-            el.style.animation = null;
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            animatedElements.forEach((el) => el.classList.add('visible'));
+            return;
+        }
+
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
         });
+
+        animatedElements.forEach((el) => this.observer.observe(el));
     }
 
-    // Método para limpiar recursos
-    destroy() {
-        if (this.observer) {
-            this.animatedElements.forEach(el => this.observer.unobserve(el));
-            this.observer.disconnect();
-        }
-        this.animatedElements = [];
+    setupParallaxScroll(signal) {
+        const updateScrollVar = () => {
+            this.rafPending = false;
+            if (this.isAmbientPaused) return;
+            document.documentElement.style.setProperty('--scroll-y', `${window.scrollY.toFixed(1)}px`);
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!this.rafPending && !this.isAmbientPaused) {
+                this.rafPending = true;
+                requestAnimationFrame(updateScrollVar);
+            }
+        }, { passive: true, signal });
     }
-} 
+}

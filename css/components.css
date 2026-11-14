@@ -1,638 +1,991 @@
-/* ===== COMPONENTES ===== */
-
-/* Navegación lateral */
-.lateral-nav {
-    background: rgba(251, 251, 251, 0);
-    backdrop-filter: blur(2px) brightness(1.1);
-    -webkit-backdrop-filter: blur(1px) brightness(0.8);
-    border: 2.5px solid #ffffff05;
-    box-shadow: 0 5px 0 rgba(0, 229, 255, 0.01);
-}
-
-.lateral-nav a { 
-    transition: all 0.3s ease; 
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-}
-
-.lateral-nav a:hover, .lateral-nav a.active { 
-    color: var(--accent); 
-    transform: translateX(10px); 
-}
-
-/* Tarjetas de proyecto */
-.project-card {
-    background-color: var(--card-dark);
-    border: 1px solid var(--line-color-dark);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.project-card:hover { 
-    transform: translateY(-10px); 
-    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7); 
-}
-
-html.light-mode .project-card {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.4s ease, transform 0.4s ease; 
-    border: 1px solid var(--line-color-light); 
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05); 
-}
-
-html.light-mode .project-card:hover { 
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); 
-}
-
-/* Bordes de categoría */
-.category-android::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4px;
-    background-color: #34d399;
-}
-
-.category-web::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4px;
-    background-color: #60a5fa;
-}
-
-.category-tools::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4px;
-    background-color: #f472b6;
-}
-
-/* Estado de ocultación con transición */
-.project-card.hide {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* Imágenes de proyecto */
-.project-image-container { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 8px; 
-    height: 250px; 
-}
-
-.project-image { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transition: transform 0.5s ease; 
-}
-
-.project-card:hover .project-image { 
-    transform: scale(1.05); 
-}
-
-/* Estados de proyecto */
-.project-status { 
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    padding: 4px 12px; 
-    border-radius: 20px; 
-    font-family: 'Fira Code', monospace; 
-    font-size: 0.75rem; 
-    font-weight: bold; 
-    z-index: 2; 
-}
-
-.status-development { background-color: #f59e0b; color: #000; }
-.status-alpha { background-color: #8b5cf6; color: #fff; }
-.status-beta { background-color: #3b82f6; color: #fff; }
-.status-release { background-color: #10b981; color: #000; }
-
-/* Botones */
-.cta-btn { 
-    position: relative; 
-    overflow: hidden; 
-    z-index: 1; 
-    transition: color 0.4s ease-in-out !important; 
-}
-
-.cta-btn::before { 
-    content: ''; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: var(--accent); 
-    transform: translateX(-101%); 
-    transition: transform 0.4s ease-in-out; 
-    z-index: -1; 
-}
-
-.cta-btn:hover::before { 
-    transform: translateX(0); 
-}
-
-html:not(.light-mode) .cta-btn:hover { 
-    color: var(--bg-dark) !important; 
-}
-
-html.light-mode .cta-btn:hover { 
-    color: var(--bg-light) !important; 
-}
-
-/* Botón de cristal líquido */
-.liquid-glass-btn {
-    position: relative;
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    font-weight: bold;
-    font-family: 'Fira Code', monospace;
-    font-size: 1rem;
-    color: var(--accent);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 9999px;
-    backdrop-filter: blur(1px) saturate(120%);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-}
-
-.liquid-glass-btn:hover {
-    color: var(--bg-dark);
-    background: var(--accent);
-    box-shadow: 0 0 40px var(--accent), inset 0 0 10px #fff3;
-}
-
-/* Filtros de proyectos */
-.filter-tabs { 
-    display: flex; 
-    gap: 8px; 
-    margin-bottom: 30px; 
-    flex-wrap: wrap; 
-}
-
-.filter-tab { 
-    padding: 8px 16px; 
-    border-radius: 30px; 
-    background-color: transparent; 
-    border: 1px solid var(--text-secondary-dark); 
-    color: var(--text-secondary-dark); 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    font-family: 'Fira Code', monospace; 
-    font-size: 0.9rem; 
-}
-
-.filter-tab:hover, .filter-tab.active { 
-    background-color: var(--accent); 
-    color: var(--bg-dark); 
-    border-color: var(--accent); 
-}
-
-/* Grid de proyectos */
-.projects-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-    gap: 30px; 
-    margin-top: 20px; 
-}
-
-/* Botones de proyecto */
-.project-buttons { 
-    display: flex; 
-    gap: 12px; 
-    margin-top: 20px; 
-}
-
-.project-btn { 
-    flex: 1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-    padding: 10px 15px; 
-    border-radius: 6px; 
-    font-family: 'Fira Code', monospace; 
-    font-weight: 500; 
-    transition: all 0.3s ease; 
-    text-align: center; 
-    position: relative; 
-    overflow: hidden; 
-}
-
-.demo-btn { 
-    background-color: var(--accent); 
-    color: var(--bg-dark); 
-    border: 2px solid var(--accent); 
-}
-
-.demo-btn:hover { 
-    background-color: transparent; 
-    color: var(--accent); 
-}
-
-.code-btn { 
-    background-color: transparent; 
-    color: var(--accent); 
-    border: 2px solid var(--accent); 
-}
-
-.code-btn:hover { 
-    background-color: var(--accent); 
-    color: var(--bg-dark); 
-}
-
-/* Widget de accesibilidad */
-#accessibility-widget { 
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 1000; 
-}
-
-#accessibility-btn { 
-    background-color: var(--card-dark); 
-    border: 1px solid var(--accent); 
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-}
-
-#accessibility-btn:hover { 
-    transform: scale(1.1); 
-    box-shadow: 0 0 15px var(--accent); 
-}
-
-#accessibility-menu { 
-    position: absolute; 
-    bottom: 70px; 
-    right: 0; 
-    background-color: var(--card-dark); 
-    border: 1px solid var(--accent); 
-    border-radius: 8px; 
-    padding: 1rem; 
-    width: 320px; 
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: opacity 0.3s ease, transform 0.3s ease; 
-    pointer-events: none; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-}
-
-#accessibility-menu.visible { 
-    opacity: 1; 
-    transform: translateY(0); 
-    pointer-events: auto; 
-}
-
-.access-btn { 
-    background: none; 
-    border: 1px solid var(--text-secondary-dark); 
-    color: var(--text-secondary-dark); 
-    padding: 0.5rem; 
-    border-radius: 6px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    font-size: 0.75rem; 
-    transition: all 0.2s ease; 
-    position: relative; 
-}
-
-.access-btn:hover { 
-    border-color: var(--accent); 
-    color: var(--accent); 
-}
-
-.access-btn.active { 
-    background-color: var(--accent); 
-    color: var(--bg-dark); 
-    border-color: var(--accent); 
-}
-
-.access-btn svg { 
-    width: 24px; 
-    height: 24px; 
-    margin-bottom: 4px; 
-}
-
-.level-indicator { 
-    position: absolute; 
-    top: 2px; 
-    right: 4px; 
-    font-size: 0.6rem; 
-    font-weight: bold; 
-    color: var(--accent); 
-    text-transform: uppercase; 
-}
-
-.access-btn.active .level-indicator { 
-    color: var(--bg-dark); 
-}
-
-/* ===== PANTALLA DE CARGA ===== */
-#terminal-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 420px;
-    max-width: 90vw;
-    padding: 1.5rem 1.5rem 1.5rem 2.2rem;
-    margin: 0;
-    z-index: 10001;
-    font-size: 1rem;
-    text-align: left;
-}
-
-#terminal-output {
-    min-height: 120px;
-    font-family: 'Fira Code', monospace;
-    color: #00e5ff;
-    text-shadow: 0 0 2px #00e5ff99;
-}
-
-#final-thianetic { 
-    transition: all 0.5s ease-out; 
-    opacity: 0; 
-}
-
-#final-thianetic.visible { 
-    opacity: 1; 
-}
-
-#skip-intro-prompt { 
-    transition: opacity 0.5s ease; 
-}
-
-#loading-screen {
-    display: block;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-#skip-intro-prompt.bounce {
-    animation: bounce 1s infinite;
-}
-
-#skip-intro-prompt.blink {
-    animation: blink 0.5s steps(1) 3;
-}
-
-/* ===== BURBUJAS DE TECNOLOGÍAS ===== */
-.tech-bubble {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(10, 25, 47, 0.9);
-    border: 1px solid var(--accent);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-    z-index: 1;
-    pointer-events: none;
-    animation: bubble-rise 8s forwards;
-    opacity: 0;
-}
-
-.tech-bubble img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
-@keyframes bubble-rise {
-    0% { transform: translateY(0) scale(0.5); opacity: 0; }
-    10% { opacity: 1; transform: translateY(-10px) scale(1); }
-    90% { opacity: 0.8; }
-    100% { transform: translateY(-200px) scale(0.8); opacity: 0; }
-}
-
-/* ===== TRANSICIONES DE HEADER ===== */
-.hero-h1-transition {
-    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), 
-                font-size 0.7s cubic-bezier(0.4,0,0.2,1), 
-                color 0.7s, opacity 0.7s;
-    will-change: transform, font-size, color, opacity;
-}
-
-.hero-h1-fixed {
-    position: fixed !important;
-    top: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%) scale(0.5) !important;
-    font-size: 2rem !important;
-    color: var(--text-primary-dark) !important;
-    z-index: 100;
-    opacity: 0.95;
-    pointer-events: none;
-}
-
-/* ===== ATRIBUCIONES ===== */
-.attributions {
-    background: rgba(10, 25, 47, 0.7);
-    border-top: 1px solid var(--accent);
-    padding: 1.5rem;
-    font-size: 0.85rem;
-}
-
-.attributions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.attribution-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.attribution-logo {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 5px;
-}
-
-#social-links ul li {
-    position: relative; /* Essential for absolute positioning of tooltip */
-    display: flex; /* Helps align the link and tooltip if needed, though not strictly required */
-    align-items: center; /* Vertically aligns the icon and potential tooltip */
-}
-
-#social-links ul li:hover .tooltip-text {
-    opacity: 1;
-}
-
-
-#social-links ul:after { content: ''; display: block; width: 1px; height: 90px; margin: 0 auto; background-color: var(--text-secondary-dark); }
-#social-links a:hover svg { color: var(--accent); transform: translateY(-3px); }
-
-/* ===== DISEÑO RESPONSIVO ===== */
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
+/* ===== COMPONENTES, LANDING CYBER-OS, MODALES, POPOVER & PRINT ===== */
+@layer components {
+    /* ===== 1. LANDING CONSOLA CYBER-OS (#loading-screen) ===== */
+    #loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: radial-gradient(circle at center, #071529 0%, #020c1b 85%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s ease;
     }
-    #theme-toggle-desktop {
+
+    #loading-screen.boot-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .cyber-boot-window {
+        width: 100%;
+        max-width: 600px;
+        background: rgba(6, 17, 36, 0.92);
+        border: 1px solid rgba(0, 229, 255, 0.35);
+        border-radius: 0.875rem;
+        box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.12);
+        overflow: hidden;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .cyber-boot-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        background: rgba(15, 35, 66, 0.75);
+        border-bottom: 1px solid rgba(0, 229, 255, 0.18);
+        font-family: 'Fira Code', monospace;
+        font-size: 0.75rem;
+        color: #94a3b8;
+    }
+
+    #boot-terminal-output {
+        min-height: 155px;
+        padding: 1.25rem 1.5rem;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.82rem;
+        line-height: 1.65;
+        color: #00e5ff;
+    }
+
+    .boot-progress-track {
+        margin: 0 1.5rem 1.25rem;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 9999px;
+        overflow: hidden;
+    }
+
+    #boot-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #00e5ff, #10b981);
+        transition: width 0.18s ease-out;
+    }
+
+    #final-thianetic {
+        font-family: 'Fira Code', monospace;
+        font-weight: 900;
+        font-size: clamp(2.25rem, 7vw, 4.75rem);
+        letter-spacing: 0.12em;
+        color: #00e5ff;
+        text-shadow: 0 0 25px rgba(0, 229, 255, 0.55);
+        margin-top: 1.5rem;
+        opacity: 0;
+        transform: scale(0.94);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+        text-align: center;
+    }
+
+    #final-thianetic.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    #skip-intro-prompt {
+        margin-top: 1.5rem;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.8rem;
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 0.45rem 1rem;
+        border-radius: 9999px;
+        cursor: pointer !important;
+        animation: bounce 1.5s infinite ease-in-out;
+        transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #skip-intro-prompt:hover {
+        color: #00e5ff;
+        border-color: #00e5ff;
+    }
+
+    /* ===== 2. NAVEGACIÓN LATERAL ===== */
+    .lateral-nav {
+        background: rgba(251, 251, 251, 0);
+        backdrop-filter: blur(2px) brightness(1.05);
+        -webkit-backdrop-filter: blur(2px) brightness(1.05);
+        border-right: 1px solid var(--line-color-dark);
+    }
+
+    .lateral-nav a {
+        transition: all 0.25s ease;
+        font-size: 0.85rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 8px;
+    }
+
+    .lateral-nav a:hover,
+    .lateral-nav a.active {
+        color: var(--accent);
+        transform: translateX(8px);
+        background: rgba(0, 229, 255, 0.06);
+    }
+
+    /* ===== 3. TARJETAS DE PROYECTO CON CONTAINER QUERIES & SUBGRID ===== */
+    .projects-grid {
+        container-type: inline-size;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.25rem;
+    }
+
+    .project-card {
+        background-color: var(--card-dark);
+        border: 1px solid var(--line-color-dark);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 28px -14px rgba(2, 12, 27, 0.65);
+    }
+
+    html.light-mode .project-card {
+        border: 1px solid var(--line-color-light);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .project-card.hide {
+        opacity: 0;
+        transform: scale(0.95);
+        pointer-events: none;
         display: none;
     }
-    #header-title {
-        z-index: 50;
+
+    .project-image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        min-height: 2.25rem;
     }
-}
 
-/* ===== TRANSICIONES DE VISTA ===== */
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-}
+    .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.45s ease;
+    }
 
-::view-transition-old(root) {
-    z-index: 1;
-}
+    .project-card:hover .project-image {
+        transform: scale(1.04);
+    }
 
-::view-transition-new(root) {
-    z-index: 9999;
-}
+    .project-status {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        z-index: 2;
+    }
 
-html.light-mode::view-transition-old(root) {
-    z-index: 9999;
-}
+    .status-development { background-color: #f59e0b; color: #000; }
+    .status-alpha { background-color: #6d28d9; color: #fff; }
+    .status-beta { background-color: #1d4ed8; color: #fff; }
+    .status-release { background-color: #10b981; color: #000; }
 
-html.light-mode::view-transition-new(root) {
-    z-index: 1;
-}
+    /* ===== 4. BOTONES Y FILTROS ===== */
+    .liquid-glass-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.85rem 2rem;
+        font-weight: 700;
+        font-family: 'Fira Code', monospace;
+        color: var(--accent);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 9999px;
+        transition: all 0.25s ease-in-out;
+    }
 
-/* ===== SOCIAL TOOLTIPS ===== */
-.social-tooltip {
-    position: absolute;
-    bottom: 100%;
-    transform: translateY(-50%);
-    margin-left: 10px;
-    white-space: nowrap;
-    background: var(--card-dark);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.875rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
+    .liquid-glass-btn:hover {
+        color: var(--bg-dark);
+        background: var(--accent);
+        box-shadow: 0 0 28px rgba(0, 229, 255, 0.45);
+    }
 
-#social-links li:hover .social-tooltip {
-    opacity: 1;
-}
+    .filter-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
 
-/* ===== MODAL DE PROYECTOS ===== */
-#project-modal {
-    backdrop-filter: blur(8px);
-}
+    .filter-tab {
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        background-color: transparent;
+        border: 1px solid var(--line-color-dark);
+        color: var(--text-secondary-dark);
+        cursor: pointer;
+        transition: all 0.25s ease;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.82rem;
+    }
 
-#project-modal.active {
-    opacity: 1;
-    pointer-events: auto;
-}
+    .filter-tab:hover,
+    .filter-tab.active {
+        background-color: var(--accent);
+        color: var(--bg-dark);
+        border-color: var(--accent);
+        font-weight: 600;
+    }
 
-#modal-content {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
+    .project-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: auto;
+        padding-top: 0.75rem;
+    }
 
-#modal-content::-webkit-scrollbar {
-    width: 8px;
-}
+    .project-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.5rem;
+        font-family: 'Fira Code', monospace;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        text-align: center;
+    }
 
-#modal-content::-webkit-scrollbar-track {
-    background: var(--card-dark);
-    border-radius: 4px;
-}
+    .demo-btn {
+        background-color: var(--accent);
+        color: var(--bg-dark);
+        border: 2px solid var(--accent);
+    }
 
-#modal-content::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 4px;
-}
+    .demo-btn:hover {
+        background-color: transparent;
+        color: var(--accent);
+    }
 
-#modal-content::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-light);
-}
+    .code-btn {
+        background-color: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+    }
 
-/* Animación de entrada del modal */
-@keyframes modalSlideIn {
-    from {
+    .code-btn:hover {
+        background-color: var(--accent);
+        color: var(--bg-dark);
+    }
+
+    /* ===== 5. TECH CARDS & LÍNEA TEMPORAL (Extraído del inline <style> de index.html) ===== */
+    .tech-card {
+        background: var(--card-dark);
+        border: 1px solid var(--line-color-dark);
+        border-radius: 12px;
+        padding: 1.75rem 1.25rem;
+        text-align: center;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tech-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.35s ease;
+    }
+
+    .tech-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 32px rgba(0, 229, 255, 0.12);
+        border-color: var(--accent);
+    }
+
+    .tech-card:hover::before {
+        transform: translateX(0);
+    }
+
+    .tech-icon {
+        margin-bottom: 0.85rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 52px;
+        transition: transform 0.3s ease;
+    }
+
+    .tech-card:hover .tech-icon {
+        transform: scale(1.1);
+    }
+
+    .tech-name {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary-dark);
+        margin-bottom: 0.35rem;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .tech-category {
+        font-size: 0.8rem;
+        color: var(--text-secondary-dark);
+    }
+
+    /* Timeline animada central */
+    .cv-timeline-line {
+        height: 0;
+        transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cv-timeline-dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 3px solid var(--bg-root-dark);
+        top: 0;
+        transition: top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 2;
+    }
+
+    .cv-timeline-future {
+        display: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 40px;
+        background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 6px, transparent 6px, transparent 12px);
+        top: 100%;
+        z-index: 1;
+    }
+
+    .cv-timeline-container {
+        min-height: 1000px;
+    }
+
+    /* ===== 6. WIDGET DE ACCESIBILIDAD CON POPOVER API & ANCHOR POSITIONING (Hallazgo #8) ===== */
+    #accessibility-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    #accessibility-btn {
+        anchor-name: --a11y-btn;
+        background-color: var(--card-dark);
+        border: 1px solid var(--accent);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer !important;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    #accessibility-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 15px var(--accent);
+    }
+
+    #accessibility-menu {
+        position: fixed;
+        inset: auto 20px 82px auto;
+        margin: 0;
+        background-color: var(--card-dark);
+        color: var(--text-primary-dark);
+        border: 1px solid var(--accent);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        width: min(320px, calc(100vw - 40px));
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+        z-index: 1001;
+        cursor: auto !important;
+    }
+
+    @supports (anchor-name: --a11y-btn) and (position-anchor: --a11y-btn) {
+        #accessibility-menu {
+            position-anchor: --a11y-btn;
+            bottom: calc(anchor(top) + 12px);
+            right: anchor(right);
+        }
+    }
+
+    /* Fallback para navegadores sin Popover API */
+    #accessibility-menu:not([popover]) {
+        display: none;
+    }
+    #accessibility-menu:not([popover]).visible {
+        display: block;
+    }
+
+    .access-btn {
+        background: none;
+        border: 1px solid var(--line-color-dark);
+        color: var(--text-secondary-dark);
+        padding: 0.55rem 0.4rem;
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.75rem;
+        transition: all 0.2s ease;
+        cursor: pointer !important;
+    }
+
+    .access-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .access-btn.active {
+        background-color: var(--accent);
+        color: var(--bg-dark);
+        border-color: var(--accent);
+    }
+
+    .access-btn svg {
+        width: 22px;
+        height: 22px;
+        margin-bottom: 4px;
+    }
+
+    .level-indicator {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 0.15rem;
+    }
+
+    .access-btn.active .level-indicator {
+        color: var(--bg-dark);
+    }
+
+    /* ===== 7. FORMULARIO & VALIDACIÓN CON :user-invalid (Hallazgos #15 y #18) ===== */
+    .contact-form-input {
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-form-input:focus {
+        box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+    }
+
+    .contact-form-input:user-invalid,
+    .contact-form-input[aria-invalid="true"] {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    /* ===== 8. SECCIÓN GEO / FAQ ACORDEÓN NATIVO (<details name="faq-accordion">) ===== */
+    .faq-item {
+        background-color: var(--card-dark);
+        border: 1px solid var(--line-color-dark);
+        border-radius: 0.75rem;
+        transition: border-color 0.25s ease;
+        overflow: hidden;
+    }
+
+    .faq-item[open] {
+        border-color: var(--accent);
+    }
+
+    .faq-summary {
+        padding: 1.1rem 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary-dark);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        user-select: none;
+    }
+
+    .faq-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-chevron {
+        transition: transform 0.25s ease;
+        color: var(--accent);
+    }
+
+    .faq-item[open] .faq-chevron {
+        transform: rotate(180deg);
+    }
+
+    /* ===== 9. BURBUJAS, ATRIBUCIONES & TOOLTIPS ===== */
+    .tech-bubble {
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(10, 25, 47, 0.92);
+        border: 1px solid var(--accent);
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        z-index: 1;
+        pointer-events: none;
+        animation: bubble-rise 6s forwards;
         opacity: 0;
-        transform: scale(0.9) translateY(-20px);
     }
-    to {
+
+    .tech-bubble img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+    }
+
+    @keyframes bubble-rise {
+        0% { transform: translateY(0) scale(0.5); opacity: 0; }
+        15% { opacity: 1; transform: translateY(-10px) scale(1); }
+        85% { opacity: 0.8; }
+        100% { transform: translateY(-160px) scale(0.8); opacity: 0; }
+    }
+
+    .attributions {
+        background: rgba(10, 25, 47, 0.7);
+        border-top: 1px solid var(--line-color-dark);
+        padding: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .attributions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    .attribution-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .attribution-logo {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 5px;
+    }
+
+    .attribution-logo img,
+    .attribution-logo svg {
+        width: 2rem;
+        height: 2rem;
+        object-fit: contain;
+    }
+
+    #social-links ul li {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    #social-links ul::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 90px;
+        margin: 0 auto;
+        background-color: var(--text-secondary-dark);
+    }
+
+    .social-tooltip {
+        position: absolute;
+        left: 100%;
+        margin-left: 12px;
+        white-space: nowrap;
+        background: var(--card-dark);
+        border: 1px solid var(--line-color-dark);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+    }
+
+    #social-links li:hover .social-tooltip {
         opacity: 1;
-        transform: scale(1) translateY(0);
+    }
+
+    /* ===== 10. NATIVE DIALOG & MODAL STYLING ===== */
+    dialog.modal-dialog {
+        border: none;
+        background: transparent;
+        padding: 1rem;
+        max-width: 95vw;
+        margin: auto;
+        overscroll-behavior: contain;
+        cursor: auto !important;
+    }
+
+    dialog.modal-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.78);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        overscroll-behavior: contain;
+        cursor: auto !important;
+    }
+
+    dialog:modal,
+    dialog:modal *,
+    .modal-dialog,
+    .modal-dialog *,
+    #accessibility-menu,
+    #accessibility-menu * {
+        cursor: auto !important;
+    }
+
+    dialog:modal button,
+    dialog:modal a,
+    dialog:modal input,
+    dialog:modal select,
+    dialog:modal textarea,
+    dialog:modal label,
+    dialog:modal .project-btn,
+    .modal-dialog button,
+    .modal-dialog a {
+        cursor: pointer !important;
+    }
+
+    body:has(dialog[open]) {
+        overflow: hidden !important;
+    }
+
+    body:has(dialog[open]) .custom-cursor,
+    body:has(#accessibility-menu:popover-open) .custom-cursor {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* ===== 10.5. CONSOLA INTERACTIVA CYBER-OS (#cli-modal) ===== */
+    .cli-terminal-window {
+        background-color: #050a14;
+        border: 1px solid rgba(16, 185, 129, 0.45);
+        border-radius: 0.875rem;
+        box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(16, 185, 129, 0.14);
+        overflow: hidden;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .cli-terminal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.7rem 1rem;
+        background: rgba(10, 22, 40, 0.95);
+        border-bottom: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .cli-terminal-body {
+        padding: 1.25rem;
+        min-height: 360px;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.04), transparent 60%), #050a14;
+        color: #10b981;
+        cursor: text !important;
+    }
+
+    .cli-output-log {
+        flex: 1;
+        overflow-y: auto;
+        font-size: 0.82rem;
+        line-height: 1.65;
+        margin-bottom: 0.75rem;
+        padding-right: 0.35rem;
+        scrollbar-width: thin;
+        scrollbar-color: #10b981 #050a14;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    .cli-line {
+        margin-bottom: 0.2rem;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .cli-default { color: #34d399; }
+    .cli-accent  { color: var(--accent, #00e5ff); font-weight: 600; }
+    .cli-info    { color: #a7f3d0; }
+    .cli-muted   { color: #64748b; }
+    .cli-prompt-echo { color: #e2e8f0; margin-top: 0.45rem; }
+    .cli-error   { color: #f87171; font-weight: 600; }
+
+    .cli-input-row {
+        display: flex;
+        align-items: center;
+        padding-top: 0.6rem;
+        border-top: 1px dashed rgba(16, 185, 129, 0.2);
+        font-size: 0.85rem;
+        position: relative;
+    }
+
+    .cli-prompt-label {
+        color: var(--accent, #00e5ff);
+        font-weight: 700;
+        flex-shrink: 0;
+        user-select: none;
+    }
+
+    .cli-visual-input-container {
+        position: relative;
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        min-height: 1.4rem;
+        overflow: hidden;
+    }
+
+    .cli-mirror-text {
+        color: #ecfdf5;
+        white-space: pre;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .cli-cursor {
+        display: inline-block;
+        color: #10b981;
+        font-size: 0.85rem;
+        line-height: 1;
+        margin-left: 1px;
+        animation: cliCursorBlink 1s steps(2, start) infinite;
+    }
+
+    @keyframes cliCursorBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .cli-hidden-input {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: transparent;
+        caret-color: transparent;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.85rem;
+        cursor: text !important;
+    }
+
+    .cli-nav-tooltip {
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 10px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: #050a14;
+        border: 1px solid rgba(16, 185, 129, 0.45);
+        color: #34d399;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 40;
+    }
+
+    .cli-nav-tooltip-wrap:hover .cli-nav-tooltip,
+    .cli-nav-tooltip-wrap:focus-visible .cli-nav-tooltip {
+        opacity: 1;
+    }
+
+    @keyframes modalSlideIn {
+        from { opacity: 0; transform: scale(0.95) translateY(-12px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    dialog[open].modal-dialog {
+        animation: modalSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    #modal-content,
+    #contact-modal-content,
+    #gdpr-modal-content,
+    #cv-modal-content {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+        scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    }
+
+    @supports not (scrollbar-color: auto) {
+        #modal-content::-webkit-scrollbar,
+        #contact-modal-content::-webkit-scrollbar,
+        #gdpr-modal-content::-webkit-scrollbar,
+        #cv-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        #modal-content::-webkit-scrollbar-track,
+        #contact-modal-content::-webkit-scrollbar-track,
+        #gdpr-modal-content::-webkit-scrollbar-track,
+        #cv-modal-content::-webkit-scrollbar-track {
+            background: var(--card-dark);
+        }
+        #modal-content::-webkit-scrollbar-thumb,
+        #contact-modal-content::-webkit-scrollbar-thumb,
+        #gdpr-modal-content::-webkit-scrollbar-thumb,
+        #cv-modal-content::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
     }
 }
 
-#modal-content {
-    animation: modalSlideIn 0.3s ease-out;
+/* ===== 11. IMPRESIÓN EXCLUSIVA DE DOSSIER CV (@media print - Hallazgo #9) ===== */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    /* Ocultar todo el portafolio salvo el modal del CV */
+    #ambient-chroma-mesh,
+    #background-canvas,
+    .custom-cursor,
+    #loading-screen,
+    #main-content,
+    #project-modal,
+    #contact-modal,
+    #gdpr-modal,
+    #cli-modal,
+    #close-cv-modal,
+    #cv-modal-content > div:last-child {
+        display: none !important;
+    }
+
+    #cv-modal {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: #ffffff !important;
+        overflow: visible !important;
+    }
+
+    #cv-modal-content {
+        max-height: none !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+    }
+
+    #cv-modal-content * {
+        color: #0f172a !important;
+        background-color: transparent !important;
+        border-color: #cbd5e1 !important;
+    }
 }
 
-/* Estilos para los botones del modal */
-#modal-demo, #modal-code {
-    transition: all 0.3s ease;
+/* Tokens contextuales y bloques protegidos con alto contraste (>4.5:1 en ambos temas) */
+.hero-terminal-container {
+    background: var(--terminal-bg) !important;
+    border-color: var(--terminal-border) !important;
+    color: var(--terminal-text) !important;
+}
+.hero-terminal-container .terminal-accent {
+    color: var(--terminal-accent) !important;
+}
+.hero-terminal-container .terminal-emerald {
+    color: var(--terminal-emerald) !important;
+}
+.hero-terminal-container .terminal-muted {
+    color: var(--terminal-text-muted) !important;
 }
 
-#modal-demo:hover, #modal-code:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+.attribution-panel {
+    background: var(--terminal-bg) !important;
+    border-color: var(--terminal-border) !important;
+    color: var(--terminal-text) !important;
+}
+.attribution-panel a {
+    color: var(--terminal-accent) !important;
 }
 
-/* Responsive del modal */
-@media (max-width: 768px) {
-    #modal-content {
-        margin: 1rem;
-        max-height: calc(100vh - 2rem);
-    }
-    
-    #modal-title {
-        font-size: 1.5rem;
-    }
-    
-    #modal-image {
-        height: 200px;
-    }
-} 
+.sith-internal-card {
+    background: var(--terminal-surface) !important;
+    border-color: var(--terminal-border) !important;
+    color: var(--terminal-text) !important;
+}
+
+.badge-status-emerald {
+    background-color: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    color: var(--terminal-emerald) !important;
+}
+
+/* Reglas complementarias para utilidades estáticas faltantes (Punto 8) */
+.bg-emerald-500\/15 { background-color: rgba(16, 185, 129, 0.15) !important; }
+.bg-emerald-500\/80 { background-color: rgba(16, 185, 129, 0.8) !important; }
+.border-accent\/30 { border-color: rgba(0, 229, 255, 0.3) !important; }
+.hover\:bg-accent-hover\/20:hover { background-color: rgba(0, 229, 255, 0.2) !important; }
+.hover\:border-emerald-400:hover { border-color: #34d399 !important; }
+.hover\:text-emerald-400:hover { color: #34d399 !important; }
+.text-slate-300 { color: #cbd5e1 !important; }
+.text-slate-400 { color: #94a3b8 !important; }
+.text-accent\/80 { color: rgba(0, 229, 255, 0.8) !important; }
+.text-accent\/90 { color: rgba(0, 229, 255, 0.9) !important; }
+.focus\:ring-2\/accent:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+.font-normal { font-weight: 400 !important; }
+.mt-10 { margin-top: 2.5rem !important; }
+.leading-none { line-height: 1 !important; }

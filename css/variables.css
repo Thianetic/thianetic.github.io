@@ -1,53 +1,155 @@
-/* ===== VARIABLES CSS ===== */
-:root {
-    /* Colores del tema oscuro */
-    --bg-dark: #020c1b;
-    --bg-root-dark: #020c1b;
-    --bg-root-light: #E0E0E0;
-    --bg-light: #eef2f9;
-    --text-primary-dark: #ccd6f6;
-    --text-primary-light: #1d1d1f;
-    --text-secondary-dark: #8892b0;
-    --text-secondary-light: #545456;
-    --accent: #00e5ff;
-    --accent-light: #008C9E;
-    --card-dark: #0a192f;
-    --card-light: #ffffff;
-    --line-color-dark: rgba(136, 146, 176, 0.2);
-    --line-color-light: rgba(229, 231, 235, 1);
-    
-    /* Tipografía */
-    --font-size: 16px;
-    --text-align: left;
-    --line-height: 1.7;
-    --letter-spacing: normal;
-}
+/* ===== VARIABLES CSS & TOKENS SEMÁNTICOS ===== */
+@layer base {
+    :root {
+        color-scheme: light dark;
 
-/* Tema claro */
-html.light-mode {
-    --bg-dark: var(--bg-light);
-    --bg-root-dark: var(--bg-root-light);
-    --text-primary-dark: var(--text-primary-light);
-    --text-secondary-dark: var(--text-secondary-light);
-    --card-dark: var(--card-light);
-    --line-color-dark: var(--line-color-light);
-    --accent: var(--accent-light);
-}
+        /* Paleta Tema Oscuro (Por defecto) con soporte oklch() y fallback hex */
+        --bg-dark: #020c1b;
+        --bg-root-dark: #020c1b;
+        --bg-root-light: #f1f5f9;
+        --bg-light: #f8fafc;
+        --text-primary-dark: #ccd6f6;
+        --text-primary-light: #0f172a;
+        --text-secondary-dark: #8892b0;
+        --text-secondary-light: #334155;
+        --accent: #00e5ff;
+        --accent-light: #006d7a;
+        --card-dark: #0a192f;
+        --card-light: #ffffff;
+        --line-color-dark: rgba(136, 146, 176, 0.22);
+        --line-color-light: rgba(148, 163, 184, 0.45);
 
-/* Estilos de accesibilidad */
-html.contrast-1 { filter: contrast(1.25); }
-html.contrast-2 { filter: contrast(1.5); }
-html.contrast-3 { filter: invert(1) hue-rotate(180deg); }
-html.dyslexia-friendly, html.dyslexia-friendly body { font-family: 'Lexend', sans-serif !important; }
-html.colorblind-friendly {
-    filter: grayscale(100%) contrast(1.2);
+        /* Scrollbars estándar */
+        --scrollbar-thumb: #1e293b;
+        --scrollbar-track: #0a192f;
+
+        /* Tokens contextuales para bloques oscuros protegidos (Hero terminal, SITH cards, attribution panel, badges) */
+        --terminal-bg: #050a14;
+        --terminal-surface: #0a192f;
+        --terminal-border: rgba(0, 229, 255, 0.25);
+        --terminal-text: #ccd6f6;
+        --terminal-text-muted: #8892b0;
+        --terminal-accent: #00e5ff;
+        --terminal-emerald: #34d399;
+
+        /* Tipografía y Escalado Accesible */
+        --font-size: 16px;
+        --text-align: left;
+        --line-height: 1.7;
+        --letter-spacing: normal;
+    }
+
+    @supports (color: oklch(0.85 0.15 200)) {
+        :root {
+            --accent: oklch(0.86 0.16 205);
+            --accent-light: oklch(0.48 0.11 208);
+        }
+    }
+
+    /* Tema Claro */
+    html.light-mode {
+        color-scheme: light;
+        --bg-dark: var(--bg-light);
+        --bg-root-dark: var(--bg-root-light);
+        --text-primary-dark: var(--text-primary-light);
+        --text-secondary-dark: var(--text-secondary-light);
+        --card-dark: var(--card-light);
+        --line-color-dark: var(--line-color-light);
+        --accent: var(--accent-light);
+        --scrollbar-thumb: #94a3b8;
+        --scrollbar-track: #e2e8f0;
+
+        /* Bloques oscuros permanentes mantienen contraste >4.5:1 incluso en tema claro */
+        --terminal-bg: #050a14;
+        --terminal-surface: #0a192f;
+        --terminal-border: rgba(0, 229, 255, 0.35);
+        --terminal-text: #f1f5f9;
+        --terminal-text-muted: #94a3b8;
+        --terminal-accent: #38bdf8;
+        --terminal-emerald: #34d399;
+    }
+
+    /* ===== NIVELES DE CONTRASTE SENSIBLES AL TEMA (Hallazgo #5) ===== */
+    /* Modo Oscuro - Contraste 1 (Alto) */
+    html:not(.light-mode).contrast-1 {
+        --text-primary-dark: #ffffff;
+        --text-secondary-dark: #e2e8f0;
+        --line-color-dark: rgba(255, 255, 255, 0.45);
+        --accent: #38bdf8;
+    }
+
+    /* Modo Claro - Contraste 1 (Alto): Texto negro profundo sobre fondo claro */
+    html.light-mode.contrast-1 {
+        --bg-dark: #ffffff;
+        --bg-root-dark: #f8fafc;
+        --card-dark: #ffffff;
+        --text-primary-dark: #000000;
+        --text-secondary-dark: #1e293b;
+        --line-color-dark: #0f172a;
+        --accent: #004d5a;
+    }
+
+    /* Modo Oscuro - Contraste 2 (Muy Alto) */
+    html:not(.light-mode).contrast-2 {
+        --bg-dark: #01060e;
+        --bg-root-dark: #01060e;
+        --card-dark: #040d1a;
+        --text-primary-dark: #ffffff;
+        --text-secondary-dark: #f8fafc;
+        --line-color-dark: rgba(255, 255, 255, 0.7);
+        --accent: #00ffff;
+    }
+
+    /* Modo Claro - Contraste 2 (Muy Alto) */
+    html.light-mode.contrast-2 {
+        --bg-dark: #ffffff;
+        --bg-root-dark: #ffffff;
+        --card-dark: #f1f5f9;
+        --text-primary-dark: #000000;
+        --text-secondary-dark: #000000;
+        --line-color-dark: #000000;
+        --accent: #003742;
+    }
+
+    /* Contraste 3 (Máximo / Terminal Puro Negro y Amarillo/Cian) */
+    html.contrast-3 {
+        --bg-dark: #000000;
+        --bg-root-dark: #000000;
+        --card-dark: #050505;
+        --text-primary-dark: #ffffff;
+        --text-secondary-dark: #fef08a;
+        --line-color-dark: #ffffff;
+        --accent: #00ffff;
+    }
+
+    html.contrast-3 img,
+    html.contrast-3 svg {
+        filter: contrast(1.1);
+    }
+
+    html.dyslexia-friendly,
+    html.dyslexia-friendly body {
+        font-family: 'Lexend', sans-serif !important;
+        --letter-spacing: 0.03em;
+        --line-height: 1.85;
+    }
+
+    html.colorblind-friendly {
+        filter: grayscale(100%) contrast(1.15);
+    }
+
+    html.highlight-links a {
+        background-color: #fde047 !important;
+        color: #000000 !important;
+        text-decoration: underline !important;
+        padding: 0 2px;
+        border-radius: 2px;
+    }
+
+    html.no-animations *,
+    html.no-animations *::before,
+    html.no-animations *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
-html.highlight-links a { 
-    background-color: yellow !important; 
-    color: black !important; 
-    text-decoration: underline !important; 
-}
-html.no-animations * { 
-    animation: none !important; 
-    transition: none !important; 
-} 

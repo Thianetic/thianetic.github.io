@@ -1,191 +1,59 @@
-// ===== MÓDULO DE CURSOR PERSONALIZADO =====
-
+// Custom Cursor Manager (RAF GPU-Composite Transform & Zero DOM Queries per Frame)
 export class CursorManager {
-    constructor() {
-        this.cursor = document.querySelector('.custom-cursor');
-        this.symbol = this.cursor.querySelector('.cursor-symbol');
-        this.init();
+    constructor(bus) {
+        this.bus = bus;
+        this.cursor = null;
+        this.isTouchDevice = false;
+        this.targetX = -100;
+        this.targetY = -100;
+        this.rafPending = false;
     }
 
     init() {
-        if (!this.cursor) return;
-        
-        this.setupEventListeners();
-    }
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-    setupEventListeners() {
-        // Seguir movimiento del mouse
-        window.addEventListener('mousemove', (e) => {
-            this.updateCursorPosition(e.clientX, e.clientY);
-        });
+        this.cursor = document.querySelector('.custom-cursor') || document.getElementById('custom-cursor');
 
-        // Efectos hover en elementos interactivos
-        const interactiveElements = document.querySelectorAll('a, button, .filter-tab, .access-btn, input, textarea, select');
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hovered');
-                this.setSymbol('_', true); // Parpadeo
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        });
+        this.isTouchDevice = (
+            'ontouchstart' in window ||
+            navigator.maxTouchPoints > 0 ||
+            window.matchMedia('(pointer: coarse)').matches
+        );
 
-        projectCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hovered');
-                this.setSymbol('{ }', false);
-            });
-            card.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        });
+        if (this.isTouchDevice || !this.cursor) {
+            if (this.cursor) this.cursor.style.display = 'none';
+            return;
+        }
 
-        // Observador para elementos dinámicos (como modales)
-        this.setupDynamicElementsObserver();
+        document.body.classList.add('has-custom-cursor');
 
-        // Ocultar cursor cuando sale de la ventana
-        document.addEventListener('mouseleave', () => {
-            this.cursor.style.opacity = '0';
-        });
+        const interactiveSelector = 'a, button, summary, [role="button"], input, textarea, select, label, .project-card, .filter-tab';
 
-        document.addEventListener('mouseenter', () => {
-            this.cursor.style.opacity = '1';
-        });
-    }
+        const renderPosition = () => {
+            this.rafPending = false;
+            this.cursor.style.transform = `translate3d(calc(${this.targetX}px - 50%), calc(${this.targetY}px - 50%), 0)`;
+        };
 
-    setupDynamicElementsObserver() {
-        // Observar cambios en el DOM para elementos dinámicos
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === 1) { // Element node
-                        // Buscar elementos interactivos en el nuevo nodo
-                        const newInteractiveElements = node.querySelectorAll ? 
-                            node.querySelectorAll('a, button, input, textarea, select, .access-btn, .project-card, .filter-tab') : [];
-                        
-                        newInteractiveElements.forEach(el => {
-                            this.addInteractiveElement(el);
-                        });
-
-                        // Si el nodo mismo es interactivo
-                        if (node.matches && node.matches('a, button, input, textarea, select, .access-btn, .project-card, .filter-tab')) {
-                            this.addInteractiveElement(node);
-                        }
-
-                        // Configurar elementos específicos de modales
-                        if (node.id === 'project-modal' || node.id === 'contact-modal' || node.id === 'gdpr-modal') {
-                            this.setupModalElements(node);
-                        }
-                    }
-                });
-            });
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-
-        // Configurar elementos de modales existentes
-        this.setupExistingModals();
-    }
-
-    setupExistingModals() {
-        const modals = ['project-modal', 'contact-modal', 'gdpr-modal'];
-        modals.forEach(modalId => {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                this.setupModalElements(modal);
+        document.addEventListener('mousemove', (e) => {
+            this.targetX = e.clientX;
+            this.targetY = e.clientY;
+            if (!this.rafPending) {
+                this.rafPending = true;
+                requestAnimationFrame(renderPosition);
             }
-        });
-    }
+        }, { passive: true, signal });
 
-    setupModalElements(modal) {
-        // Configurar elementos interactivos dentro del modal
-        const interactiveElements = modal.querySelectorAll('a, button, input, textarea, select, .close-modal, .project-btn, .demo-btn, .code-btn');
-        
-        interactiveElements.forEach(el => {
-            this.addInteractiveElement(el);
-        });
-
-        // Configurar botones de cierre específicamente
-        const closeButtons = modal.querySelectorAll('.close-modal, [id*="close"]');
-        closeButtons.forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(interactiveSelector)) {
                 this.cursor.classList.add('hovered');
-                this.setSymbol('×', false);
-            });
-            btn.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        });
-    }
+            }
+        }, { passive: true, signal });
 
-    updateCursorPosition(x, y) {
-        this.cursor.style.left = x + 'px';
-        this.cursor.style.top = y + 'px';
-    }
-
-    setSymbol(symbol, blink = false) {
-        if (!this.symbol) return;
-        this.symbol.textContent = symbol;
-        if (blink) {
-            this.symbol.style.animation = 'cursor-blink 1s steps(2, start) infinite';
-        } else {
-            this.symbol.style.animation = 'none';
-        }
-    }
-
-    // Método para agregar elementos interactivos dinámicamente
-    addInteractiveElement(element) {
-        // Remover listeners existentes para evitar duplicados
-        element.removeEventListener('mouseenter', this._handleMouseEnter);
-        element.removeEventListener('mouseleave', this._handleMouseLeave);
-        
-        // Determinar el tipo de elemento y configurar el cursor apropiadamente
-        if (element.classList.contains('project-card')) {
-            element.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hovered');
-                this.setSymbol('{ }', false);
-            });
-            element.addEventListener('mouseleave', () => {
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(interactiveSelector)) {
                 this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        } else if (element.classList.contains('close-modal') || element.id?.includes('close')) {
-            element.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hovered');
-                this.setSymbol('×', false);
-            });
-            element.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        } else {
-            // Elementos interactivos generales (enlaces, botones, inputs, etc.)
-            element.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hovered');
-                this.setSymbol('_', true); // Parpadeo para elementos interactivos
-            });
-            element.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hovered');
-                this.setSymbol('>');
-            });
-        }
+            }
+        }, { passive: true, signal });
     }
-
-    // Método para cambiar el estado del cursor
-    setCursorState(state) {
-        this.cursor.classList.remove('hovered');
-        if (state === 'hovered') {
-            this.cursor.classList.add('hovered');
-        }
-    }
-} 
+}

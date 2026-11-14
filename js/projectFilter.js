@@ -1,74 +1,57 @@
-// ===== MÓDULO DE FILTRO DE PROYECTOS =====
+// Project Filter Manager (Scoped strictly to #ecosistema & View Transitions API)
+import { matchesProjectFilter } from './utils.js';
 
 export class ProjectFilter {
-    constructor() {
-        this.filterTabs = document.querySelectorAll('.filter-tab');
-        this.projects = document.querySelectorAll('.project-card');
-        this.init();
+    constructor(bus) {
+        this.bus = bus;
+        this.filterBtns = [];
+        this.projectCards = [];
+        this.currentFilter = 'all';
     }
 
     init() {
-        this.setupEventListeners();
+        const abortController = new AbortController();
+        const { signal } = abortController;
+
+        this.filterBtns = Array.from(document.querySelectorAll('.filter-tab, .filter-btn'));
+        this.projectCards = Array.from(document.querySelectorAll('#ecosistema .project-card'));
+
+        if (!this.filterBtns.length || !this.projectCards.length) return;
+
+        this.filterBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter') || 'all';
+                this.applyFilter(filter, btn);
+            }, { signal });
+        });
     }
 
-    setupEventListeners() {
-        this.filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                this.handleFilterClick(tab);
+    applyFilter(filter, activeBtn) {
+        if (this.currentFilter === filter) return;
+        this.currentFilter = filter;
+
+        this.filterBtns.forEach((btn) => {
+            const isActive = btn === activeBtn;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        const updateDom = () => {
+            this.projectCards.forEach((card) => {
+                const categoriesAttr = card.getAttribute('data-category') || '';
+                const isMatch = matchesProjectFilter(categoriesAttr, filter);
+                card.classList.toggle('hide', !isMatch);
             });
-        });
-    }
+        };
 
-    handleFilterClick(clickedTab) {
-        // Actualizar estado activo de las pestañas
-        this.filterTabs.forEach(tab => tab.classList.remove('active'));
-        clickedTab.classList.add('active');
+        const prefersReducedMotion =
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            document.documentElement.classList.contains('reduce-motion');
 
-        // Obtener filtro seleccionado
-        const filter = clickedTab.dataset.filter;
-
-        // Aplicar filtro con transiciones suaves
-        this.filterProjects(filter);
-    }
-
-    filterProjects(filter) {
-        this.projects.forEach(project => {
-            const matches = filter === 'all' || project.dataset.category === filter;
-            
-            if (matches) {
-                // Mostrar proyecto
-                project.classList.remove('hide');
-                project.style.display = 'block';
-                
-                // Animar entrada
-                setTimeout(() => {
-                    project.style.opacity = '1';
-                    project.style.transform = 'scale(1)';
-                }, 50);
-            } else {
-                // Ocultar proyecto con animación
-                project.style.opacity = '0';
-                project.style.transform = 'scale(0.95)';
-                
-                // Ocultar después de la animación
-                setTimeout(() => {
-                    project.classList.add('hide');
-                    project.style.display = 'none';
-                }, 400);
-            }
-        });
-    }
-
-    // Método para filtrar por categoría específica
-    filterByCategory(category) {
-        const tab = Array.from(this.filterTabs).find(tab => tab.dataset.filter === category);
-        if (tab) {
-            this.handleFilterClick(tab);
+        if (document.startViewTransition && !prefersReducedMotion) {
+            document.startViewTransition(updateDom);
+        } else {
+            updateDom();
         }
     }
-
-    // Método para mostrar todos los proyectos
-    showAll() {
-        this.handleFilterClick(this.filterTabs[0]); // Asumiendo que el primer tab es "all"
-    }
-} 
+}

@@ -1,154 +1,167 @@
-// ===== MÓDULO DE PANTALLA DE CARGA =====
+// Loading Screen Cyber-OS Boot & Hero Terminal Manager
+import { APP_VERSION, BOOT_SEQUENCE, HERO_TERMINAL_LINES } from './config.js';
+import { scrambleText } from './utils.js';
 
-export class LoadingScreen {
-    constructor() {
-        this.loadingScreen = document.getElementById('loading-screen');
-        this.terminalOutput = document.getElementById('terminal-output');
-        this.terminalWrapper = document.getElementById('terminal-wrapper');
-        this.finalAnimationContainer = document.getElementById('final-animation-container');
-        this.finalThianetic = document.getElementById('final-thianetic');
-        this.skipPrompt = document.getElementById('skip-intro-prompt');
-        this.mainContent = document.getElementById('main-content');
-        
-        this.introFinished = false;
-        this.introTimeout = null;
-        this.scrambleChars = '!<>-_\\/[]{}—=+*^?#_';
-        
-        this.init();
+export class LoadingManager {
+    constructor(bus) {
+        this.bus = bus;
+        this.loadingScreen = null;
+        this.bootOutput = null;
+        this.bootProgressBar = null;
+        this.finalThianetic = null;
+        this.heroTerminalOutput = null;
+        this.replayBtns = [];
+        this.bootTimers = [];
+        this.heroTimers = [];
+        this.isBootRunning = false;
     }
 
     init() {
-        if (!this.loadingScreen) return;
-        
-        this.setupEventListeners();
-        this.startBootSequence();
-        this.hideBodyScroll();
-    }
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-    setupEventListeners() {
-        this.loadingScreen.addEventListener('click', () => this.finishIntro());
-        window.addEventListener('keydown', (e) => this.handleKeyPress(e));
-    }
+        this.loadingScreen = document.getElementById('loading-screen');
+        this.bootOutput = document.getElementById('boot-terminal-output');
+        this.bootProgressBar = document.getElementById('boot-progress-bar');
+        this.finalThianetic = document.getElementById('final-thianetic');
+        this.heroTerminalOutput = document.getElementById('terminal-output');
+        this.replayBtns = Array.from(document.querySelectorAll('#replay-boot-btn, .replay-boot-trigger'));
 
-    handleKeyPress(e) {
-        if (e.code === 'Space') {
-            e.preventDefault();
-            this.finishIntro();
+        const versionBadge = document.getElementById('boot-version-badge');
+        if (versionBadge) {
+            versionBadge.textContent = `SEC-CORE v${APP_VERSION}`;
         }
-    }
 
-    hideBodyScroll() {
-        document.body.style.overflow = 'hidden';
-    }
-
-    startBootSequence() {
-        // Mostrar el prompt al iniciar el boot
-        const isMobile = window.innerWidth <= 768;
-        if (this.skipPrompt) {
-            this.skipPrompt.classList.remove('hidden');
-            this.skipPrompt.classList.remove('visible');
-            this.skipPrompt.classList.add('bounce');
-            this.skipPrompt.textContent = isMobile ? '[Toca] la pantalla para continuar' : 'Pulsa [ESPACIO] para continuar';
-        }
-        const bootSequence = [
-            { text: 'THIANETIC OS v3.0...', delay: 400 },
-            { text: 'INITIATING DYNAMIC CORE...', delay: 400 },
-            { text: 'RENDER_MATRIX: ACTIVE', delay: 300 },
-            { text: 'WELCOME_USER  ' + this.getUserId(), delay: 200, final: true }
-        ];
-        this.typeBootSequence(bootSequence, 0);
-    }
-
-    getUserId() {
-        let id = localStorage.getItem('thianetic_user_id');
-        if (!id) {
-            const letters = () => Array.from({length:3},()=>String.fromCharCode(65+Math.floor(Math.random()*26))).join('');
-            const digits = () => Math.floor(100+Math.random()*900);
-            id = letters() + digits();
-            localStorage.setItem('thianetic_user_id', id);
-        }
-        return id;
-    }
-
-    typeBootSequence(sequence, lineIndex) {
-        if (this.introFinished || lineIndex >= sequence.length) return;
-        const line = sequence[lineIndex];
-        const p = document.createElement('p');
-        this.terminalOutput.appendChild(p);
-        let charIndex = 0;
-        const typeInterval = setInterval(() => {
-            if (charIndex < line.text.length) {
-                p.textContent = line.text.slice(0, charIndex + 1);
-                charIndex++;
-            } else {
-                clearInterval(typeInterval);
-                if (line.final) {
-                    setTimeout(() => {
-                        this.startFinalAnimation();
-                    }, 400);
-                } else {
-                    lineIndex++;
-                    setTimeout(() => this.typeBootSequence(sequence, lineIndex), line.delay);
+        if (this.loadingScreen) {
+            window.addEventListener('keydown', (e) => {
+                if (!this.isBootRunning) return;
+                if (e.code === 'Space' || e.key === 'Escape' || e.key === 'Enter') {
+                    e.preventDefault();
+                    this.finishBoot();
                 }
-            }
-        }, 30);
+            }, { signal });
+
+            this.loadingScreen.addEventListener('click', () => {
+                if (this.isBootRunning) {
+                    this.finishBoot();
+                }
+            }, { signal });
+        }
+
+        this.replayBtns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.startCyberBoot();
+            }, { signal });
+        });
+
+        this.startCyberBoot();
+        this.startHeroTerminal();
     }
 
-    startFinalAnimation() {
-        if (this.terminalWrapper) this.terminalWrapper.style.opacity = '0';
-        if (this.skipPrompt) {
-            // Parpadeo antes de ocultar
-            setTimeout(() => {
-                this.skipPrompt.classList.add('hidden');
-                this.skipPrompt.classList.remove('visible');
-            }, 150);
+    clearBootTimers() {
+        this.bootTimers.forEach((id) => clearTimeout(id));
+        this.bootTimers = [];
+    }
+
+    clearHeroTimers() {
+        this.heroTimers.forEach((id) => clearTimeout(id));
+        this.heroTimers = [];
+    }
+
+    finishBoot() {
+        if (!this.isBootRunning) return;
+        this.isBootRunning = false;
+        this.clearBootTimers();
+        if (this.loadingScreen) {
+            this.loadingScreen.classList.add('boot-hidden');
+            this.loadingScreen.setAttribute('aria-hidden', 'true');
+            this.loadingScreen.setAttribute('inert', '');
+        }
+    }
+
+    startCyberBoot() {
+        if (!this.loadingScreen || !this.bootOutput) return;
+
+        const isReduced = (
+            (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+            document.documentElement.classList.contains('reduce-motion')
+        );
+
+        if (isReduced) {
+            this.finishBoot();
+            return;
+        }
+
+        this.clearBootTimers();
+        this.isBootRunning = true;
+
+        this.loadingScreen.classList.remove('boot-hidden');
+        this.loadingScreen.setAttribute('aria-hidden', 'false');
+        this.loadingScreen.removeAttribute('inert');
+
+        this.bootOutput.innerHTML = '';
+        if (this.bootProgressBar) {
+            this.bootProgressBar.style.width = '0%';
         }
         if (this.finalThianetic) {
+            this.finalThianetic.classList.remove('visible');
+            this.finalThianetic.textContent = 'THIANETIC';
+        }
+
+        let cumulativeDelay = 250;
+        BOOT_SEQUENCE.forEach((step) => {
+            cumulativeDelay += step.delay || 550;
+            const timerId = setTimeout(() => {
+                if (!this.isBootRunning) return;
+                const line = document.createElement('div');
+                line.className = 'mb-1.5 font-mono text-xs sm:text-sm';
+                line.textContent = `> ${step.text}`;
+                this.bootOutput.appendChild(line);
+
+                if (this.bootProgressBar && typeof step.progress === 'number') {
+                    this.bootProgressBar.style.width = `${step.progress}%`;
+                }
+            }, cumulativeDelay);
+            this.bootTimers.push(timerId);
+        });
+
+        const revealDelay = cumulativeDelay + 350;
+        const revealTimer = setTimeout(() => {
+            if (!this.isBootRunning || !this.finalThianetic) return;
             this.finalThianetic.classList.add('visible');
-            this.scrambleTextAnimation(this.finalThianetic, 'THIANETIC');
-        }
+            scrambleText(this.finalThianetic, 'THIANETIC', { durationStep: 35, stepIncrement: 0.35 });
+        }, revealDelay);
+        this.bootTimers.push(revealTimer);
+
+        const finishTimer = setTimeout(() => {
+            if (!this.isBootRunning) return;
+            this.finishBoot();
+        }, revealDelay + 1400);
+        this.bootTimers.push(finishTimer);
     }
 
-    scrambleTextAnimation(element, finalText) {
-        let i = 0;
-        const interval = setInterval(() => {
-            element.textContent = finalText.split("").map((l, idx) => 
-                (idx < i) ? finalText[idx] : this.scrambleChars[Math.floor(Math.random() * this.scrambleChars.length)]
-            ).join("");
-            
-            if (i >= finalText.length) {
-                clearInterval(interval);
-                setTimeout(() => this.finishIntro(), 1200);
-            }
-            i += 1/2;
-        }, 50);
+    startHeroTerminal() {
+        if (!this.heroTerminalOutput) return;
+        this.clearHeroTimers();
+        this.heroTerminalOutput.innerHTML = '';
+
+        let delay = 200;
+        HERO_TERMINAL_LINES.forEach((item) => {
+            delay += item.delay || 140;
+            const timerId = setTimeout(() => {
+                this.appendHeroLine(item);
+            }, delay);
+            this.heroTimers.push(timerId);
+        });
     }
 
-    finishIntro() {
-        if (this.introFinished) return;
-        
-        this.introFinished = true;
-        if (this.introTimeout) clearTimeout(this.introTimeout);
-        
-        window.removeEventListener('keydown', this.handleKeyPress);
-        this.loadingScreen.removeEventListener('click', this.finishIntro);
-
-        // Ocultar pantalla de carga
-        this.loadingScreen.style.transition = 'opacity 1s ease-out';
-        this.loadingScreen.style.opacity = '0';
-        
-        // Mostrar contenido principal inmediatamente
-        if (this.mainContent) {
-            this.mainContent.classList.remove('invisible');
-            this.mainContent.style.opacity = '1';
-        }
-        
-        setTimeout(() => {
-            if (this.loadingScreen) {
-                this.loadingScreen.style.display = 'none'; // Mejor que remove()
-            }
-            document.body.style.overflowY = 'auto';
-            window.dispatchEvent(new CustomEvent('loadingComplete'));
-        }, 1000);
+    appendHeroLine(item) {
+        if (!this.heroTerminalOutput) return;
+        const row = document.createElement('div');
+        row.className = item.final ? 'text-emerald-400 font-bold mt-1' : 'text-accent/90';
+        row.textContent = `> ${item.text}`;
+        this.heroTerminalOutput.appendChild(row);
     }
-} 
+}

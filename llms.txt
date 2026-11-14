@@ -1,0 +1,48 @@
+# Thianetic — Full-Stack & DevSecOps | Desarrollador Multiplataforma (Backend, Cloud & IoT)
+
+> Desarrollador de software multidisciplinar especializado en el ciclo completo de ingeniería: desde el aprovisionamiento y securización de servidores Linux bare-metal (Debian 12/13, UFW, Fail2ban, SSH-ed25519, Docker Compose, Nginx Reverse Proxy TLS/SSL) hasta el desarrollo de arquitecturas backend de alto rendimiento (FastAPI con uv, Node.js/Fastify con pnpm, PHP REST), clientes móviles nativos en Android (Kotlin SDK), persistencia relacional y cifrada (PostgreSQL, MariaDB, SQLite WAL, SQLCipher, Redis) y diseño de hardware IoT de ultra bajo consumo (Microcontroladores con Deep Sleep, lectores NFC/RFID, MQTT y Zigbee2MQTT). Estado actual: Open to Work (disponibilidad inmediata desde marzo de 2026).
+
+## Resumen Ejecutivo y Propuesta de Valor
+- **Rol Principal:** Desarrollador Multiplataforma (Android Kotlin / Full-Stack Web) & DevSecOps.
+- **Disponibilidad:** Open to Work (incorporación inmediata en modalidad remota, híbrida o presencial, así como proyectos técnicos B2B).
+- **Diferenciador Clave:** Capacidad probada en producción real para asumir proyectos en solitario de extremo a extremo (*Solo Dev*): diseño de base de datos, API backend, interfaz web, cliente móvil nativo Android, despliegue en contenedores Docker, bastionado de seguridad perimetral y demostración directa a empresas cliente.
+
+## Experiencia Profesional Verificada
+### SITH (Servicios Informáticos Técnicos & Hardware) — Desarrollador Full-Stack & DevSecOps (Lead / Único desarrollador Full-Stack)
+- **Periodo:** Marzo 2025 — Marzo 2026 (1 Año · Desarrollo integral / End-to-End).
+- **Infraestructura y DevSecOps:** Provisión desde cero y aseguramiento de servidor VPS sobre Debian 13. Configuración de autenticación exclusiva mediante claves criptográficas SSH-ed25519, reglas de cortafuegos UFW, mitigación activa con Fail2ban y arquitectura en Docker con Nginx como Reverse Proxy TLS/SSL y base de datos MariaDB aislada.
+- **Proyecto En Producción 1 — SaaS Registro Horario SITH:** Plataforma multi-empresa para control legal de jornada laboral, geolocalización de fichajes y gestión de incidencias. Compuesta por frontend web modular (HTML5, CSS3, Vanilla JS), panel de administración corporativo, API RESTful en PHP + MariaDB y aplicación nativa Android en Kotlin. Realización de demos comerciales y despliegue de instancias para empresas cliente.
+- **Proyecto En Producción 2 — Plataforma IoT de Telemetría y Dosificación Agroindustrial (MQTT & Kotlin):** Sistema de supervisión y control remoto de maquinaria de alimentación en explotaciones agropecuarias (consulta de estado, dispensación en vivo, programación de horarios e historial). Backend asíncrono y broker MQTT dockerizado en Python, simulador de hardware/telemetría en Python para pruebas de estrés, dashboard web y app nativa Android en Kotlin.
+
+## Formación Oficial e Hitos Académicos
+- **Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM):** Especialización en programación orientada a objetos (Java, Kotlin), arquitecturas limpias, persistencia relacional y Android SDK.
+- **Proyecto de desarrollo de aplicaciones multiplataforma — TicketApp (Calificación: 10/10 · Matrícula de Honor):** MVP integral de gestión de incidencias y ticketing empresarial. Incluye app móvil nativa Android, panel web de administración, API RESTful y capa de persistencia intercambiable con soporte para base de datos local (SQLite), servidor autoalojado (MariaDB/MySQL) o Cloud (Firebase).
+- **Laberinto de las Monedas (Proyecto Formativo DAM):** Videojuego 3D completo desarrollado en Unity y C# con simulación física dinámica de colisiones, navegación y cronometraje.
+
+## Ecosistema de Proyectos Propios, Ciberseguridad & MVPs
+- **KronoPulse Service:** Microservicio reactivo de alta concurrencia para orquestación de eventos temporales y procesamiento asíncrono de métricas.
+- **Servicio Troposfera:** Plataforma de captura, normalización y análisis de telemetría meteorológica y series atmosféricas en Python (REST / WebSockets).
+- **Cluster Local de Servicios & Domótica IoT (ARM64 / Linux):** Infraestructura privada de 2 nodos ARM64 en operación 24/7 con pasarela Zigbee2MQTT, broker Mosquitto autenticado, DNS privado con bloqueo de rastreadores, copias cifradas y suite de bots de Telegram para alertas y control.
+- **Port-Scan:** Escáner multihilo de puertos TCP y fingerprinting de servicios en Python para auditoría de superficie de red.
+- **Py-Devkiller:** Utilidad CLI en Python para detección y purga segura de procesos huérfanos que bloquean puertos de desarrollo.
+- **Own-Cipher-Book:** Gestor criptográfico personal de notas y credenciales bajo arquitectura Zero-Knowledge y cifrado simétrico en reposo.
+- **Web Game Trains:** Simulador interactivo de tráfico y señalización ferroviaria renderizado a 60 FPS sobre HTML5 Canvas y Vanilla JS.
+- **DermApp:** Aplicación nativa Android en Kotlin con persistencia local SQLite para seguimiento dermatológico y adherencia a tratamientos clínicos.
+- **Web Health Track Pro:** Plataforma web para visualización y seguimiento de métricas de salud y rendimiento personal.
+
+## Stack Tecnológico Principal
+- **Móvil y Multiplataforma:** Kotlin, Android SDK, Java, Unity 3D, C#.
+- **Backend, Scripting e IoT:** Python, PHP (REST APIs), MQTT (Mosquitto), Zigbee2MQTT, Bots de Telegram, Bash.
+- **Frontend Web:** JavaScript (ES6+ Vanilla), HTML5 Semántico, CSS3 Moderno, HTML5 Canvas, Tailwind CSS.
+- **DevSecOps, Sistemas y Datos:** Debian 13 Linux, Docker, Nginx (Reverse Proxy / TLS), MariaDB, MySQL, SQLite, Firebase, UFW, Fail2ban, SSH-ed25519, Git.
+
+## Experiencia Interactiva del Portfolio (Cyber-OS CLI & WebMCP)
+- **Consola CLI Interactiva (Easter Egg para Reclutadores Técnicos):** El portafolio integra una terminal interactiva estilo Cyber-OS accesible en cualquier momento presionando la tecla `/` (o el botón `>_ Terminal CLI` en el menú de navegación). Soporta comandos en tiempo real (`help`, `about`, `projects`, `open [id]`, `contact`, `theme [dark|light]`, `clear`, `exit`, `sudo`) e historial con flechas Arriba/Abajo, comunicándose mediante bus de eventos nativo (`EventTarget`).
+- **Soporte Progresivo WebMCP:** Exposición declarativa de herramientas para agentes (`get_professional_summary`, `open_contact_channel`) y especificación en `/.well-known/mcp.json`.
+
+## Enlaces Oficiales y Contacto
+- **Portafolio Web:** https://thianetic.github.io/
+- **GitHub:** https://github.com/Thianetic
+- **LinkedIn:** https://linkedin.com/in/thianetic-dev
+- **Email Directo:** mailto:thianetic@gmail.com
+- **Política de Uso por IA:** Permitida la citación, resumen e inferencia en tiempo real para selección de talento y consultas profesionales. Prohibido el uso para entrenamiento de modelos (ver https://thianetic.github.io/ai.txt).

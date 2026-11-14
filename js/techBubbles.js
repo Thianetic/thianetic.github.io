@@ -1,122 +1,77 @@
-// ===== MÓDULO DE BURBUJAS DE TECNOLOGÍAS =====
+// Tech Bubbles Floating Effect Manager
+import { TECH_LOGOS } from './config.js';
 
-export class TechBubbles {
-    constructor() {
-        this.techLogos = {
-            'Kotlin': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
-            'Jetpack Compose': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg',
-            'Android SDK': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
-            'Firebase': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-            'MySQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
-            'SQLite': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg', 
-            'GoogleCloud': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg',
-            'HTML': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
-            'CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
-            'JavaScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
-            'Tailwind CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
-            'Unity': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg',
-            'C#': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg', 
-            'PHP': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-plain.svg',
-            'Supabase': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg',
-            'NGINX': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg',
-            'MariaDB': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg',
-            'Java': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-            'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-            'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-            'MongoDB': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-            'Blender': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg'
-        };
-
-        this.bubbleInterval = null;
-        this.availableTechs = [];
-        this.init();
+export class TechBubblesManager {
+    constructor(bus) {
+        this.bus = bus;
+        this.activeIntervals = new Map();
     }
 
     init() {
-        this.setupProjectCards();
-    }
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-    setupProjectCards() {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        projectCards.forEach(card => {
+        const cards = document.querySelectorAll('#ecosistema .project-card');
+        cards.forEach((card) => {
             card.addEventListener('mouseenter', () => {
-                this.startBubbleAnimation(card);
-            });
-            
+                if (
+                    document.documentElement.classList.contains('reduce-motion') ||
+                    document.documentElement.classList.contains('ambient-paused')
+                ) {
+                    return;
+                }
+                this.startBubbles(card);
+            }, { signal });
+
             card.addEventListener('mouseleave', () => {
-                this.stopBubbleAnimation();
-            });
+                this.stopBubbles(card);
+            }, { signal });
         });
     }
 
-    startBubbleAnimation(card) {
-        const techItems = card.querySelectorAll('li');
-        const container = card.querySelector('.project-image-container');
-        
-        if (!container) return;
+    startBubbles(card) {
+        if (this.activeIntervals.has(card)) return;
 
-        // Obtener tecnologías del proyecto
-        this.availableTechs = Array.from(techItems)
-            .map(item => item.textContent.trim())
-            .filter(tech => this.techLogos[tech]) // Solo tecnologías con logo
-            .sort(() => Math.random() - 0.5);
-        
-        if (this.availableTechs.length === 0) return;
-        
-        let currentIndex = 0;
-        
-        this.bubbleInterval = setInterval(() => {
-            if (currentIndex < this.availableTechs.length) {
-                const techName = this.availableTechs[currentIndex];
-                const logoUrl = this.techLogos[techName];
-                
-                if (logoUrl) {
-                    this.createTechBubble(container, logoUrl);
-                }
-                
-                currentIndex++;
-                
-                // Reiniciar ciclo si llegamos al final
-                if (currentIndex >= this.availableTechs.length) {
-                    currentIndex = 0;
-                    // Volver a barajar para el próximo ciclo
-                    this.availableTechs.sort(() => Math.random() - 0.5);
-                }
-            }
-        }, 1000);
+        const tags = Array.from(card.querySelectorAll('li, span'))
+            .map((el) => el.textContent.trim())
+            .filter((txt) => TECH_LOGOS[txt]);
+
+        const urls = tags.length
+            ? tags.map((t) => TECH_LOGOS[t])
+            : [TECH_LOGOS.Python, TECH_LOGOS.Kotlin, TECH_LOGOS.Docker].filter(Boolean);
+
+        const intervalId = setInterval(() => {
+            this.spawnBubble(card, urls);
+        }, 700);
+
+        this.activeIntervals.set(card, intervalId);
     }
 
-    stopBubbleAnimation() {
-        if (this.bubbleInterval) {
-            clearInterval(this.bubbleInterval);
-            this.bubbleInterval = null;
+    stopBubbles(card) {
+        const intervalId = this.activeIntervals.get(card);
+        if (intervalId) {
+            clearInterval(intervalId);
+            this.activeIntervals.delete(card);
         }
-        this.availableTechs = [];
     }
 
-    createTechBubble(container, logoUrl) {
+    spawnBubble(card, urls) {
+        if (!urls.length) return;
         const bubble = document.createElement('div');
         bubble.className = 'tech-bubble';
-        
-        const logoImg = document.createElement('img');
-        logoImg.src = logoUrl;
-        logoImg.alt = 'Tech Logo';
-        bubble.appendChild(logoImg);
-        
-        // Posición aleatoria en el contenedor
-        const containerRect = container.getBoundingClientRect();
-        const posX = Math.random() * (containerRect.width - 40);
-        bubble.style.left = `${posX}px`;
-        bubble.style.bottom = '0px';
-        
-        container.appendChild(bubble);
-        
-        // Eliminar la burbuja después de la animación
+        bubble.style.left = `${Math.floor(Math.random() * 75) + 10}%`;
+        bubble.style.bottom = '12px';
+
+        const img = document.createElement('img');
+        img.src = urls[Math.floor(Math.random() * urls.length)];
+        img.alt = '';
+        img.loading = 'lazy';
+        bubble.appendChild(img);
+
+        card.appendChild(bubble);
+
         setTimeout(() => {
-            if (bubble.parentNode) {
-                bubble.remove();
-            }
-        }, 8000);
+            bubble.remove();
+        }, 3000);
     }
-} 
+}

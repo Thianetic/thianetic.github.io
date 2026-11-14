@@ -1,0 +1,72 @@
+# =====================================================================
+# robots.txt — Portafolio Profesional Thianetic (https://thianetic.github.io)
+# Política: Acceso permitido a buscadores y asistentes de IA en tiempo real
+#           (citación y recomendación profesional: Googlebot, OAI-SearchBot,
+#           ChatGPT-User, Claude-Web, Claude-SearchBot, Claude-User, PerplexityBot).
+#           Entrenamiento masivo de modelos (TDM) denegado (GPTBot, Google-Extended,
+#           Applebot-Extended, ClaudeBot, CCBot, Bytespider) según /ai.txt y W3C TDMRep.
+# =====================================================================
+
+# Buscadores generales y asistentes de búsqueda/citación en vivo (Permitidos)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Crawlers específicos de entrenamiento de modelos (Bloqueados explícitamente)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+# Regla por defecto para el resto de agentes legítimos
+User-agent: *
+Allow: /
+
+# Referencias estructuradas para motores de búsqueda y agentes IA
+Sitemap: https://thianetic.github.io/sitemap.xml
+# Declaración de políticas de IA y TDM:
+# ai.txt: https://thianetic.github.io/ai.txt
+# tdmrep: https://thianetic.github.io/.well-known/tdmrep.json
+# llms.txt: https://thianetic.github.io/llms.txt

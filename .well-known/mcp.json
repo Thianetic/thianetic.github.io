@@ -1,0 +1,52 @@
+{
+  "mcpVersion": "2025-03-26",
+  "name": "thianetic-portfolio-mcp",
+  "version": "1.0.0",
+  "description": "Interfaz estructurada de solo lectura del portafolio profesional de Thianetic (Desarrollador Multiplataforma & DevSecOps).",
+  "homepage": "https://thianetic.github.io/",
+  "policy": {
+    "inference": "allowed",
+    "citation": "allowed",
+    "training": "disallowed",
+    "tdmPolicyUrl": "https://thianetic.github.io/ai.txt"
+  },
+  "resources": [
+    {
+      "uri": "https://thianetic.github.io/llms.txt",
+      "name": "Dossier Ejecutivo para LLMs (Markdown)",
+      "mimeType": "text/markdown",
+      "description": "Resumen completo y verificado de experiencia laboral en SITH, titulación DAM, Proyecto DAM TicketApp (10/10), catálogo de proyectos y stack."
+    },
+    {
+      "uri": "https://thianetic.github.io/VERSION",
+      "name": "Versión Publicada del Portafolio",
+      "mimeType": "text/plain",
+      "description": "Versión SemVer actual del sitio web."
+    }
+  ],
+  "tools": [
+    {
+      "name": "get_professional_summary",
+      "description": "Devuelve el resumen estructurado en JSON del perfil profesional de Thianetic, experiencia en SITH, formación DAM (Proyecto DAM 10/10), stack técnico y catálogo de proyectos.",
+      "readOnlyHint": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "open_contact_channel",
+      "description": "Abre el modal de contacto directo en el navegador o devuelve los canales de contacto verificados de Thianetic.",
+      "readOnlyHint": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string",
+            "description": "Asunto opcional para pre-seleccionar en el formulario de contacto."
+          }
+        }
+      }
+    }
+  ]
+}

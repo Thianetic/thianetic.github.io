@@ -1,154 +1,148 @@
-// ===== ARCHIVO PRINCIPAL =====
-
-// Importar módulos
-import { ParticleSystem } from './particles.js';
-import { AccessibilityManager } from './accessibility.js';
-import { ProjectFilter } from './projectFilter.js';
-import { TechBubbles } from './techBubbles.js';
+// Main Application Orchestrator, Timeline Scroll & Progressive WebMCP Registration
+import { APP_VERSION, PROFILE_INFO, PROJECT_CATALOG } from './config.js';
+import { scrambleText } from './utils.js';
+import { LoadingManager } from './loading.js';
 import { ThemeManager } from './theme.js';
-import { NavigationManager } from './navigation.js';
-import { LoadingScreen } from './loading.js';
-import { CursorManager } from './cursor.js';
+import { AccessibilityManager } from './accessibility.js';
+import { ParticleSystem } from './particles.js';
 import { AnimationManager } from './animations.js';
+import { CursorManager } from './cursor.js';
+import { NavigationManager } from './navigation.js';
+import { ProjectFilter } from './projectFilter.js';
 import { ProjectModal } from './projectModal.js';
-import { ContactForm } from './contactForm.js';
+import { TechBubblesManager } from './techBubbles.js';
+import { ContactFormManager } from './contactForm.js';
+import { ConsoleManager } from './console.js';
 
-class PortfolioApp {
+export class PortfolioApp {
     constructor() {
-        this.modules = {};
-        this.init();
+        this.bus = new EventTarget();
+        this.modules = {
+            loading: new LoadingManager(this.bus),
+            theme: new ThemeManager(this.bus),
+            accessibility: new AccessibilityManager(this.bus),
+            particles: new ParticleSystem(this.bus),
+            animations: new AnimationManager(this.bus),
+            cursor: new CursorManager(this.bus),
+            navigation: new NavigationManager(this.bus),
+            projectFilter: new ProjectFilter(this.bus),
+            projectModal: new ProjectModal(this.bus),
+            techBubbles: new TechBubblesManager(this.bus),
+            contactForm: new ContactFormManager(this.bus),
+            console: new ConsoleManager(this.bus)
+        };
     }
-    
-    async init() {
-        // Esperar a que el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setup());
-        } else {
-            this.setup();
-        }
-    }
-    
-    setup() {
-        // Inicializar módulos básicos primero
-        this.initializeBasicModules();
-        
-        // Esperar a que termine la pantalla de carga
-        window.addEventListener('loadingComplete', () => {
-            this.initializeAdvancedModules();
-        });
-        
-        // Configuraciones adicionales
-        this.setupAdditionalFeatures();
-    }
-    
-    initializeBasicModules() {
-        // Módulos que se inicializan inmediatamente
-        this.modules.loading = new LoadingScreen();
-        this.modules.cursor = new CursorManager();
-        this.modules.theme = new ThemeManager();
-        this.modules.accessibility = new AccessibilityManager();
-        this.modules.animations = new AnimationManager();
-        
-        // Inicializar partículas inmediatamente para que el fondo esté visible
-        const canvas = document.getElementById('background-canvas');
-        if (canvas) {
-            try {
-                this.modules.particles = new ParticleSystem(canvas);
-            } catch (e) {
-                console.error('Error initializing particles:', e);
-            }
-        }
-    }
-    
-    initializeAdvancedModules() {
-        // Módulos que se inicializan después de la carga
-        this.modules.navigation = new NavigationManager();
-        this.modules.projectFilter = new ProjectFilter();
-        this.modules.techBubbles = new TechBubbles();
-        this.modules.projectModal = new ProjectModal();
-        this.modules.contactForm = new ContactForm();
-        
-        // Hacer el cursor manager disponible globalmente para los modales
-        window.cursorManager = this.modules.cursor;
-    }
-    
-    setupAdditionalFeatures() {
-        // Año actual para el copyright
-        const currentYearElement = document.getElementById('current-year');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-        
-        // Tooltips de redes sociales
-        this.setupSocialTooltips();
 
-        // --- LOADING SCREEN ---
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            const skipPrompt = document.getElementById('skip-intro-prompt');
-            skipPrompt.classList.remove("hidden");
-            skipPrompt.classList.add("visible", "bounce");
-            skipPrompt.setAttribute("aria-hidden", "false");
-            function updateSkipPromptText() {
-                if (window.innerWidth <= 768) {
-                    skipPrompt.textContent = '[Toca] la pantalla para continuar';
-                } else {
-                    skipPrompt.textContent = 'Pulsa [ESPACIO] para continuar';
-                }
+    init() {
+        const abortController = new AbortController();
+        const { signal } = abortController;
+
+        Object.values(this.modules).forEach((mod) => {
+            if (typeof mod.init === 'function') {
+                mod.init();
             }
-            updateSkipPromptText();
-            window.addEventListener('resize', updateSkipPromptText);
-        }
+        });
+
+        this.setupTimelineAnimation(signal);
+        this.setupSocialTooltips(signal);
+        this.registerWebMCP();
     }
-    
-    setupSocialTooltips() {
+
+    setupTimelineAnimation(signal) {
+        const container = document.querySelector('.cv-timeline-container');
+        const line = document.querySelector('.cv-timeline-line');
+        const dot = document.querySelector('.cv-timeline-dot');
+
+        if (!container || !line || !dot) return;
+
+        let totalHeight = container.offsetHeight;
+        let containerTop = container.getBoundingClientRect().top + window.scrollY;
+
+        window.addEventListener('resize', () => {
+            totalHeight = container.offsetHeight;
+            containerTop = container.getBoundingClientRect().top + window.scrollY;
+        }, { passive: true, signal });
+
+        let rafPending = false;
+        const updateTimeline = () => {
+            rafPending = false;
+            const windowHeight = window.innerHeight;
+            const startTrigger = windowHeight * 0.65;
+            const scrollY = window.scrollY;
+            const rawScrolled = (scrollY + startTrigger) - containerTop;
+            const progress = Math.min(Math.max(rawScrolled / (totalHeight || 1), 0), 1);
+            const currentPx = Math.round(progress * totalHeight);
+
+            line.style.height = `${currentPx}px`;
+            dot.style.top = `${currentPx}px`;
+
+            if (progress >= 0.98) {
+                line.classList.add('completed');
+            } else {
+                line.classList.remove('completed');
+            }
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!rafPending) {
+                rafPending = true;
+                requestAnimationFrame(updateTimeline);
+            }
+        }, { passive: true, signal });
+
+        updateTimeline();
+    }
+
+    setupSocialTooltips(signal) {
         const socialLinks = document.querySelectorAll('#social-links a');
-        const scrambleChars = '01000110100001101001011000010110111001100101011101000110100101100011';
-        
-        socialLinks.forEach(link => {
+        socialLinks.forEach((link) => {
             const tooltip = link.querySelector('.social-tooltip');
             if (!tooltip) return;
-            
-            const originalText = tooltip.textContent;
-            let interval;
-            
-            link.addEventListener('mouseover', () => {
-                let i = 0;
-                clearInterval(interval);
-                interval = setInterval(() => {
-                    tooltip.textContent = originalText.split("").map((l, idx) => 
-                        (idx < i) ? originalText[idx] : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
-                    ).join("");
-                    if (i >= originalText.length) clearInterval(interval);
-                    i += 1/3;
-                }, 30);
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                clearInterval(interval);
-                tooltip.textContent = originalText;
-            });
+
+            link.addEventListener('mouseenter', () => {
+                if (document.documentElement.classList.contains('reduce-motion')) return;
+                scrambleText(tooltip, tooltip.getAttribute('data-text') || '@thianetic');
+            }, { signal });
         });
     }
-    
-    destroy() {
-        // Limpiar todos los módulos
-        Object.values(this.modules).forEach(module => {
-            if (module && typeof module.destroy === 'function') {
-                module.destroy();
+
+    registerWebMCP() {
+        if (typeof navigator === 'undefined' || !navigator.modelContext) return;
+        try {
+            if (typeof navigator.modelContext.registerTool === 'function') {
+                navigator.modelContext.registerTool({
+                    name: 'get_professional_summary',
+                    description: 'Returns verified structured summary of Thianetic portfolio, experience, education, and project catalog.',
+                    inputSchema: { type: 'object', properties: {} },
+                    execute: async () => ({
+                        version: APP_VERSION,
+                        name: PROFILE_INFO.name,
+                        role: PROFILE_INFO.role,
+                        subtitle: PROFILE_INFO.subtitle,
+                        experience: PROFILE_INFO.experience,
+                        education: PROFILE_INFO.education,
+                        projects: Object.keys(PROJECT_CATALOG),
+                        llmsTxtUrl: 'https://thianetic.github.io/llms.txt'
+                    })
+                });
+
+                navigator.modelContext.registerTool({
+                    name: 'open_contact_channel',
+                    description: 'Opens the interactive contact modal in the portfolio UI.',
+                    inputSchema: { type: 'object', properties: {} },
+                    execute: async () => {
+                        this.bus.dispatchEvent(new CustomEvent('contact:open'));
+                        return { status: 'opened' };
+                    }
+                });
             }
-        });
+        } catch {
+            // Silently ignore experimental WebMCP differences across user agents
+        }
     }
 }
 
-// Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    window.portfolioApp = new PortfolioApp();
+    const app = new PortfolioApp();
+    app.init();
 });
-
-// Limpiar al salir de la página
-window.addEventListener('beforeunload', () => {
-    if (window.portfolioApp) {
-        window.portfolioApp.destroy();
-    }
-}); 
