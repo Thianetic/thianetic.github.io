@@ -9,6 +9,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +21,22 @@ const MAX_INITIAL_PAYLOAD_KB = 500;
 console.log('====================================================');
 console.log('🚀 THIANETIC PORTFOLIO — BUILD & QUALITY VERIFICATION');
 console.log('====================================================\n');
+
+// 0. Comprobación Estricta de Sintaxis en Módulos JavaScript (node --check)
+console.log('🔍 Paso 0: Verificando sintaxis e integridad de todos los módulos JavaScript...');
+const jsDir = path.join(ROOT_DIR, 'js');
+const jsFiles = fs.readdirSync(jsDir).filter(f => f.endsWith('.js'));
+for (const file of jsFiles) {
+    const fullPath = path.join(jsDir, file);
+    try {
+        execFileSync(process.execPath, ['--check', fullPath], { stdio: 'pipe' });
+    } catch (err) {
+        console.error(`❌ Error de sintaxis en js/${file}:`);
+        console.error(err.stderr ? err.stderr.toString() : err.message);
+        process.exit(1);
+    }
+}
+console.log(`✅ ${jsFiles.length} módulos JS analizados con 0 errores de sintaxis.`);
 
 // 1. Verificación de Enlaces y Recursos Locales (0 errores 404)
 console.log('🔍 Paso 1: Verificando integridad de enlaces y assets locales...');

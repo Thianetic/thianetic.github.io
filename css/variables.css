@@ -148,7 +148,9 @@
 
     html.colorblind-friendly #main-content,
     html.colorblind-friendly header,
-    html.colorblind-friendly #mobile-menu {
+    html.colorblind-friendly #mobile-menu,
+    html.colorblind-friendly #social-links,
+    html.colorblind-friendly #accessibility-btn {
         filter: grayscale(100%) contrast(1.15);
     }
 

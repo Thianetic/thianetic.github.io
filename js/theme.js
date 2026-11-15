@@ -113,6 +113,12 @@ export class ThemeManager {
         if (this.themeToggleDesktopBtn) {
             this.themeToggleDesktopBtn.setAttribute('aria-label', label);
             this.themeToggleDesktopBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+            this.themeToggleDesktopBtn.classList.toggle('active', isLight);
+        }
+
+        const themeIndicator = document.getElementById('theme-mode-indicator');
+        if (themeIndicator) {
+            themeIndicator.textContent = isLight ? 'Claro' : 'Oscuro';
         }
     }
 }

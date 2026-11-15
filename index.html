@@ -36,7 +36,7 @@
           "url": "https://thianetic.github.io/",
           "name": "Thianetic | Portfolio & Dossier Técnico — Desarrollador Multiplataforma & DevSecOps",
           "inLanguage": "es",
-          "dateModified": "2026-11-16",
+          "dateModified": "2026-11-15",
           "mainEntity": {
             "@id": "https://thianetic.github.io/#person"
           }
@@ -220,22 +220,24 @@
     <canvas id="background-canvas" aria-hidden="true"></canvas>
 
     <!-- ===== SOCIAL LINKS ===== -->
-    <div id="social-links" class="hidden lg:block z-40 relative">
-        <ul class="flex items-center space-x-5 fixed bottom-0 z-40" style="left: 2rem; bottom: 2.6rem;">
-            <li>
-                <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
+    <nav id="social-links" class="hidden lg:block fixed bottom-0 left-10 z-40" aria-label="Redes sociales">
+        <ul class="flex items-end space-x-6">
+            <li class="flex flex-col items-center">
+                <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
+                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+                    <span class="social-tooltip tooltip-text" data-text="in/thianetic-dev" data-scramble-text>in/thianetic-dev</span>
+                </a>
+                <span class="social-line" aria-hidden="true"></span>
+            </li>
+            <li class="flex flex-col items-center">
+                <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
                     <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                     <span class="social-tooltip tooltip-text" data-text="@thianetic" data-scramble-text>@thianetic</span>
                 </a>
-            </li>
-            <li>
-                <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
-                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
-                    <span class="social-tooltip tooltip-text" data-text="@thianetic" data-scramble-text>@thianetic</span>
-                </a>
+                <span class="social-line" aria-hidden="true"></span>
             </li>
         </ul>
-    </div>
+    </nav>
 
     <!-- ===== FIXED HEADER TITLE & OPEN TO WORK BADGE ===== -->
     <header class="fixed top-0 left-0 right-0 py-3 px-6 lg:px-12 flex justify-between items-center bg-[var(--bg-dark)]/75 backdrop-blur-md border-b border-[var(--line-color-dark)] z-40 transition-all duration-300">
@@ -253,15 +255,6 @@
             <button type="button" id="cv-header-btn" commandfor="cv-modal" command="show-modal" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold border border-accent/40 text-accent hover:bg-accent hover:text-[var(--bg-dark)] transition-all cursor-pointer">
                 <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                 <span data-scramble-text>CV / Dossier</span>
-            </button>
-            <!-- Desktop Theme Toggle integrado en el header sin colisión -->
-            <button type="button" id="theme-toggle-desktop" class="hidden lg:flex items-center justify-center text-accent p-1.5 rounded-full hover:bg-accent-hover/20 transition-all cursor-pointer" aria-label="Cambiar tema">
-                <svg id="theme-icon-sun-desktop" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <svg id="theme-icon-moon-desktop" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
             </button>
             <button type="button" id="mobile-menu-btn" class="lg:hidden text-accent text-2xl" aria-label="Abrir Menú" aria-expanded="false" aria-controls="mobile-menu">&#9776;</button>
         </div>
@@ -311,7 +304,7 @@
         <div class="lg:flex pt-16">
 
             <!-- ===== DESKTOP LATERAL NAVIGATION ===== -->
-            <nav aria-label="Navegación principal" class="hidden lg:flex flex-col justify-center items-start h-screen w-52 fixed top-0 left-0 p-8 space-y-5 lateral-nav z-30">
+            <nav aria-label="Navegación principal" class="hidden lg:flex flex-col justify-center items-start h-screen w-52 fixed top-0 left-0 p-8 space-y-3 lateral-nav z-30">
                 <a href="#hero" data-nav-link="hero" class="font-fira-code text-xs uppercase hover:text-accent transition-colors" data-scramble-text>Inicio</a>
                 <a href="#trayectoria" data-nav-link="trayectoria" class="font-fira-code text-xs uppercase hover:text-accent transition-colors" data-scramble-text>Trayectoria &amp; CV</a>
                 <a href="#ecosistema" data-nav-link="ecosistema" class="font-fira-code text-xs uppercase hover:text-accent transition-colors" data-scramble-text>Ecosistema &amp; Labs</a>
@@ -1263,70 +1256,80 @@
                 </footer>
             </div>
         </div>
-
-        <!-- ===== ACCESSIBILITY WIDGET (Popover API Nativo + Anchor Positioning - Hallazgo #8) ===== -->
-        <div id="accessibility-widget">
-            <button type="button" id="accessibility-btn" popovertarget="accessibility-menu" aria-label="Abrir menú de accesibilidad" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </button>
-            <div id="accessibility-menu" popover="auto" role="dialog" aria-label="Opciones de accesibilidad">
-                <h2 class="font-bold text-lg text-[var(--text-primary-dark)] mb-4">Ajustes de Accesibilidad</h2>
-                <div class="grid grid-cols-2 gap-3">
-                    <button type="button" class="access-btn" data-access-action="cycle-contrast" title="Alternar Contraste">
-                        <span class="level-indicator">Normal</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        Contraste
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="toggle-colorblind" title="Modo Color">
-                        <span class="level-indicator">off</span>
-                        <svg class="w-6 h-6 mb-1 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8v16z"/></svg>
-                        No Color
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="toggle-links" title="Resaltar Enlaces">
-                        <span class="level-indicator">off</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                        </svg>
-                        Enlaces
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="cycle-textSize" title="Ajustar Texto">
-                        <span class="level-indicator">Normal</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
-                        </svg>
-                        Tamaño Texto
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="cycle-textAlign" title="Alinear Texto">
-                        <span class="level-indicator">Izquierda</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5" />
-                        </svg>
-                        Alineación
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="cycle-font" title="Fuente Legible">
-                        <span class="level-indicator">Normal</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                        </svg>
-                        Fuente
-                    </button>
-                    <button type="button" class="access-btn" data-access-action="toggle-animations" title="Pausar Animaciones">
-                        <span class="level-indicator">off</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Pausar animaciones
-                    </button>
-                </div>
-                <button type="button" id="reset-access" class="w-full text-center text-xs mt-4 text-[var(--text-secondary-dark)] hover:text-accent cursor-pointer">Restablecer</button>
-            </div>
-        </div>
     </main>
+
+    <!-- ===== ACCESSIBILITY WIDGET (Popover API Nativo + Anchor Positioning - Hallazgo #8) ===== -->
+    <div id="accessibility-widget">
+        <button type="button" id="accessibility-btn" popovertarget="accessibility-menu" aria-label="Abrir menú de accesibilidad" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        </button>
+        <div id="accessibility-menu" popover="auto" role="dialog" aria-label="Opciones de accesibilidad">
+            <h2 class="font-bold text-lg text-[var(--text-primary-dark)] mb-4">Ajustes de Accesibilidad</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <button type="button" class="access-btn" data-access-action="cycle-contrast" title="Alternar Contraste">
+                    <span class="level-indicator">Normal</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    Contraste
+                </button>
+                <button type="button" class="access-btn" data-access-action="toggle-colorblind" title="Modo Color">
+                    <span class="level-indicator">off</span>
+                    <svg class="w-6 h-6 mb-1 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8v16z"/></svg>
+                    No Color
+                </button>
+                <button type="button" class="access-btn" data-access-action="toggle-links" title="Resaltar Enlaces">
+                    <span class="level-indicator">off</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                    </svg>
+                    Enlaces
+                </button>
+                <button type="button" class="access-btn" data-access-action="cycle-textSize" title="Ajustar Texto">
+                    <span class="level-indicator">Normal</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                    </svg>
+                    Tamaño Texto
+                </button>
+                <button type="button" class="access-btn" data-access-action="cycle-textAlign" title="Alinear Texto">
+                    <span class="level-indicator">Izquierda</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5" />
+                    </svg>
+                    Alineación
+                </button>
+                <button type="button" class="access-btn" data-access-action="cycle-font" title="Fuente Legible">
+                    <span class="level-indicator">Normal</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                    </svg>
+                    Fuente
+                </button>
+                <button type="button" class="access-btn" data-access-action="toggle-animations" title="Pausar Animaciones">
+                    <span class="level-indicator">off</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Pausar animaciones
+                </button>
+                <button type="button" id="theme-toggle-desktop" class="access-btn cursor-pointer" aria-label="Cambiar tema" title="Alternar Modo Claro / Oscuro">
+                    <span class="level-indicator" id="theme-mode-indicator">Oscuro</span>
+                    <svg id="theme-icon-sun-desktop" class="w-6 h-6 mb-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="theme-icon-moon-desktop" class="w-6 h-6 mb-1 hidden inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    Tema
+                </button>
+            </div>
+            <button type="button" id="reset-access" class="w-full text-center text-xs mt-4 text-[var(--text-secondary-dark)] hover:text-accent cursor-pointer">Restablecer</button>
+        </div>
+    </div>
 
     <!-- ===== MODAL DE PROYECTO ===== -->
     <dialog id="project-modal" closedby="any" class="modal-dialog max-w-4xl w-full" aria-labelledby="modal-title">

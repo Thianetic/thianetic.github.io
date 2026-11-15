@@ -48,8 +48,6 @@ export class ProjectModal {
                 }
                 return;
             }
-                return;
-            }
 
             if (e.target.closest('a[href], button')) return;
 

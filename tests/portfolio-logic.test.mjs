@@ -245,3 +245,20 @@ test('CSP y Zero-CDN: index.html y 404.html conservan CSP estricta y hashes SHA-
     assert.ok(notFoundHtml.includes('id="arcade-canvas"'), '404.html debe contener el canvas del juego');
 });
 
+test('Sintaxis JavaScript: todos los módulos en js/ pasan node --check con 0 errores', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const { execFileSync } = await import('node:child_process');
+    const jsDir = path.resolve(import.meta.dirname, '../js');
+    const files = fs.readdirSync(jsDir).filter(f => f.endsWith('.js'));
+
+    assert.ok(files.length >= 10, 'Deben existir módulos JavaScript en js/');
+
+    for (const file of files) {
+        const fullPath = path.join(jsDir, file);
+        assert.doesNotThrow(() => {
+            execFileSync(process.execPath, ['--check', fullPath], { stdio: 'pipe' });
+        }, `Fallo de sintaxis en js/${file}`);
+    }
+});
+
