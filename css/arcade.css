@@ -47,7 +47,8 @@
     background: var(--card-dark);
     border: 1px solid var(--line-color-dark);
     border-radius: 12px;
-    backdrop-blur: 8px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
 .arcade-stat-item {

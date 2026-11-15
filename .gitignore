@@ -32,4 +32,5 @@ AGENTS.md
 .agents/
 CHANGELOG.md
 
-/tests
+# Artefacto de compilación / build
+_site/
