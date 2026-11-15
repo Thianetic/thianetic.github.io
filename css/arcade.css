@@ -1,0 +1,269 @@
+/* ===== THIANETIC // SEC-CORE DEFENSE ARCADE 404 STYLES ===== */
+
+.arcade-brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+#game-container {
+    margin: 1rem auto;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 20px rgba(0, 229, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #020813;
+    max-width: 900px;
+    width: 100%;
+    touch-action: none;
+    position: relative;
+}
+
+#game-container canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 65vh;
+    aspect-ratio: 9 / 8;
+    object-fit: contain;
+    background-color: #020813;
+}
+
+.arcade-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    background: var(--card-dark);
+    border: 1px solid var(--line-color-dark);
+    border-radius: 12px;
+    backdrop-blur: 8px;
+}
+
+.arcade-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arcade-stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--text-secondary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.arcade-stat-value {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+
+.arcade-powerup-indicators {
+    min-height: 34px;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.arcade-controls {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+}
+
+.arcade-btn {
+    padding: 0.55rem 1rem;
+    background: rgba(0, 229, 255, 0.06);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.arcade-btn:hover {
+    background: var(--accent);
+    color: #020c1b;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.arcade-btn.primary {
+    border-color: #10b981;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.arcade-btn.primary:hover {
+    background: #10b981;
+    color: #020c1b;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.arcade-btn.danger {
+    border-color: #ff0055;
+    color: #ff0055;
+    background: rgba(255, 0, 85, 0.1);
+}
+
+.arcade-btn.danger:hover {
+    background: #ff0055;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+}
+
+/* Controles táctiles móviles */
+.arcade-touch-controls {
+    display: none;
+    margin-top: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    user-select: none;
+}
+
+.arcade-touch-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.arcade-touch-btn {
+    width: 58px;
+    height: 58px;
+    background: rgba(0, 229, 255, 0.15);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 12px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+.arcade-touch-btn:active {
+    background: var(--accent);
+    color: #020c1b;
+    transform: scale(0.94);
+}
+
+.arcade-touch-btn.fire {
+    width: 90px;
+    height: 58px;
+    background: rgba(255, 0, 85, 0.2);
+    border-color: #ff0055;
+    color: #ff0055;
+    font-size: 0.9rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.arcade-touch-btn.fire:active {
+    background: #ff0055;
+    color: #fff;
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+    .arcade-touch-controls {
+        display: flex;
+    }
+}
+
+/* Panel de Diagnóstico & Controles */
+.arcade-retro-panel {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: var(--card-dark);
+    border: 1px solid var(--line-color-dark);
+    border-radius: 12px;
+    text-align: left;
+}
+
+.arcade-retro-panel h3 {
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.arcade-instructions-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    color: var(--text-secondary-dark);
+}
+
+.arcade-instructions-table td {
+    padding: 0.35rem 0.5rem;
+}
+
+.arcade-instructions-table kbd {
+    background: #020c1b;
+    border: 1px solid var(--accent);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+}
+
+/* Modal de Estadísticas */
+.arcade-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+}
+
+.arcade-stats-card {
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.arcade-stats-card-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary-dark);
+    margin-bottom: 0.25rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.arcade-stats-card-value {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--accent);
+    font-family: 'Fira Code', monospace;
+}

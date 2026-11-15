@@ -58,6 +58,8 @@
     <link rel="stylesheet" href="css/tailwind.min.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/arcade.css">
+    <script type="module" src="js/404-arcade.js" defer></script>
 </head>
 <body class="bg-[var(--bg-root-dark)] text-[var(--text-primary-dark)] min-h-screen flex flex-col justify-between font-sans selection:bg-accent selection:text-[var(--bg-dark)]">
 
@@ -77,8 +79,9 @@
     </header>
 
     <!-- Contenido principal 404 -->
-    <main class="flex-1 flex items-center justify-center p-6">
-        <section class="max-w-lg w-full bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-2xl p-8 sm:p-10 shadow-2xl text-center relative overflow-hidden">
+    <main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 w-full">
+        <!-- Tarjeta Cyber-OS inicial -->
+        <section id="error-card" class="max-w-lg w-full bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-2xl p-8 sm:p-10 shadow-2xl text-center relative overflow-hidden transition-all duration-300">
             <!-- Glow superior decorativo -->
             <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-accent/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
@@ -99,11 +102,17 @@
                 La dirección solicitada no existe, ha sido movida o purgada de la tabla de rutas. Verifica la URL o regresa a la consola principal.
             </p>
 
-            <!-- Terminal block simulado -->
+            <!-- Terminal block simulado con Easter Egg -->
             <div class="bg-black/50 border border-white/10 rounded-lg p-3.5 mb-6 text-left font-fira-code text-xs text-[var(--text-secondary-dark)] space-y-1">
                 <div><span class="text-emerald-400">thianetic@sec-core</span>:<span class="text-accent">~</span>$ route --lookup path</div>
                 <div class="text-red-400">&gt; Status: 404 NOT_FOUND [ERR_SOCKET_PURGED]</div>
                 <div class="text-emerald-400">&gt; Fallback route: https://thianetic.github.io/</div>
+                <div class="pt-2 mt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-amber-400">&gt; Emergency bypass:</span>
+                    <button type="button" id="launch-arcade-btn" class="text-accent hover:underline hover:text-emerald-400 transition-colors font-bold cursor-pointer inline-flex items-center gap-1" aria-expanded="false" aria-controls="arcade-section">
+                        <span>[ &gt; INICIAR_DEFENSA_PERIMETRAL ]</span>
+                    </button>
+                </div>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
@@ -117,7 +126,153 @@
                 </a>
             </div>
         </section>
+
+        <!-- Contenedor del Juego Arcade (Desplegable) -->
+        <section id="arcade-section" class="hidden max-w-4xl w-full mt-6 bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-2xl p-4 sm:p-8 shadow-2xl text-center relative overflow-hidden transition-all duration-300" aria-label="Defensa Perimetral Arcade">
+            <!-- Header Arcade -->
+            <div class="arcade-brand-badge">
+                <span class="text-accent animate-pulse">●</span>
+                <span data-i18n="arcade.badge">THIANETIC // SEC-CORE DEFENSE</span>
+                <span class="opacity-40">/</span>
+                <span class="opacity-80">v1.0.1</span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-black font-fira-code text-accent mb-2 tracking-tight" data-i18n="arcade.title">
+                PROTOCOLO DE DEFENSA PERIMETRAL
+            </h2>
+            <p class="text-xs sm:text-sm text-[var(--text-secondary-dark)] max-w-2xl mx-auto mb-4" data-i18n="arcade.subtitle">
+                Contén el desbordamiento de búfer repeliendo las amenazas socket antes de que colapsen el puerto 404.
+            </p>
+
+            <!-- Canvas Container -->
+            <div id="game-container">
+                <canvas id="arcade-canvas" width="900" height="800" aria-label="Juego Space Invaders Arcade"></canvas>
+            </div>
+
+            <!-- Virtual Touch Controls for Mobile -->
+            <div class="arcade-touch-controls">
+                <div class="arcade-touch-group">
+                    <button type="button" id="touch-left" class="arcade-touch-btn" aria-label="Mover a la izquierda">◀</button>
+                    <button type="button" id="touch-right" class="arcade-touch-btn" aria-label="Mover a la derecha">▶</button>
+                </div>
+                <button type="button" id="touch-fire" class="arcade-touch-btn fire" aria-label="Disparar">🔥 FUEGO</button>
+            </div>
+
+            <!-- Live HUD / Stats Bar -->
+            <div class="arcade-stats-bar">
+                <div class="arcade-stat-item">
+                    <span class="arcade-stat-label" data-i18n="stats.score">Puntuación</span>
+                    <span class="arcade-stat-value" id="score">0</span>
+                </div>
+                <div class="arcade-stat-item">
+                    <span class="arcade-stat-label" data-i18n="stats.lives">Vidas</span>
+                    <span class="arcade-stat-value text-red-400" id="lives">♥ ♥ ♥</span>
+                </div>
+                <div class="arcade-stat-item">
+                    <span class="arcade-stat-label" data-i18n="stats.level">Nivel</span>
+                    <span class="arcade-stat-value text-emerald-400" id="level">1</span>
+                </div>
+                <div class="arcade-stat-item">
+                    <span class="arcade-stat-label" data-i18n="stats.highscore">Récord</span>
+                    <span class="arcade-stat-value text-amber-400" id="highscore">0</span>
+                </div>
+            </div>
+
+            <!-- Powerup Indicators -->
+            <div id="powerup-indicators" class="arcade-powerup-indicators"></div>
+
+            <!-- Control Buttons -->
+            <div class="arcade-controls">
+                <button type="button" class="arcade-btn primary cursor-pointer" id="start-btn" data-i18n="controls.start">
+                    ▶ Iniciar Juego
+                </button>
+                <button type="button" class="arcade-btn primary cursor-pointer" id="restart-btn" style="display: none;" data-i18n="controls.restart">
+                    ↺ Reiniciar
+                </button>
+                <button type="button" class="arcade-btn cursor-pointer" id="sound-btn" data-i18n="controls.soundOn">
+                    🔊 Sonido: ON
+                </button>
+                <button type="button" class="arcade-btn cursor-pointer" id="fullscreen-btn" data-i18n="controls.fullscreen">
+                    ⛶ Pantalla Completa
+                </button>
+                <button type="button" class="arcade-btn cursor-pointer" id="stats-btn" data-i18n="controls.stats">
+                    📊 Estadísticas
+                </button>
+                <button type="button" class="arcade-btn danger cursor-pointer" id="close-arcade-btn" data-i18n="controls.close">
+                    ✕ Minimizar Arcade
+                </button>
+            </div>
+
+            <!-- Instructions & Diagnostic Panel -->
+            <div class="arcade-retro-panel">
+                <h3>🕹️ Controles de Vuelo y Disparo</h3>
+                <table class="arcade-instructions-table">
+                    <tbody>
+                        <tr>
+                            <td><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></td>
+                            <td>Mover nave defensora</td>
+                            <td><kbd>ESPACIO</kbd> / <kbd>CLIC</kbd></td>
+                            <td>Disparar cañón láser</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>P</kbd></td>
+                            <td>Pausar / Reanudar partida</td>
+                            <td><kbd>M</kbd></td>
+                            <td>Silenciar / Activar sonido procedural</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>F</kbd></td>
+                            <td>Pantalla completa</td>
+                            <td><kbd>Arrastrar</kbd></td>
+                            <td>Control táctil directo en móvil</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
+
+    <!-- Modal de Estadísticas del Arcade -->
+    <dialog id="stats-modal" closedby="any" class="modal-dialog max-w-lg w-full" aria-labelledby="stats-modal-title">
+        <div class="bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-xl p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4 border-b border-[var(--line-color-dark)] pb-3">
+                <h2 id="stats-modal-title" class="font-fira-code font-bold text-accent text-lg flex items-center gap-2">
+                    📊 Estadísticas de Combate
+                </h2>
+                <button type="button" id="close-stats" class="text-[var(--text-secondary-dark)] hover:text-red-400 p-1 font-mono text-lg cursor-pointer" aria-label="Cerrar estadísticas">✕</button>
+            </div>
+            <div class="arcade-stats-grid">
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Puntos Totales</div>
+                    <div class="arcade-stats-card-value" id="total-score">0</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Nivel Máximo</div>
+                    <div class="arcade-stats-card-value" id="total-level">0</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Partidas Jugadas</div>
+                    <div class="arcade-stats-card-value" id="games-played">0</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Invasores Destruidos</div>
+                    <div class="arcade-stats-card-value" id="enemies-killed">0</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Disparos Totales</div>
+                    <div class="arcade-stats-card-value" id="total-shots">0</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Precisión</div>
+                    <div class="arcade-stats-card-value" id="accuracy">0%</div>
+                </div>
+                <div class="arcade-stats-card">
+                    <div class="arcade-stats-card-label">Tiempo de Combate</div>
+                    <div class="arcade-stats-card-value" id="play-time">0m</div>
+                </div>
+            </div>
+        </div>
+    </dialog>
 
     <!-- Footer minimalista -->
     <footer class="w-full py-4 text-center text-xs font-mono text-[var(--text-secondary-dark)] border-t border-[var(--line-color-dark)]">
