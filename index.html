@@ -113,7 +113,8 @@
     </script>
 
     <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="alternate icon" href="img/favicon.ico">
 
     <!-- ===== ANTI-FOUC: TEMA Y ACCESIBILIDAD SINCRÓNICOS (Hallazgo #14) ===== -->
     <script>
@@ -162,10 +163,9 @@
         </style>
     </noscript>
 
-    <!-- ===== FONT LOADING OPTIMIZATION ===== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700;900&family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- ===== FUENTES LOCALES AUTOALOJADAS (Zero-CDN) ===== -->
+    <link rel="preload" href="assets/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
 
     <!-- ===== CSS MODULAR ESTÁTICO (Sin compilador JIT en runtime - Hallazgo #10) ===== -->
     <link rel="stylesheet" href="css/variables.css">
@@ -174,11 +174,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
 
-    <!-- ===== ICONOGRAFÍA EXTERNA CON SRI ===== -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
-    <script defer src="https://code.iconify.design/3/3.1.0/iconify.min.js" integrity="sha384-GYcZF/Xz4/6ZHVch5eVcYcyWmSCvO3+ffsxF+B9hfRyc3XCkSws7SO5ZSGqHlUNH" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
+    </head>
 
 <body class="overflow-x-hidden">
     <!-- ===== LANDING CONSOLA CYBER-OS (#loading-screen) ===== -->
@@ -224,13 +220,13 @@
         <ul class="flex items-center space-x-5 fixed bottom-0 z-40" style="left: 2rem; bottom: 2.6rem;">
             <li>
                 <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
-                    <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:github"></span>
+                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                     <span class="social-tooltip tooltip-text" data-text="@thianetic" data-scramble-text>@thianetic</span>
                 </a>
             </li>
             <li>
                 <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
-                    <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:linkedin"></span>
+                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
                     <span class="social-tooltip tooltip-text" data-text="@thianetic" data-scramble-text>@thianetic</span>
                 </a>
             </li>
@@ -251,7 +247,7 @@
 
         <div class="flex items-center space-x-3">
             <button type="button" id="cv-header-btn" commandfor="cv-modal" command="show-modal" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold border border-accent/40 text-accent hover:bg-accent hover:text-[var(--bg-dark)] transition-all cursor-pointer">
-                <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                 <span data-scramble-text>CV / Dossier</span>
             </button>
             <!-- Desktop Theme Toggle integrado en el header sin colisión -->
@@ -296,10 +292,10 @@
 
         <div class="flex items-center space-x-6 mt-6">
             <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 text-[var(--text-secondary-dark)] hover:text-accent">
-                <span class="iconify h-7 w-7" data-icon="mdi:github"></span>
+                <svg class="h-7 w-7 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
             </a>
             <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 text-[var(--text-secondary-dark)] hover:text-accent">
-                <span class="iconify h-7 w-7" data-icon="mdi:linkedin"></span>
+                <svg class="h-7 w-7 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
             </a>
         </div>
     </nav>
@@ -656,17 +652,19 @@
                                 <ul class="flex flex-wrap gap-1.5 mb-4">
                                     <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Node.js 22</li>
                                     <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Fastify</li>
-                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Prisma</li>
-                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Hardware IoT</li>
-                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Docker</li>
+                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Prisma ORM</li>
+                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">MariaDB</li>
+                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Redis</li>
+                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">IoT Hardware</li>
+                                    <li class="text-[11px] font-mono bg-[#0a192f] text-emerald-300 px-2 py-0.5 rounded">Docker Compose</li>
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="kronopulse" aria-label="Ver ficha de KronoPulse">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -690,11 +688,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="own-cipher-book" aria-label="Ver ficha de own-cipher-book">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -717,11 +715,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="troposfera" aria-label="Ver ficha de TropoScan">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -744,11 +742,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="port-scan" aria-label="Ver ficha de Monitor de Puertos">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -771,11 +769,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="py-devkiller" aria-label="Ver ficha de DevKiller TUI">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -798,11 +796,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="web-game-trains" aria-label="Ver ficha de Mesa de Trenes">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -812,7 +810,10 @@
                             <article class="project-card p-6 rounded-xl bg-[var(--card-dark)] border border-[var(--line-color-dark)] hover:border-accent transition-all cursor-pointer" data-project="dermapp" data-category="mobile">
                                 <div class="project-image-container mb-4">
                                     <span class="project-status status-beta text-[11px] font-mono px-2 py-0.5 rounded">ANDROID NATIVO</span>
-                                    <img loading="lazy" decoding="async" src="img/dermapp-android.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="DermApp">
+                                    <picture>
+                                        <source srcset="img/dermapp-android.webp" type="image/webp">
+                                        <img loading="lazy" decoding="async" src="img/dermapp-android.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="DermApp" width="300" height="144">
+                                    </picture>
                                 </div>
                                 <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">DermApp</h3>
                                 <p class="text-xs sm:text-sm text-content mb-4 leading-relaxed">
@@ -825,11 +826,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="dermapp" aria-label="Ver ficha de DermApp">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>CÓDIGO</span>
                                     </a>
                                 </div>
@@ -839,7 +840,10 @@
                             <article class="project-card p-6 rounded-xl bg-[var(--card-dark)] border border-[var(--line-color-dark)] hover:border-accent transition-all cursor-pointer" data-project="laberinto" data-category="games">
                                 <div class="project-image-container mb-4">
                                     <span class="project-status status-release text-[11px] font-mono px-2 py-0.5 rounded">UNITY 3D / C#</span>
-                                    <img loading="lazy" decoding="async" src="img/laberinto-unity.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="Laberinto de las Monedas">
+                                    <picture>
+                                        <source srcset="img/laberinto-unity.webp" type="image/webp">
+                                        <img loading="lazy" decoding="async" src="img/laberinto-unity.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="Laberinto de las Monedas" width="300" height="144">
+                                    </picture>
                                 </div>
                                 <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">Laberinto de las Monedas</h3>
                                 <p class="text-xs sm:text-sm text-content mb-4 leading-relaxed">
@@ -852,11 +856,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="laberinto" aria-label="Ver ficha de Laberinto de las Monedas">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>CÓDIGO</span>
                                     </a>
                                 </div>
@@ -866,7 +870,10 @@
                             <article class="project-card p-6 rounded-xl bg-[var(--card-dark)] border border-amber-500/30 hover:border-amber-400 transition-all cursor-pointer" data-project="ticketapp" data-category="mobile">
                                 <div class="project-image-container mb-4">
                                     <span class="project-status status-development text-[11px] font-mono px-2 py-0.5 rounded">DAM 10/10 · MATRÍCULA DE HONOR</span>
-                                    <img loading="lazy" decoding="async" src="img/ticketapp-android.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="TicketApp">
+                                    <picture>
+                                        <source srcset="img/ticketapp-android.webp" type="image/webp">
+                                        <img loading="lazy" decoding="async" src="img/ticketapp-android.png" class="project-image h-36 w-full object-contain p-2 bg-black/40 rounded-lg" alt="TicketApp" width="300" height="144">
+                                    </picture>
                                 </div>
                                 <h3 class="text-xl font-bold text-[var(--text-primary-dark)] mb-2">TicketApp — Sistema Integral de Ticketing &amp; Incidencias</h3>
                                 <p class="text-xs sm:text-sm text-content mb-4 leading-relaxed">
@@ -879,11 +886,11 @@
                                 </ul>
                                 <div class="project-buttons flex gap-2">
                                     <button type="button" class="project-btn demo-btn text-xs font-mono py-1.5 px-3 project-card-trigger cursor-pointer" data-project-trigger="ticketapp" aria-label="Ver ficha de TicketApp">
-                                        <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
+                                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
                                         <span data-scramble-text>Ver ficha</span>
                                     </button>
                                     <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="project-btn code-btn text-xs font-mono py-1.5 px-3">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                                         <span data-scramble-text>REPOSITORIO</span>
                                     </a>
                                 </div>
@@ -980,7 +987,7 @@
                             <!-- DevSecOps & Seguridad -->
                             <div class="tech-card animate-fade-up stagger-1">
                                 <div class="tech-icon">
-                                    <span class="iconify w-10 h-10 text-emerald-400" data-icon="mdi:shield-check"></span>
+                                    <svg class="w-10 h-10 text-emerald-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                                 </div>
                                 <h3 class="tech-name">DevSecOps</h3>
                                 <p class="tech-category">UFW · Fail2ban · SSH ed25519 · TOCTOU</p>
@@ -1061,7 +1068,7 @@
                             <!-- IoT & Hardware Firmware -->
                             <div class="tech-card animate-fade-up stagger-2">
                                 <div class="tech-icon">
-                                    <span class="iconify w-10 h-10 text-cyan-400" data-icon="mdi:chip"></span>
+                                    <svg class="w-10 h-10 text-cyan-400 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m2 4v8h8V8H8m-4 1H2v2h2V9m0 4H2v2h2v-2m18-4h-2v2h2V9m0 4h-2v2h2v-2m-9 7v2h2v-2h-2m-4 0v2h2v-2H7m8 0v2h2v-2h-2M11 2v2h2V2h-2M7 2v2h2V2H7m8 0v2h2V2h-2z"/></svg>
                                 </div>
                                 <h3 class="tech-name">Hardware IoT &amp; MQTT</h3>
                                 <p class="tech-category">Microcontroladores · NFC · Deep Sleep</p>
@@ -1150,18 +1157,18 @@
                                 <span data-scramble-text>ENVIAR MENSAJE</span>
                             </button>
                             <a href="mailto:thianetic@gmail.com" class="px-7 py-3.5 rounded-full text-sm font-mono font-bold bg-white/5 border border-white/15 text-[var(--text-primary-dark)] hover:border-accent hover:text-accent transition-all inline-flex items-center gap-2">
-                                <span class="iconify w-4 h-4" data-icon="mdi:email-outline"></span>
+                                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0l-8 5-8-5h16m0 12H4V8l8 5 8-5v10z"/></svg>
                                 <span>thianetic@gmail.com</span>
                             </a>
                         </div>
 
                         <div class="flex justify-center items-center gap-6 text-sm font-mono text-[var(--text-secondary-dark)]">
                             <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" class="hover:text-accent flex items-center gap-1.5">
-                                <span class="iconify w-4 h-4" data-icon="mdi:linkedin"></span> LinkedIn
+                                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg> LinkedIn
                             </a>
                             <span>·</span>
                             <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" class="hover:text-accent flex items-center gap-1.5">
-                                <span class="iconify w-4 h-4" data-icon="mdi:github"></span> GitHub
+                                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg> GitHub
                             </a>
                         </div>
                     </section>
@@ -1189,7 +1196,7 @@
                         <div class="attributions-grid container mx-auto px-6 max-w-5xl">
                             <div class="attribution-item">
                                 <div class="attribution-logo">
-                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" width="30" height="18" class="w-12 h-12">
+                                    <svg class="w-10 h-10 text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-label="Tailwind CSS"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/></svg>
                                 </div>
                                 <div>
                                     <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Tailwind CSS</a>
@@ -1273,7 +1280,7 @@
                     </button>
                     <button type="button" class="access-btn" data-access-action="toggle-colorblind" title="Modo Color">
                         <span class="level-indicator">off</span>
-                        <span class="iconify w-6 h-6 mb-1" data-icon="mdi:invert-colors-off"></span>
+                        <svg class="w-6 h-6 mb-1 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8v16z"/></svg>
                         No Color
                     </button>
                     <button type="button" class="access-btn" data-access-action="toggle-links" title="Resaltar Enlaces">
@@ -1326,7 +1333,7 @@
                     <span id="modal-status" class="inline-block px-3 py-1 rounded-full text-xs font-fira-code font-bold"></span>
                 </div>
                 <button id="close-modal" type="button" commandfor="project-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar modal">
-                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                 </button>
             </div>
 
@@ -1352,11 +1359,11 @@
 
                 <div class="flex gap-4">
                     <a id="modal-demo" href="#" target="_blank" rel="noopener noreferrer" class="project-btn demo-btn flex-1 justify-center">
-                        <span class="iconify w-4 h-4" data-icon="mdi:open-in-new"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7m-9 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5h-2v5H5V9h5V7H5z"/></svg>
                         <span data-scramble-text>VER DEMO</span>
                     </a>
                     <a id="modal-code" href="#" target="_blank" rel="noopener noreferrer" class="project-btn code-btn flex-1 justify-center">
-                        <span class="iconify w-4 h-4" data-icon="mdi:github"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                         <span data-scramble-text>VER CÓDIGO</span>
                     </a>
                 </div>
@@ -1370,7 +1377,7 @@
             <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
                 <h2 id="contact-modal-title" class="text-2xl font-bold text-[var(--text-primary-dark)]">Enviar Mensaje</h2>
                 <button id="close-contact-modal" type="button" commandfor="contact-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar formulario">
-                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                 </button>
             </div>
 
@@ -1467,7 +1474,7 @@
                     id="copy-message-btn"
                     class="w-full mt-3 project-btn code-btn justify-center cursor-pointer text-xs font-mono"
                 >
-                    <span class="iconify w-4 h-4" data-icon="mdi:content-copy"></span>
+                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/></svg>
                     <span>Copiar texto del mensaje</span>
                 </button>
 
@@ -1476,7 +1483,7 @@
                         type="submit"
                         class="flex-1 project-btn demo-btn justify-center cursor-pointer"
                     >
-                        <span class="iconify w-4 h-4" data-icon="mdi:send"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
                         <span data-scramble-text>ENVIAR MENSAJE</span>
                     </button>
                     <button
@@ -1499,7 +1506,7 @@
             <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
                 <h2 id="gdpr-modal-title" class="text-2xl font-bold text-[var(--text-primary-dark)]">Política de Privacidad y Tratamiento de Datos</h2>
                 <button id="close-gdpr-modal" type="button" commandfor="gdpr-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar términos">
-                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                 </button>
             </div>
 
@@ -1545,7 +1552,7 @@
                     </div>
                 </div>
                 <button id="close-cv-modal" type="button" commandfor="cv-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar modal">
-                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
+                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                 </button>
             </div>
 
@@ -1559,7 +1566,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <span class="iconify w-4 h-4" data-icon="mdi:briefcase-outline"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2m4 4V4h-4v2h4m6 4H4v3.5l8 4 8-4V10m-8 6.25L4.47 12.5V19h15.06v-6.5L12 16.25z"/></svg>
                         Experiencia Clave: SITH (Marzo 2025 — Marzo 2026)
                     </h3>
                     <div class="p-4 rounded-lg bg-white/[0.02] border border-white/10 space-y-3">
@@ -1581,7 +1588,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <span class="iconify w-4 h-4" data-icon="mdi:school-outline"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3m6.82 6L12 12.72 5.18 9 12 5.28 18.82 9M17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
                         Formación Oficial &amp; Hitos Académicos
                     </h3>
                     <div class="space-y-3 text-xs font-mono">
@@ -1604,7 +1611,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <span class="iconify w-4 h-4" data-icon="mdi:code-braces"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-3a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8m8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-3a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg>
                         Proyectos Propios &amp; Infraestructura IoT
                     </h3>
                     <div class="grid sm:grid-cols-2 gap-3 text-xs font-mono">
@@ -1637,17 +1644,17 @@
                 <!-- Códigos QR de Verificación y Contacto Rápido (Impresión / PDF) -->
                 <div class="p-4 rounded-lg bg-black/40 border border-white/10 mt-4">
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <span class="iconify w-4 h-4" data-icon="mdi:qrcode-scan"></span>
+                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4V4m2 2v2h2V6H6m8-2h6v6h-6V4m2 2v2h2V6h-2M4 14h6v6H4v-6m2 2v2h2v-2H6m10 0h2v2h-2v-2m-2-2h2v2h-2v-2m4 4h2v2h-2v-2m-2 0h-2v2h2v-2m2-4h2v2h-2v-2m-4-2h2v2h-2v-2z"/></svg>
                         Verificación Directa &amp; Contacto Rápido
                     </h3>
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <a href="https://thianetic.github.io/" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:border-accent hover:bg-white/10 transition-all cursor-pointer group" title="Abrir Portafolio Web">
-                            <img src="img/qr_thianetic.github.io.png" alt="QR Portafolio Web Thianetic" width="110" height="110" class="w-24 h-24 rounded bg-white p-1 mb-2 group-hover:scale-105 transition-transform">
+                            <img src="img/qr_thianetic.github.io.png" alt="QR Portafolio Web Thianetic" width="110" height="110" loading="lazy" decoding="async" class="w-24 h-24 rounded bg-white p-1 mb-2 object-contain group-hover:scale-105 transition-transform">
                             <span class="font-bold text-xs text-[var(--text-primary-dark)] group-hover:text-accent transition-colors">Portafolio Web</span>
                             <span class="text-[11px] font-mono text-accent">thianetic.github.io</span>
                         </a>
                         <a href="https://t.me/Thianetic" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:border-emerald-400 hover:bg-white/10 transition-all cursor-pointer group" title="Abrir Telegram Directo (@Thianetic)">
-                            <img src="img/qr_thianetic_telegram.png" alt="QR Telegram Thianetic" width="110" height="110" class="w-24 h-24 rounded bg-white p-1 mb-2 group-hover:scale-105 transition-transform">
+                            <img src="img/qr_thianetic_telegram.png" alt="QR Telegram Thianetic" width="110" height="110" loading="lazy" decoding="async" class="w-24 h-24 rounded bg-white p-1 mb-2 object-contain group-hover:scale-105 transition-transform">
                             <span class="font-bold text-xs text-[var(--text-primary-dark)] group-hover:text-emerald-400 transition-colors">Telegram Directo</span>
                             <span class="text-[11px] font-mono text-emerald-400">@Thianetic</span>
                         </a>
@@ -1657,15 +1664,15 @@
 
             <div class="p-6 border-t border-[var(--line-color-dark)] flex flex-wrap gap-3">
                 <button id="print-cv-btn" type="button" class="flex-1 project-btn demo-btn justify-center text-xs font-mono py-2.5 cursor-pointer">
-                    <span class="iconify w-4 h-4" data-icon="mdi:printer"></span>
+                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 3H6v4h12V3m1 5H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3m-3 11H8v-5h8v5m3-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"/></svg>
                     <span data-scramble-text>IMPRIMIR / GUARDAR PDF</span>
                 </button>
                 <a href="mailto:thianetic@gmail.com?subject=Solicitud%20de%20CV%20-%20Thianetic" class="flex-1 project-btn code-btn justify-center text-xs font-mono py-2.5">
-                    <span class="iconify w-4 h-4" data-icon="mdi:email-outline"></span>
+                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0l-8 5-8-5h16m0 12H4V8l8 5 8-5v10z"/></svg>
                     <span data-scramble-text>SOLICITAR POR EMAIL</span>
                 </a>
                 <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" class="project-btn code-btn justify-center text-xs font-mono py-2.5 px-4">
-                    <span class="iconify w-4 h-4" data-icon="mdi:linkedin"></span>
+                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
                     <span data-scramble-text>LINKEDIN</span>
                 </a>
             </div>
@@ -1687,7 +1694,7 @@
                 <div class="flex items-center gap-3">
                     <span class="hidden sm:inline text-[11px] font-mono text-slate-400">ESC o "exit" para cerrar</span>
                     <button id="close-cli-modal" type="button" commandfor="cli-modal" command="close" class="text-slate-400 hover:text-emerald-400 transition-colors p-1" aria-label="Cerrar consola interactiva">
-                        <span class="iconify w-5 h-5" data-icon="mdi:close"></span>
+                        <svg class="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                     </button>
                 </div>
             </div>

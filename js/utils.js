@@ -128,6 +128,13 @@ export function applyAccessibilityDomState(state, rootEl, options = ACCESSIBILIT
     rootEl.classList.remove(...fontClasses);
     if (state.font > 0 && fontClasses[state.font - 1]) {
         rootEl.classList.add(fontClasses[state.font - 1]);
+        if (typeof document !== 'undefined' && document.head && !document.getElementById('lexend-font-stylesheet')) {
+            const link = document.createElement('link');
+            link.id = 'lexend-font-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = 'assets/fonts/lexend.css';
+            document.head.appendChild(link);
+        }
     }
 
     // 6. Modo monocromo / daltonismo (usando classes de ACCESSIBILITY_OPTIONS)

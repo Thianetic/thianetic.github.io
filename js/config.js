@@ -118,6 +118,7 @@ export const PROJECT_CATALOG = {
     'kronopulse': {
         title: 'KronoPulse — Sistema de Control de Presencia SaaS & Subsistema IoT',
         cardTitle: 'KronoPulse',
+        category: 'automation web',
         status: 'SAAS B2B & HARDWARE IOT',
         statusClass: 'status-release',
         image: null,
@@ -135,9 +136,10 @@ export const PROJECT_CATALOG = {
     'ticketapp': {
         title: 'TicketApp — Sistema Integral de Ticketing & Incidencias',
         cardTitle: 'TicketApp — Sistema Integral de Ticketing & Incidencias',
+        category: 'mobile',
         status: 'DAM 10/10 · MATRÍCULA DE HONOR',
         statusClass: 'status-development',
-        image: 'img/ticketapp-android.png',
+        image: 'img/ticketapp-android.webp',
         summary: 'Ecosistema completo de gestión de incidencias corporativas (DAM 10/10): aplicación nativa Android en Kotlin, panel web corporativo, API RESTful y persistencia multi-opción (SQLite local, MariaDB autoalojada o Cloud Firebase).',
         description: 'Ecosistema completo de gestión de incidencias corporativas desarrollado como Proyecto de desarrollo de aplicaciones multiplataforma (calificado con 10/10 y Matrícula de Honor): aplicación nativa Android en Kotlin, panel web de administración, API RESTful y arquitectura desacoplada con persistencia multi-opción (SQLite local, servidor MariaDB/MySQL autoalojado o Cloud Firebase).',
         technologies: ['Android Kotlin', 'Panel Web', 'PHP REST', 'SQLite / MariaDB', 'Firebase'],
@@ -153,6 +155,7 @@ export const PROJECT_CATALOG = {
     'sith-horario': {
         title: 'SaaS Registro Horario SITH',
         cardTitle: 'SaaS Registro Horario SITH',
+        category: 'web mobile',
         status: 'PRODUCCIÓN B2B · SITH',
         statusClass: 'status-release',
         image: null,
@@ -172,6 +175,7 @@ export const PROJECT_CATALOG = {
     'sith-iot': {
         title: 'Plataforma IoT de Telemetría y Dosificación Agroindustrial (MQTT & Kotlin)',
         cardTitle: 'Plataforma IoT de Telemetría y Dosificación Agroindustrial (MQTT & Kotlin)',
+        category: 'mobile automation',
         status: 'PRODUCCIÓN IOT · SITH',
         statusClass: 'status-release',
         image: null,
@@ -190,6 +194,7 @@ export const PROJECT_CATALOG = {
     'own-cipher-book': {
         title: 'own-cipher-book (OCB) — Registro Criptográfico Zero-Knowledge',
         cardTitle: 'own-cipher-book (OCB)',
+        category: 'security web',
         status: 'CRIPTOGRAFÍA & SEGURIDAD',
         statusClass: 'status-release',
         image: null,
@@ -208,6 +213,7 @@ export const PROJECT_CATALOG = {
     'troposfera': {
         title: 'TropoScan — Telemetría Ambiental & Calidad del Aire',
         cardTitle: 'TropoScan',
+        category: 'automation',
         status: 'TELEMETRÍA & DATOS',
         statusClass: 'status-beta',
         image: null,
@@ -226,6 +232,7 @@ export const PROJECT_CATALOG = {
     'port-scan': {
         title: 'Monitor de Puertos (`port-scan`) — TUI, Daemon & Auditoría Forense',
         cardTitle: 'Monitor de Puertos',
+        category: 'security',
         status: 'DEVSECOPS & FORENSE',
         statusClass: 'status-release',
         image: null,
@@ -244,6 +251,7 @@ export const PROJECT_CATALOG = {
     'py-devkiller': {
         title: 'DevKiller TUI — Limpieza & Desbloqueo Seguro de Procesos',
         cardTitle: 'DevKiller TUI',
+        category: 'security automation',
         status: 'DEVOPS TOOL',
         statusClass: 'status-release',
         image: null,
@@ -261,6 +269,7 @@ export const PROJECT_CATALOG = {
     'web-game-trains': {
         title: 'Mesa de Trenes: Red Global — Simulador & Control Ferroviario',
         cardTitle: 'Mesa de Trenes: Red Global',
+        category: 'games',
         status: 'SIMULADOR 3D / 2D CTC',
         statusClass: 'status-release',
         image: null,
@@ -278,9 +287,10 @@ export const PROJECT_CATALOG = {
     'dermapp': {
         title: 'DermApp — Seguimiento Clínico Dermatológico',
         cardTitle: 'DermApp',
+        category: 'mobile',
         status: 'ANDROID NATIVO',
         statusClass: 'status-beta',
-        image: 'img/dermapp-android.png',
+        image: 'img/dermapp-android.webp',
         summary: 'Aplicación móvil para seguimiento dermatológico y adherencia a tratamientos clínicos. Desarrollada en Kotlin nativo con almacenamiento local seguro en SQLite, recordatorios de medicación y comparativa fotográfica temporal.',
         description: 'Aplicación móvil para seguimiento dermatológico y adherencia a tratamientos clínicos. Desarrollada en Kotlin nativo sobre Android SDK con almacenamiento local seguro en SQLite, recordatorios de medicación y comparativa fotográfica temporal.',
         technologies: ['Android SDK', 'Kotlin', 'SQLite', 'Clean Architecture'],
@@ -295,9 +305,10 @@ export const PROJECT_CATALOG = {
     'laberinto': {
         title: 'Laberinto de las Monedas — Físicas & Simulación 3D',
         cardTitle: 'Laberinto de las Monedas',
+        category: 'games',
         status: 'UNITY 3D / C#',
         statusClass: 'status-release',
-        image: 'img/laberinto-unity.png',
+        image: 'img/laberinto-unity.webp',
         summary: 'Videojuego 3D completo en Unity con programación en C#: simulación física dinámica de colisiones, mecánicas de aceleración y balanceo, cronometraje de precisión y optimización para hardware heterogéneo.',
         description: 'Videojuego 3D completo desarrollado en Unity con programación en C#: simulación física dinámica de colisiones, mecánicas de aceleración y balanceo, cronometraje de precisión y optimización de rendimiento para hardware heterogéneo.',
         technologies: ['Unity', 'C#', 'Físicas 3D', 'Cinemática'],
@@ -312,6 +323,7 @@ export const PROJECT_CATALOG = {
     'cluster-iot': {
         title: 'Cluster Local de Servicios & Domótica IoT (Linux ARM64)',
         cardTitle: 'Cluster Local de Servicios & Domótica IoT (Linux ARM64)',
+        category: 'automation',
         status: 'INFRAESTRUCTURA 24/7',
         statusClass: 'status-release',
         image: null,
