@@ -34,9 +34,9 @@ export class ProjectModal {
         this.modalDemoLink = document.getElementById('modal-demo');
         this.modalCodeLink = document.getElementById('modal-code');
 
-        // Event delegation for any project card with [data-project] or explicit trigger [data-project-trigger]
+        // Event delegation for any project card with [data-project] or explicit trigger [data-project-trigger] / .project-card-trigger
         document.addEventListener('click', (e) => {
-            const trigger = e.target.closest('[data-project-trigger]');
+            const trigger = e.target.closest('[data-project-trigger], .project-card-trigger');
             if (trigger) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -46,6 +46,8 @@ export class ProjectModal {
                     this.lastTriggerElement = trigger;
                     this.openProjectModal(projectId, card);
                 }
+                return;
+            }
                 return;
             }
 
@@ -62,6 +64,18 @@ export class ProjectModal {
 
         document.addEventListener('keydown', (e) => {
             if (e.key !== 'Enter' && e.key !== ' ') return;
+            const trigger = e.target.closest('[data-project-trigger], .project-card-trigger');
+            if (trigger) {
+                e.preventDefault();
+                e.stopPropagation();
+                const card = trigger.closest('[data-project]');
+                const projectId = trigger.getAttribute('data-project-trigger') || card?.getAttribute('data-project');
+                if (projectId) {
+                    this.lastTriggerElement = trigger;
+                    this.openProjectModal(projectId, card);
+                }
+                return;
+            }
             const card = e.target.closest('[data-project]');
             if (!card || e.target.closest('a[href], button')) return;
 

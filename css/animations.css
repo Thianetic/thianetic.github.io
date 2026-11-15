@@ -138,9 +138,6 @@
         to { transform: translateX(100%); opacity: 0; }
     }
 
-    .notification-enter { animation: slideInRight 0.25s ease-out forwards; }
-    .notification-exit { animation: slideOutRight 0.25s ease-in forwards; }
-
     /* Accesibilidad estricta para reducción de movimiento */
     @media (prefers-reduced-motion: reduce) {
         .animate-on-scroll,

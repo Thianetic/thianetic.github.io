@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Recurso No Encontrado | Thianetic</title>
+    <meta name="description" content="Página no encontrada en el portafolio profesional de Thianetic.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="alternate icon" href="img/favicon.ico">
+
+    <!-- Anti-FOUC script temprano para tema -->
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light') {
+                    document.documentElement.classList.add('light-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="bg-[var(--bg-root-dark)] text-[var(--text-primary-dark)] min-h-screen flex flex-col justify-between font-sans selection:bg-accent selection:text-[var(--bg-dark)]">
+
+    <!-- Header minimalista -->
+    <header class="w-full px-6 py-5 border-b border-[var(--line-color-dark)] bg-[var(--bg-root-dark)]/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group cursor-pointer" aria-label="Volver al portafolio de Thianetic">
+                <span class="font-fira-code font-black text-xl text-[var(--text-primary-dark)] group-hover:text-accent transition-colors">
+                    THIANETIC<span class="text-accent">.</span>
+                </span>
+            </a>
+            <a href="index.html" class="font-mono text-xs text-accent hover:underline flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                <span>VOLVER AL INICIO</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido principal 404 -->
+    <main class="flex-1 flex items-center justify-center p-6">
+        <section class="max-w-lg w-full bg-[var(--card-dark)] border border-[var(--line-color-dark)] rounded-2xl p-8 sm:p-10 shadow-2xl text-center relative overflow-hidden">
+            <!-- Glow superior decorativo -->
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-accent/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
+                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                <span>SOCKET_DISCONNECTED // HTTP_404</span>
+            </div>
+
+            <h1 class="text-6xl sm:text-7xl font-black font-fira-code text-accent mb-3 tracking-tighter">
+                404
+            </h1>
+
+            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-primary-dark)] mb-3">
+                Recurso o Ruta No Encontrada
+            </h2>
+
+            <p class="text-sm text-[var(--text-secondary-dark)] leading-relaxed mb-6">
+                La dirección solicitada no existe, ha sido movida o purgada de la tabla de rutas. Verifica la URL o regresa a la consola principal.
+            </p>
+
+            <!-- Terminal block simulado -->
+            <div class="bg-black/50 border border-white/10 rounded-lg p-3.5 mb-6 text-left font-fira-code text-xs text-[var(--text-secondary-dark)] space-y-1">
+                <div><span class="text-emerald-400">thianetic@sec-core</span>:<span class="text-accent">~</span>$ route --lookup path</div>
+                <div class="text-red-400">&gt; Status: 404 NOT_FOUND [ERR_SOCKET_PURGED]</div>
+                <div class="text-emerald-400">&gt; Fallback route: https://thianetic.github.io/</div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="index.html" class="project-btn demo-btn justify-center text-xs font-mono py-2.5 px-6 cursor-pointer">
+                    <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    <span>VOLVER AL PORTAFOLIO</span>
+                </a>
+                <a href="index.html#contact" class="project-btn code-btn justify-center text-xs font-mono py-2.5 px-6">
+                    <svg class="w-4 h-4 inline-block mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0l-8 5-8-5h16m0 12H4V8l8 5 8-5v10z"/></svg>
+                    <span>CONTACTAR</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer minimalista -->
+    <footer class="w-full py-4 text-center text-xs font-mono text-[var(--text-secondary-dark)] border-t border-[var(--line-color-dark)]">
+        <span>&copy; <span id="year">2026</span> Thianetic. Todos los derechos reservados.</span>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

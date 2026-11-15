@@ -95,7 +95,7 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         padding: 0.45rem 1rem;
         border-radius: 9999px;
-        cursor: pointer !important;
+        cursor: pointer;
         animation: bounce 1.5s infinite ease-in-out;
         transition: color 0.2s ease, border-color 0.2s ease;
     }
@@ -405,7 +405,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer !important;
+        cursor: pointer;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -426,7 +426,7 @@
         width: min(320px, calc(100vw - 40px));
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
         z-index: 1001;
-        cursor: auto !important;
+        cursor: auto;
     }
 
     @supports (anchor-name: --a11y-btn) and (position-anchor: --a11y-btn) {
@@ -458,7 +458,7 @@
         text-align: center;
         font-size: 0.75rem;
         transition: all 0.2s ease;
-        cursor: pointer !important;
+        cursor: pointer;
     }
 
     .access-btn:hover {
@@ -502,7 +502,7 @@
 
     .contact-form-input:user-invalid,
     .contact-form-input[aria-invalid="true"] {
-        border-color: #ef4444 !important;
+        border-color: #ef4444;
         box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
     }
 
@@ -654,7 +654,7 @@
         max-width: 95vw;
         margin: auto;
         overscroll-behavior: contain;
-        cursor: auto !important;
+        cursor: auto;
     }
 
     dialog.modal-dialog::backdrop {
@@ -662,7 +662,7 @@
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
         overscroll-behavior: contain;
-        cursor: auto !important;
+        cursor: auto;
     }
 
     dialog:modal,
@@ -671,7 +671,7 @@
     .modal-dialog *,
     #accessibility-menu,
     #accessibility-menu * {
-        cursor: auto !important;
+        cursor: auto;
     }
 
     dialog:modal button,
@@ -683,7 +683,7 @@
     dialog:modal .project-btn,
     .modal-dialog button,
     .modal-dialog a {
-        cursor: pointer !important;
+        cursor: pointer;
     }
 
     body:has(dialog[open]) {
@@ -725,7 +725,7 @@
         justify-content: space-between;
         background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.04), transparent 60%), #050a14;
         color: #10b981;
-        cursor: text !important;
+        cursor: text;
     }
 
     .cli-output-log {
@@ -811,7 +811,7 @@
         caret-color: transparent;
         font-family: 'Fira Code', monospace;
         font-size: 0.85rem;
-        cursor: text !important;
+        cursor: text;
     }
 
     .cli-nav-tooltip {
@@ -936,56 +936,3 @@
         border-color: #cbd5e1 !important;
     }
 }
-
-/* Tokens contextuales y bloques protegidos con alto contraste (>4.5:1 en ambos temas) */
-.hero-terminal-container {
-    background: var(--terminal-bg) !important;
-    border-color: var(--terminal-border) !important;
-    color: var(--terminal-text) !important;
-}
-.hero-terminal-container .terminal-accent {
-    color: var(--terminal-accent) !important;
-}
-.hero-terminal-container .terminal-emerald {
-    color: var(--terminal-emerald) !important;
-}
-.hero-terminal-container .terminal-muted {
-    color: var(--terminal-text-muted) !important;
-}
-
-.attribution-panel {
-    background: var(--terminal-bg) !important;
-    border-color: var(--terminal-border) !important;
-    color: var(--terminal-text) !important;
-}
-.attribution-panel a {
-    color: var(--terminal-accent) !important;
-}
-
-.sith-internal-card {
-    background: var(--terminal-surface) !important;
-    border-color: var(--terminal-border) !important;
-    color: var(--terminal-text) !important;
-}
-
-.badge-status-emerald {
-    background-color: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(52, 211, 153, 0.4);
-    color: var(--terminal-emerald) !important;
-}
-
-/* Reglas complementarias para utilidades estáticas faltantes (Punto 8) */
-.bg-emerald-500\/15 { background-color: rgba(16, 185, 129, 0.15) !important; }
-.bg-emerald-500\/80 { background-color: rgba(16, 185, 129, 0.8) !important; }
-.border-accent\/30 { border-color: rgba(0, 229, 255, 0.3) !important; }
-.hover\:bg-accent-hover\/20:hover { background-color: rgba(0, 229, 255, 0.2) !important; }
-.hover\:border-emerald-400:hover { border-color: #34d399 !important; }
-.hover\:text-emerald-400:hover { color: #34d399 !important; }
-.text-slate-300 { color: #cbd5e1 !important; }
-.text-slate-400 { color: #94a3b8 !important; }
-.text-accent\/80 { color: rgba(0, 229, 255, 0.8) !important; }
-.text-accent\/90 { color: rgba(0, 229, 255, 0.9) !important; }
-.focus\:ring-2\/accent:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
-.font-normal { font-weight: 400 !important; }
-.mt-10 { margin-top: 2.5rem !important; }
-.leading-none { line-height: 1 !important; }

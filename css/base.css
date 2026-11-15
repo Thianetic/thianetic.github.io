@@ -33,7 +33,7 @@
     }
 
     /* Aplicar fuentes consistentes */
-    body, .lateral-nav, .project-card, .cta-btn, .project-btn, .liquid-glass-btn,
+    body, .lateral-nav, .project-card, .project-btn, .liquid-glass-btn,
     .filter-tab, .mobile-nav-link, .project-card li {
         font-family: var(--font-family, 'Inter', sans-serif);
     }
