@@ -34,14 +34,14 @@ export class TechBubblesManager {
 
         const tags = Array.from(card.querySelectorAll('li, span'))
             .map((el) => el.textContent.trim())
-            .filter((txt) => TECH_LOGOS[txt]);
+            .filter((txt) => TECH_LOGOS[txt] || ['Python', 'Kotlin', 'Docker', 'Linux', 'FastAPI', 'Android'].includes(txt));
 
-        const urls = tags.length
-            ? tags.map((t) => TECH_LOGOS[t])
-            : [TECH_LOGOS.Python, TECH_LOGOS.Kotlin, TECH_LOGOS.Docker].filter(Boolean);
+        const techList = tags.length
+            ? tags
+            : ['Python', 'Kotlin', 'Docker', 'Linux'];
 
         const intervalId = setInterval(() => {
-            this.spawnBubble(card, urls);
+            this.spawnBubble(card, techList);
         }, 700);
 
         this.activeIntervals.set(card, intervalId);
@@ -55,18 +55,17 @@ export class TechBubblesManager {
         }
     }
 
-    spawnBubble(card, urls) {
-        if (!urls.length) return;
+    spawnBubble(card, techList) {
+        if (!techList.length) return;
         const bubble = document.createElement('div');
         bubble.className = 'tech-bubble';
         bubble.style.left = `${Math.floor(Math.random() * 75) + 10}%`;
         bubble.style.bottom = '12px';
 
-        const img = document.createElement('img');
-        img.src = urls[Math.floor(Math.random() * urls.length)];
-        img.alt = '';
-        img.loading = 'lazy';
-        bubble.appendChild(img);
+        const tag = document.createElement('span');
+        tag.className = 'bubble-tag';
+        tag.textContent = techList[Math.floor(Math.random() * techList.length)];
+        bubble.appendChild(tag);
 
         card.appendChild(bubble);
 
