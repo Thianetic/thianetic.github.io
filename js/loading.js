@@ -52,11 +52,16 @@ export class LoadingManager {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                this.startCyberBoot();
+                this.startCyberBoot(true);
             }, { signal });
         });
 
-        this.startCyberBoot();
+        const alreadySeen = Boolean(sessionStorage.getItem('boot_seen'));
+        if (alreadySeen) {
+            this.finishBoot(true);
+        } else {
+            this.startCyberBoot(false);
+        }
         this.startHeroTerminal();
     }
 
@@ -70,10 +75,11 @@ export class LoadingManager {
         this.heroTimers = [];
     }
 
-    finishBoot() {
-        if (!this.isBootRunning) return;
+    finishBoot(instant = false) {
+        if (!this.isBootRunning && !instant) return;
         this.isBootRunning = false;
         this.clearBootTimers();
+        sessionStorage.setItem('boot_seen', '1');
         if (this.loadingScreen) {
             this.loadingScreen.classList.add('boot-hidden');
             this.loadingScreen.setAttribute('aria-hidden', 'true');
@@ -81,7 +87,7 @@ export class LoadingManager {
         }
     }
 
-    startCyberBoot() {
+    startCyberBoot(isFull = false) {
         if (!this.loadingScreen || !this.bootOutput) return;
 
         const isReduced = (
@@ -90,7 +96,7 @@ export class LoadingManager {
         );
 
         if (isReduced) {
-            this.finishBoot();
+            this.finishBoot(true);
             return;
         }
 
@@ -110,36 +116,52 @@ export class LoadingManager {
             this.finalThianetic.textContent = 'THIANETIC';
         }
 
-        let cumulativeDelay = 250;
-        BOOT_SEQUENCE.forEach((step) => {
-            cumulativeDelay += step.delay || 550;
-            const timerId = setTimeout(() => {
+        if (isFull) {
+            let cumulativeDelay = 250;
+            BOOT_SEQUENCE.forEach((step) => {
+                cumulativeDelay += step.delay || 550;
+                const timerId = setTimeout(() => {
+                    if (!this.isBootRunning) return;
+                    const line = document.createElement('div');
+                    line.className = 'mb-1.5 font-mono text-xs sm:text-sm';
+                    line.textContent = `> ${step.text}`;
+                    this.bootOutput.appendChild(line);
+
+                    if (this.bootProgressBar && typeof step.progress === 'number') {
+                        this.bootProgressBar.style.width = `${step.progress}%`;
+                    }
+                }, cumulativeDelay);
+                this.bootTimers.push(timerId);
+            });
+
+            const revealDelay = cumulativeDelay + 350;
+            const revealTimer = setTimeout(() => {
+                if (!this.isBootRunning || !this.finalThianetic) return;
+                this.finalThianetic.classList.add('visible');
+                scrambleText(this.finalThianetic, 'THIANETIC', { durationStep: 35, stepIncrement: 0.35 });
+            }, revealDelay);
+            this.bootTimers.push(revealTimer);
+
+            const finishTimer = setTimeout(() => {
                 if (!this.isBootRunning) return;
-                const line = document.createElement('div');
-                line.className = 'mb-1.5 font-mono text-xs sm:text-sm';
-                line.textContent = `> ${step.text}`;
-                this.bootOutput.appendChild(line);
+                this.finishBoot();
+            }, revealDelay + 1400);
+            this.bootTimers.push(finishTimer);
+        } else {
+            if (this.bootProgressBar) {
+                this.bootProgressBar.style.width = '100%';
+            }
+            if (this.finalThianetic) {
+                this.finalThianetic.classList.add('visible');
+                scrambleText(this.finalThianetic, 'THIANETIC', { durationStep: 30, stepIncrement: 0.45 });
+            }
 
-                if (this.bootProgressBar && typeof step.progress === 'number') {
-                    this.bootProgressBar.style.width = `${step.progress}%`;
-                }
-            }, cumulativeDelay);
-            this.bootTimers.push(timerId);
-        });
-
-        const revealDelay = cumulativeDelay + 350;
-        const revealTimer = setTimeout(() => {
-            if (!this.isBootRunning || !this.finalThianetic) return;
-            this.finalThianetic.classList.add('visible');
-            scrambleText(this.finalThianetic, 'THIANETIC', { durationStep: 35, stepIncrement: 0.35 });
-        }, revealDelay);
-        this.bootTimers.push(revealTimer);
-
-        const finishTimer = setTimeout(() => {
-            if (!this.isBootRunning) return;
-            this.finishBoot();
-        }, revealDelay + 1400);
-        this.bootTimers.push(finishTimer);
+            const finishTimer = setTimeout(() => {
+                if (!this.isBootRunning) return;
+                this.finishBoot();
+            }, 850);
+            this.bootTimers.push(finishTimer);
+        }
     }
 
     startHeroTerminal() {

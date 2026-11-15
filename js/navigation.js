@@ -69,21 +69,20 @@ export class NavigationManager {
         this.mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
 
         const mainContent = document.getElementById('main-content');
-        const header = document.querySelector('header');
 
         if (open) {
             this.mobileMenu.classList.remove('translate-x-full');
             this.mobileMenu.removeAttribute('inert');
             if (mainContent) mainContent.setAttribute('inert', '');
-            if (header) header.setAttribute('inert', '');
             const firstLink = this.mobileMenu.querySelector('a');
             if (firstLink) firstLink.focus();
         } else {
             this.mobileMenu.classList.add('translate-x-full');
             this.mobileMenu.setAttribute('inert', '');
             if (mainContent) mainContent.removeAttribute('inert');
-            if (header) header.removeAttribute('inert');
-            this.mobileMenuBtn.focus();
+            if (this.mobileMenuBtn && getComputedStyle(this.mobileMenuBtn).display !== 'none') {
+                this.mobileMenuBtn.focus();
+            }
         }
     }
 
@@ -131,7 +130,7 @@ export class NavigationManager {
 
     setupHoverScramble(signal) {
         const scrambleElements = document.querySelectorAll(
-            '.lateral-nav a, .mobile-nav-link, .filter-tab, .liquid-glass-btn, .project-btn'
+            '.liquid-glass-btn, .project-btn, #cv-header-btn'
         );
         scrambleElements.forEach((el) => {
             el.addEventListener('mouseenter', () => {

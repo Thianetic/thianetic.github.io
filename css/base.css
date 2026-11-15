@@ -2,9 +2,9 @@
 @layer base, components, utilities, overrides;
 
 @layer base {
-    /* Escalado proporcional en raíz para que todas las utilidades rem escalen (Hallazgo #6) */
+    /* Escalado relativo en raíz para respetar la configuración base del navegador del usuario */
     html {
-        font-size: var(--font-size, 16px);
+        font-size: 100%;
         scrollbar-width: thin;
         scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
     }
@@ -111,11 +111,5 @@
         height: 100%;
         z-index: -1;
         pointer-events: none;
-    }
-
-    /* Contención de renderizado para secciones bajo el pliegue (Fluidez 60 FPS) */
-    .cv-section-lazy {
-        content-visibility: auto;
-        contain-intrinsic-size: 1px 750px;
     }
 }

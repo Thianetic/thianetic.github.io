@@ -34,8 +34,21 @@ export class ProjectModal {
         this.modalDemoLink = document.getElementById('modal-demo');
         this.modalCodeLink = document.getElementById('modal-code');
 
-        // Event delegation for any project card with [data-project]
+        // Event delegation for any project card with [data-project] or explicit trigger [data-project-trigger]
         document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-project-trigger]');
+            if (trigger) {
+                e.preventDefault();
+                e.stopPropagation();
+                const card = trigger.closest('[data-project]');
+                const projectId = trigger.getAttribute('data-project-trigger') || card?.getAttribute('data-project');
+                if (projectId) {
+                    this.lastTriggerElement = trigger;
+                    this.openProjectModal(projectId, card);
+                }
+                return;
+            }
+
             if (e.target.closest('a[href], button')) return;
 
             const card = e.target.closest('[data-project]');
@@ -99,7 +112,8 @@ export class ProjectModal {
 
         if (this.modalStatus) {
             this.modalStatus.textContent = data.status || 'PROYECTO TÉCNICO';
-            this.modalStatus.className = 'inline-block px-3 py-1 rounded-full text-xs font-fira-code font-bold status-release';
+            const statusClass = data.statusClass || 'status-release';
+            this.modalStatus.className = `inline-block px-3 py-1 rounded-full text-xs font-fira-code font-bold ${statusClass}`;
         }
 
         if (this.modalDescription) {
@@ -141,12 +155,23 @@ export class ProjectModal {
             });
         }
 
+        if (this.modalDemoLink) {
+            if (data.demoUrl && data.demoUrl !== '#') {
+                this.modalDemoLink.href = data.demoUrl;
+                this.modalDemoLink.classList.remove('hidden');
+            } else {
+                this.modalDemoLink.classList.add('hidden');
+                this.modalDemoLink.removeAttribute('href');
+            }
+        }
+
         if (this.modalCodeLink) {
             if (data.codeUrl && data.codeUrl !== '#') {
                 this.modalCodeLink.href = data.codeUrl;
                 this.modalCodeLink.classList.remove('hidden');
             } else {
                 this.modalCodeLink.classList.add('hidden');
+                this.modalCodeLink.removeAttribute('href');
             }
         }
 

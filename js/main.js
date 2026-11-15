@@ -128,11 +128,21 @@ export class PortfolioApp {
 
                 navigator.modelContext.registerTool({
                     name: 'open_contact_channel',
-                    description: 'Opens the interactive contact modal in the portfolio UI.',
-                    inputSchema: { type: 'object', properties: {} },
-                    execute: async () => {
-                        this.bus.dispatchEvent(new CustomEvent('contact:open'));
-                        return { status: 'opened' };
+                    description: 'Abre el modal de contacto directo en el navegador o devuelve los canales de contacto verificados de Thianetic.',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            subject: {
+                                type: 'string',
+                                description: 'Asunto opcional para pre-seleccionar en el formulario de contacto.'
+                            }
+                        }
+                    },
+                    execute: async (args = {}) => {
+                        this.bus.dispatchEvent(new CustomEvent('contact:open', {
+                            detail: { subject: args?.subject }
+                        }));
+                        return { status: 'opened', subject: args?.subject || null };
                     }
                 });
             }

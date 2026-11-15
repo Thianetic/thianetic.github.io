@@ -101,15 +101,29 @@ export class ContactFormManager {
         }
 
         if (this.bus) {
-            this.bus.addEventListener('contact:open', () => {
-                this.openContactModal();
+            this.bus.addEventListener('contact:open', (e) => {
+                const subject = e.detail?.subject;
+                this.openContactModal(subject);
             }, { signal });
         }
     }
 
-    openContactModal() {
+    openContactModal(subject = null) {
         if (this.contactModal && !this.contactModal.open) {
             this.contactModal.showModal();
+        }
+
+        if (subject && this.form) {
+            const subjectSelect = this.form.querySelector('#contact-subject, select[name="subject"]');
+            if (subjectSelect) {
+                const target = String(subject).toLowerCase().trim();
+                const matched = Array.from(subjectSelect.options).find(opt =>
+                    opt.value.toLowerCase().includes(target) || opt.text.toLowerCase().includes(target)
+                );
+                if (matched) {
+                    subjectSelect.value = matched.value;
+                }
+            }
         }
     }
 

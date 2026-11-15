@@ -134,7 +134,7 @@
         --line-height: 1.85;
     }
 
-    html.colorblind-friendly {
+    html.colorblind-friendly #main-content {
         filter: grayscale(100%) contrast(1.15);
     }
 
