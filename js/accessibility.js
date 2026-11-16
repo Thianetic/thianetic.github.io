@@ -59,6 +59,9 @@ export class AccessibilityManager {
             this.resetBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.handleAction('reset');
+                if (this.bus) {
+                    this.bus.dispatchEvent(new CustomEvent('theme:reset'));
+                }
             }, { signal });
         }
     }

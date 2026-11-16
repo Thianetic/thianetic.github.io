@@ -5,6 +5,9 @@
     /* Escalado relativo en raíz para respetar la configuración base del navegador del usuario */
     html {
         font-size: 100%;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
         scrollbar-width: thin;
         scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
     }
@@ -20,6 +23,9 @@
         background-color: var(--bg-root-dark);
         color: var(--text-secondary-dark);
         transition: background-color 0.4s ease, color 0.4s ease;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
         font-size: 1rem;
         line-height: var(--line-height);
         letter-spacing: var(--letter-spacing);

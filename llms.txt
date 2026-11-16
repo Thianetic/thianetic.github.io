@@ -8,7 +8,7 @@
 - **Diferenciador Clave:** Capacidad probada en producción real para asumir proyectos en solitario de extremo a extremo (*Solo Dev*): diseño de base de datos, API backend, interfaz web, cliente móvil nativo Android, despliegue en contenedores Docker, bastionado de seguridad perimetral y demostración directa a empresas cliente.
 
 ## Experiencia Profesional Verificada
-### SITH (Servicios Informáticos Técnicos & Hardware) — Desarrollador Full-Stack & DevSecOps (Lead / Único desarrollador Full-Stack)
+### SITH (Servicios Informáticos Técnicos & Hardware) — Desarrollador Full-Stack & DevSecOps (Desarrollo Integral End-to-End)
 - **Periodo:** Marzo 2025 — Marzo 2026 (1 Año · Desarrollo integral / End-to-End).
 - **Infraestructura y DevSecOps:** Provisión desde cero y aseguramiento de servidor VPS sobre Debian 13. Configuración de autenticación exclusiva mediante claves criptográficas SSH-ed25519, reglas de cortafuegos UFW, mitigación activa con Fail2ban y arquitectura en Docker con Nginx como Reverse Proxy TLS/SSL y base de datos MariaDB aislada.
 - **Proyecto En Producción 1 — SaaS Registro Horario SITH:** Plataforma multi-empresa para control legal de jornada laboral, geolocalización de fichajes y gestión de incidencias. Compuesta por frontend web modular (HTML5, CSS3, Vanilla JS), panel de administración corporativo, API RESTful en PHP + MariaDB y aplicación nativa Android en Kotlin. Realización de demos comerciales y despliegue de instancias para empresas cliente.

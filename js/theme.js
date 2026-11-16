@@ -24,12 +24,54 @@ export class ThemeManager {
             this.themeToggleDesktopBtn.addEventListener('click', handleToggle, { signal });
         }
 
+        // Listener reactivo al cambio de tema del sistema operativo / navegador
+        if (typeof window !== 'undefined' && window.matchMedia) {
+            const systemThemeMedia = window.matchMedia('(prefers-color-scheme: light)');
+            const handleSystemThemeChange = (e) => {
+                let savedTheme = null;
+                try {
+                    savedTheme = localStorage.getItem('theme');
+                } catch {
+                    savedTheme = null;
+                }
+                // Si el usuario no ha fijado una preferencia manual en localStorage, seguir dinámicamente al sistema
+                if (!savedTheme) {
+                    const html = document.documentElement;
+                    html.classList.toggle('light-mode', e.matches);
+                    this.updateThemeIcons(e.matches);
+                    if (this.bus) {
+                        this.bus.dispatchEvent(new CustomEvent('theme:changed', {
+                            detail: { theme: e.matches ? 'light' : 'dark' }
+                        }));
+                    }
+                }
+            };
+
+            if (systemThemeMedia.addEventListener) {
+                systemThemeMedia.addEventListener('change', handleSystemThemeChange, { signal });
+            } else if (systemThemeMedia.addListener) {
+                systemThemeMedia.addListener(handleSystemThemeChange);
+            }
+        }
+
         if (this.bus) {
             this.bus.addEventListener('theme:set', (e) => {
                 const targetTheme = e.detail?.theme;
                 if (targetTheme === 'light' || targetTheme === 'dark') {
                     this.setTheme(targetTheme);
                 }
+            }, { signal });
+
+            this.bus.addEventListener('theme:reset', () => {
+                try {
+                    localStorage.removeItem('theme');
+                } catch {
+                    // Ignore storage errors
+                }
+                const html = document.documentElement;
+                const isSystemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+                html.classList.toggle('light-mode', isSystemLight);
+                this.updateThemeIcons(isSystemLight);
             }, { signal });
         }
     }
@@ -100,9 +142,13 @@ export class ThemeManager {
             sunMobile.classList.toggle('hidden', isLight);
             moonMobile.classList.toggle('hidden', !isLight);
         }
+
+        // Interruptor deslizable en desktop (sol y luna coexisten en la pista)
         if (sunDesktop && moonDesktop) {
-            sunDesktop.classList.toggle('hidden', isLight);
-            moonDesktop.classList.toggle('hidden', !isLight);
+            sunDesktop.classList.remove('hidden');
+            moonDesktop.classList.remove('hidden');
+            sunDesktop.style.opacity = isLight ? '1' : '0.35';
+            moonDesktop.style.opacity = isLight ? '0.35' : '1';
         }
 
         const label = isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro';
@@ -110,15 +156,32 @@ export class ThemeManager {
             this.themeToggleBtn.setAttribute('aria-label', label);
             this.themeToggleBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
         }
+
         if (this.themeToggleDesktopBtn) {
             this.themeToggleDesktopBtn.setAttribute('aria-label', label);
-            this.themeToggleDesktopBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-            this.themeToggleDesktopBtn.classList.toggle('active', isLight);
+            this.themeToggleDesktopBtn.setAttribute('aria-checked', isLight ? 'true' : 'false');
+            this.themeToggleDesktopBtn.classList.toggle('theme-switch-checked', isLight);
+
+            const thumb = this.themeToggleDesktopBtn.querySelector('.theme-switch-thumb');
+            if (thumb) {
+                if (isLight) {
+                    thumb.classList.remove('translate-x-1');
+                    thumb.classList.add('translate-x-7');
+                } else {
+                    thumb.classList.remove('translate-x-7');
+                    thumb.classList.add('translate-x-1');
+                }
+            }
         }
 
         const themeIndicator = document.getElementById('theme-mode-indicator');
         if (themeIndicator) {
             themeIndicator.textContent = isLight ? 'Claro' : 'Oscuro';
+            if (isLight) {
+                themeIndicator.className = 'text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-500 border border-amber-500/30 font-semibold uppercase';
+            } else {
+                themeIndicator.className = 'text-[10px] font-mono px-2 py-0.5 rounded bg-accent/15 text-accent border border-accent/30 font-semibold uppercase';
+            }
         }
     }
 }

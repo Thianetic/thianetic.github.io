@@ -262,3 +262,36 @@ test('Sintaxis JavaScript: todos los módulos en js/ pasan node --check con 0 er
     }
 });
 
+test('Integridad v1.2.0: versionado SemVer sincronizado, switch de tema aislado y humble phrasing', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const root = path.resolve(import.meta.dirname, '..');
+
+    const versionFile = fs.readFileSync(path.join(root, 'VERSION'), 'utf8').trim();
+    const { APP_VERSION } = await import('../js/config.js');
+    const notFoundHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');
+    const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+    const llmsTxt = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
+    const variablesCss = fs.readFileSync(path.join(root, 'css/variables.css'), 'utf8');
+
+    // 1. Versionado sincronizado
+    assert.equal(versionFile, '1.2.0', 'VERSION debe ser 1.2.0');
+    assert.equal(APP_VERSION, '1.2.0', 'APP_VERSION debe ser 1.2.0');
+    assert.ok(notFoundHtml.includes('v1.2.0'), '404.html debe reflejar v1.2.0');
+
+    // 2. Switch de tema aislado en el panel de accesibilidad
+    assert.ok(indexHtml.includes('id="theme-toggle-desktop"'), 'index.html debe contener el botón desktop de tema');
+    assert.ok(indexHtml.includes('role="switch"'), 'theme-toggle-desktop debe tener role="switch"');
+    assert.ok(indexHtml.includes('theme-switch-container'), 'theme-toggle-desktop debe estar en su contenedor aislado');
+    assert.ok(indexHtml.includes('theme-switch-thumb'), 'theme-toggle-desktop debe tener thumb deslizable');
+
+    // 3. Estabilidad del widget de accesibilidad (sin filter en #accessibility-btn)
+    assert.ok(!variablesCss.includes('#accessibility-btn {'), 'variables.css no debe aplicar filter directamente a #accessibility-btn');
+
+    // 4. Humble phrasing: Cero términos inflados en index.html y llms.txt
+    assert.equal(indexHtml.includes('Unipersonal') || indexHtml.includes('unipersonal'), false, 'index.html no debe contener "Unipersonal"');
+    assert.equal(llmsTxt.includes('Unipersonal') || llmsTxt.includes('unipersonal'), false, 'llms.txt no debe contener "Unipersonal"');
+    assert.equal(indexHtml.includes('Full-Stack Lead') || indexHtml.includes('Lead Full-Stack'), false, 'index.html no debe contener "Lead"');
+    assert.equal(llmsTxt.includes('Full-Stack Lead') || llmsTxt.includes('Lead Full-Stack'), false, 'llms.txt no debe contener "Lead"');
+});
+

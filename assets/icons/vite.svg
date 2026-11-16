@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+  <defs>
+    <linearGradient id="vg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#41D1FF"/>
+      <stop offset="100%" stop-color="#BD34FE"/>
+    </linearGradient>
+    <linearGradient id="vg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEA83"/>
+      <stop offset="100%" stop-color="#FFDD35"/>
+    </linearGradient>
+  </defs>
+  <!-- Vite Wings & Lightning Bolt -->
+  <path fill="url(#vg1)" d="M21.45 3.3a.75.75 0 0 0-.8-.11L12.5 7.42 4.35 3.19a.75.75 0 0 0-1.07.78l2.7 15.42a.75.75 0 0 0 .61.61l5.22 1a.75.75 0 0 0 .38 0l5.22-1a.75.75 0 0 0 .61-.61l2.7-15.42a.75.75 0 0 0-.27-.67z"/>
+  <path fill="url(#vg2)" d="M13 14.5l-2 3.5v-4.5H9l3-5.5v4.5h2z"/>
+</svg>

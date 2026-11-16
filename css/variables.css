@@ -149,9 +149,20 @@
     html.colorblind-friendly #main-content,
     html.colorblind-friendly header,
     html.colorblind-friendly #mobile-menu,
-    html.colorblind-friendly #social-links,
-    html.colorblind-friendly #accessibility-btn {
+    html.colorblind-friendly #social-links {
         filter: grayscale(100%) contrast(1.15);
+    }
+
+    /* Adaptación de contraste en modo claro para contenedores con fondo translúcido oscuro */
+    html.light-mode .bg-black\/40,
+    html.light-mode .bg-black\/30,
+    html.light-mode .bg-black\/20 {
+        background-color: var(--card-light) !important;
+        border-color: var(--line-color-light) !important;
+    }
+
+    html.light-mode img.bg-black\/40 {
+        background-color: #f1f5f9 !important;
     }
 
     html.highlight-links a {
