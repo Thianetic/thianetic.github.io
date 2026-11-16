@@ -232,8 +232,8 @@ test('CSP y Zero-CDN: index.html y 404.html conservan CSP estricta y hashes SHA-
 
         const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
         assert.ok(scriptMatch, `${file} debe tener el script inline anti-FOUC`);
-        const hash = crypto.createHash('sha256').update(scriptMatch[1]).digest('base64');
-        assert.ok(html.includes(`'sha256-${hash}'`), `${file} debe incluir el hash exacto ${hash} en su CSP`);
+        const lfHash = crypto.createHash('sha256').update(scriptMatch[1].replace(/\r\n/g, '\n')).digest('base64');
+        assert.ok(html.includes(`'sha256-${lfHash}'`), `${file} debe incluir el hash exacto ${lfHash} en su CSP`);
 
         assert.equal(html.includes('src="http://') || html.includes('src="https://'), false, `${file} no debe tener src externo`);
         assert.equal(html.includes('rel="stylesheet" href="http'), false, `${file} no debe cargar CSS externo`);
