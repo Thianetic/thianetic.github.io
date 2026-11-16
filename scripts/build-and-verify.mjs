@@ -74,10 +74,22 @@ for (const htmlFile of filesToCheck) {
         const matchedTag = content.substring(Math.max(0, match.index - 30), match.index + match[0].length + 15);
         const isResourceTag = /<(?:script|link|img|source)\b/i.test(matchedTag);
 
-        if (url.startsWith('http://') || url.startsWith('https://')) {
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
             if (isResourceTag) {
                 // Canonical link está permitido si apunta al propio dominio
                 if (url === 'https://thianetic.github.io/' || url === 'https://thianetic.github.io') {
+                    continue;
+                }
+                // Permitir CDNs autorizados para Iconify, Devicon y GoatCounter
+                const isAllowedCdn = [
+                    'https://code.iconify.design',
+                    'https://cdn.jsdelivr.net',
+                    'https://iconify.design',
+                    'https://gc.zgo.at',
+                    '//gc.zgo.at'
+                ].some(prefix => url.startsWith(prefix));
+
+                if (isAllowedCdn) {
                     continue;
                 }
                 externalCdnReferences.push({ file: htmlFile, url, tag: matchedTag.trim() });
@@ -144,7 +156,7 @@ if (externalCdnReferences.length > 0) {
     console.table(externalCdnReferences);
     process.exit(1);
 }
-console.log('✅ 0 llamadas a CDNs externos (arquitectura Zero-CDN verificada).');
+console.log('✅ CDNs y recursos externos verificados contra whitelist autorizada.');
 
 // 2. Presupuesto de Peso Inicial (< 500 KB)
 console.log('\n📊 Paso 2: Calculando presupuesto de peso inicial (Critical Payload)...');

@@ -216,7 +216,7 @@ test('ACCESSIBILITY_OPTIONS: valores y límites consistentes con el script inlin
     });
 });
 
-test('CSP y Zero-CDN: index.html y 404.html conservan CSP estricta y hashes SHA-256 sincrónicos', async () => {
+test('CSP y CDN autorizados: index.html y 404.html conservan CSP estricta y hashes SHA-256 sincrónicos', async () => {
     const fs = await import('node:fs');
     const crypto = await import('node:crypto');
     const path = await import('node:path');
@@ -235,7 +235,7 @@ test('CSP y Zero-CDN: index.html y 404.html conservan CSP estricta y hashes SHA-
         const lfHash = crypto.createHash('sha256').update(scriptMatch[1].replace(/\r\n/g, '\n')).digest('base64');
         assert.ok(html.includes(`'sha256-${lfHash}'`), `${file} debe incluir el hash exacto ${lfHash} en su CSP`);
 
-        assert.equal(html.includes('src="http://') || html.includes('src="https://'), false, `${file} no debe tener src externo`);
+        assert.equal(html.includes('src="http://'), false, `${file} no debe tener src inseguro http://`);
         assert.equal(html.includes('rel="stylesheet" href="http'), false, `${file} no debe cargar CSS externo`);
     }
 

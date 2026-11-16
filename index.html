@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Thianetic | Desarrollador Multiplataforma &amp; DevSecOps</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P2x0x/Dch73rVumcT+rHSqEkk5+wbVXa4bO7EFIcxvE=' 'sha256-/mEqb8SCGqpTRAuBLcL8KxhlhAULsdav42/6q7PfMUE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at https://code.iconify.design 'sha256-P2x0x/Dch73rVumcT+rHSqEkk5+wbVXa4bO7EFIcxvE=' 'sha256-/mEqb8SCGqpTRAuBLcL8KxhlhAULsdav42/6q7PfMUE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://thianetic.goatcounter.com https://cdn.jsdelivr.net https://iconify.design; font-src 'self'; connect-src 'self' https://thianetic.goatcounter.com https://api.iconify.design https://api2.iconify.design https://api.simplesvg.com https://api.unisvg.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
 
     <!-- ===== SEO & SOCIAL META TAGS (Hallazgo #19) ===== -->
     <meta name="description" content="Portfolio oficial de Thianetic: Desarrollador Multiplataforma & DevSecOps (Backend, Cloud & IoT). Especialista en Debian/Linux hardening, Docker, Node.js (pnpm), Python (uv), Android Kotlin, SQL/NoSQL e IoT MQTT.">
@@ -178,6 +178,8 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
 
+    <!-- ===== ICONOGRAFÍA EXTERNA ICONIFY CON SRI ===== -->
+    <script defer src="https://code.iconify.design/3/3.1.0/iconify.min.js" integrity="sha384-GYcZF/Xz4/6ZHVch5eVcYcyWmSCvO3+ffsxF+B9hfRyc3XCkSws7SO5ZSGqHlUNH" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
 
 <body class="overflow-x-hidden">
@@ -224,14 +226,14 @@
         <ul class="flex items-end space-x-6">
             <li class="flex flex-col items-center">
                 <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
-                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+                    <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:linkedin"></span>
                     <span class="social-tooltip tooltip-text" data-text="in/thianetic-dev" data-scramble-text>in/thianetic-dev</span>
                 </a>
                 <span class="social-line" aria-hidden="true"></span>
             </li>
             <li class="flex flex-col items-center">
                 <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 transition-all duration-300 text-[var(--text-secondary-dark)] hover:text-accent">
-                    <svg class="h-6 w-6 transition-all duration-300 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                    <span class="iconify h-6 w-6 transition-all duration-300" data-icon="mdi:github"></span>
                     <span class="social-tooltip tooltip-text" data-text="@thianetic" data-scramble-text>@thianetic</span>
                 </a>
                 <span class="social-line" aria-hidden="true"></span>
@@ -253,7 +255,7 @@
 
         <div class="flex items-center space-x-3">
             <button type="button" id="cv-header-btn" commandfor="cv-modal" command="show-modal" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold border border-accent/40 text-accent hover:bg-accent hover:text-[var(--bg-dark)] transition-all cursor-pointer">
-                <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-10-3h8v2H8v-2m0-4h8v2H8v-2m0-4h5v2H8V9z"/></svg>
+                <span class="iconify w-4 h-4" data-icon="mdi:file-document-outline"></span>
                 <span data-scramble-text>CV / Dossier</span>
             </button>
             <button type="button" id="mobile-menu-btn" class="lg:hidden text-accent text-2xl" aria-label="Abrir Menú" aria-expanded="false" aria-controls="mobile-menu">&#9776;</button>
@@ -289,10 +291,10 @@
 
         <div class="flex items-center space-x-6 mt-6">
             <a href="https://github.com/thianetic" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 text-[var(--text-secondary-dark)] hover:text-accent">
-                <svg class="h-7 w-7 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                <span class="iconify h-7 w-7" data-icon="mdi:github"></span>
             </a>
             <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 text-[var(--text-secondary-dark)] hover:text-accent">
-                <svg class="h-7 w-7 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+                <span class="iconify h-7 w-7" data-icon="mdi:linkedin"></span>
             </a>
         </div>
     </nav>
@@ -391,7 +393,7 @@
                                 Trayectoria Profesional &amp; Hitos
                             </h2>
                             <span class="hidden sm:inline-block text-xs font-mono text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 rounded-full">
-                                🟢 Open to Work (Desde Marzo 2026)
+                                🟢 Open to Work
                             </span>
                         </div>
 
@@ -975,7 +977,7 @@
                             <!-- Linux / Debian -->
                             <div class="tech-card animate-fade-up">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/debian.svg" alt="Linux Debian" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/linux/linux-original.svg" alt="Linux Base" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Linux / Debian</h3>
                                 <p class="tech-category">Base SO &amp; Hardening (12/13)</p>
@@ -984,7 +986,7 @@
                             <!-- DevSecOps & Seguridad -->
                             <div class="tech-card animate-fade-up stagger-1">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/devsecops.svg" alt="DevSecOps" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <span class="iconify w-10 h-10 text-emerald-400" data-icon="mdi:shield-check"></span>
                                 </div>
                                 <h3 class="tech-name">DevSecOps</h3>
                                 <p class="tech-category">UFW · Fail2ban · SSH ed25519 · TOCTOU</p>
@@ -993,7 +995,7 @@
                             <!-- Docker & Compose -->
                             <div class="tech-card animate-fade-up stagger-2">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/docker.svg" alt="Docker &amp; Compose" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/docker/docker-original.svg" alt="Docker" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Docker / Compose</h3>
                                 <p class="tech-category">Aislamiento &amp; Orquestación</p>
@@ -1002,7 +1004,7 @@
                             <!-- Nginx & SSL -->
                             <div class="tech-card animate-fade-up stagger-3">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/nginx.svg" alt="Nginx" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/nginx/nginx-original.svg" alt="Nginx" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Nginx</h3>
                                 <p class="tech-category">Reverse Proxy &amp; TLS / Rate Limit</p>
@@ -1011,7 +1013,7 @@
                             <!-- Python & uv -->
                             <div class="tech-card animate-fade-up">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/python.svg" alt="Python Astral uv" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/python/python-original.svg" alt="Python" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Python (Astral uv)</h3>
                                 <p class="tech-category">FastAPI · TUI · AsyncIO · Criptografía</p>
@@ -1020,7 +1022,7 @@
                             <!-- Node.js & pnpm -->
                             <div class="tech-card animate-fade-up stagger-1">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/nodejs.svg" alt="Node.js &amp; pnpm" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Node.js (pnpm)</h3>
                                 <p class="tech-category">Fastify · Prisma · Lucia Auth</p>
@@ -1029,7 +1031,7 @@
                             <!-- JavaScript & Vite -->
                             <div class="tech-card animate-fade-up stagger-2">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/vite.svg" alt="JavaScript &amp; Vite" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/vitejs/vitejs-original.svg" alt="Vite" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">JavaScript &amp; Vite</h3>
                                 <p class="tech-category">ES2025 · Web Components · SharedWorkers</p>
@@ -1038,7 +1040,7 @@
                             <!-- Kotlin & Android -->
                             <div class="tech-card animate-fade-up stagger-3">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/kotlin.svg" alt="Kotlin &amp; Android" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/kotlin/kotlin-original.svg" alt="Kotlin" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Kotlin / Android</h3>
                                 <p class="tech-category">Android SDK Nativo · Room / SQLite</p>
@@ -1047,7 +1049,7 @@
                             <!-- SQL & Bases de Datos -->
                             <div class="tech-card animate-fade-up">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/postgresql.svg" alt="PostgreSQL &amp; MariaDB" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">PostgreSQL / MariaDB</h3>
                                 <p class="tech-category">SQLite WAL · SQLCipher · Redis</p>
@@ -1056,7 +1058,7 @@
                             <!-- Automatización & Shell -->
                             <div class="tech-card animate-fade-up stagger-1">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/bash.svg" alt="Bash &amp; PowerShell" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/bash/bash-original.svg" alt="Bash & PowerShell" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Bash &amp; PowerShell</h3>
                                 <p class="tech-category">Cron · Logrotate · Batch · Serv. Win</p>
@@ -1065,7 +1067,7 @@
                             <!-- IoT & Hardware Firmware -->
                             <div class="tech-card animate-fade-up stagger-2">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/mqtt.svg" alt="Hardware IoT &amp; MQTT" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <span class="iconify w-10 h-10 text-cyan-400" data-icon="mdi:chip"></span>
                                 </div>
                                 <h3 class="tech-name">Hardware IoT &amp; MQTT</h3>
                                 <p class="tech-category">Microcontroladores · NFC · Deep Sleep</p>
@@ -1074,7 +1076,7 @@
                             <!-- Gráficos & 3D -->
                             <div class="tech-card animate-fade-up stagger-3">
                                 <div class="tech-icon">
-                                    <img src="assets/icons/unity.svg" alt="Three.js &amp; Unity" class="w-12 h-12 object-contain" width="48" height="48" loading="lazy">
+                                    <img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/threejs/threejs-original.svg" alt="Three.js & Unity" class="w-10 h-10">
                                 </div>
                                 <h3 class="tech-name">Three.js &amp; Unity C#</h3>
                                 <p class="tech-category">Simulación 2D/3D &amp; Canvas 60 FPS</p>
@@ -1146,7 +1148,7 @@
                         </h2>
 
                         <p class="text-base sm:text-lg mb-8 text-content leading-relaxed">
-                            Si buscas un perfil resolutivo para desarrollo de aplicaciones multiplataforma, infraestructura segura con DevSecOps o creación ágil de MVPs con visión integral de producto, mi buzón está abierto.
+                            Si buscas un perfil resolutivo para desarrollo de aplicaciones multiplataforma, infraestructura segura con DevSecOps o creación ágil con visión integral de producto, mi buzón está abierto.
                         </p>
 
                         <div class="flex flex-wrap justify-center items-center gap-4 mb-8">
@@ -1238,11 +1240,11 @@
                             </div>
                             <div class="attribution-item">
                                 <div class="attribution-logo">
-                                    <svg class="w-10 h-10 text-cyan-400 inline-block" viewBox="0 0 24 24" fill="currentColor" aria-label="Devicon"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+                                    <img loading="lazy" decoding="async" src="https://iconify.design/favicon.svg" alt="Iconify" width="30" height="18" class="w-12">
                                 </div>
                                 <div>
-                                    <a href="https://devicon.dev/" target="_blank" rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Devicon</a>
-                                    <div class="text-xs">Licencia MIT / Open Source</div>
+                                    <a href="https://iconify.design/" target="_blank" rel="noopener noreferrer" class="text-[var(--text-primary-dark)] hover:text-accent">Iconify</a>
+                                    <div class="text-xs">Licencia MIT</div>
                                 </div>
                             </div>
                         </div>
@@ -1296,7 +1298,7 @@
                 </button>
                 <button type="button" class="access-btn" data-access-action="toggle-colorblind" title="Modo Color">
                     <span class="level-indicator">off</span>
-                    <svg class="w-6 h-6 mb-1 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8v16z"/></svg>
+                    <span class="iconify w-6 h-6 mb-1 inline-block" data-icon="mdi:invert-colors-off"></span>
                     No Color
                 </button>
                 <button type="button" class="access-btn" data-access-action="toggle-links" title="Resaltar Enlaces">
@@ -1348,7 +1350,7 @@
                     <span id="modal-status" class="inline-block px-3 py-1 rounded-full text-xs font-fira-code font-bold"></span>
                 </div>
                 <button id="close-modal" type="button" commandfor="project-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar modal">
-                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
                 </button>
             </div>
 
@@ -1374,11 +1376,11 @@
 
                 <div class="flex gap-4">
                     <a id="modal-demo" href="#" target="_blank" rel="noopener noreferrer" class="project-btn demo-btn flex-1 justify-center">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7m-9 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5h-2v5H5V9h5V7H5z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:open-in-new"></span>
                         <span data-scramble-text>VER DEMO</span>
                     </a>
                     <a id="modal-code" href="#" target="_blank" rel="noopener noreferrer" class="project-btn code-btn flex-1 justify-center">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:github"></span>
                         <span data-scramble-text>VER CÓDIGO</span>
                     </a>
                 </div>
@@ -1392,7 +1394,7 @@
             <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
                 <h2 id="contact-modal-title" class="text-2xl font-bold text-[var(--text-primary-dark)]">Enviar Mensaje</h2>
                 <button id="close-contact-modal" type="button" commandfor="contact-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar formulario">
-                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
                 </button>
             </div>
 
@@ -1521,7 +1523,7 @@
             <div class="flex justify-between items-center p-6 border-b border-[var(--line-color-dark)]">
                 <h2 id="gdpr-modal-title" class="text-2xl font-bold text-[var(--text-primary-dark)]">Política de Privacidad y Tratamiento de Datos</h2>
                 <button id="close-gdpr-modal" type="button" commandfor="gdpr-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar términos">
-                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
                 </button>
             </div>
 
@@ -1568,7 +1570,7 @@
                     </div>
                 </div>
                 <button id="close-cv-modal" type="button" commandfor="cv-modal" command="close" class="text-[var(--text-secondary-dark)] hover:text-accent transition-colors p-2" aria-label="Cerrar modal">
-                    <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                    <span class="iconify w-6 h-6" data-icon="mdi:close"></span>
                 </button>
             </div>
 
@@ -1582,7 +1584,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2h4a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2m4 4V4h-4v2h4m6 4H4v3.5l8 4 8-4V10m-8 6.25L4.47 12.5V19h15.06v-6.5L12 16.25z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:briefcase-outline"></span>
                         Experiencia Clave: SITH (Marzo 2025 — Marzo 2026)
                     </h3>
                     <div class="p-4 rounded-lg bg-white/[0.02] border border-white/10 space-y-3">
@@ -1604,7 +1606,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3m6.82 6L12 12.72 5.18 9 12 5.28 18.82 9M17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:school-outline"></span>
                         Formación Oficial &amp; Hitos Académicos
                     </h3>
                     <div class="space-y-3 text-xs font-mono">
@@ -1627,7 +1629,7 @@
 
                 <div>
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-3a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8m8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-3a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:code-braces"></span>
                         Proyectos Propios &amp; Infraestructura IoT
                     </h3>
                     <div class="grid sm:grid-cols-2 gap-3 text-xs font-mono">
@@ -1660,7 +1662,7 @@
                 <!-- Códigos QR de Verificación y Contacto Rápido (Impresión / PDF) -->
                 <div class="p-4 rounded-lg bg-black/40 border border-white/10 mt-4">
                     <h3 class="font-mono text-xs font-bold text-accent uppercase mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4V4m2 2v2h2V6H6m8-2h6v6h-6V4m2 2v2h2V6h-2M4 14h6v6H4v-6m2 2v2h2v-2H6m10 0h2v2h-2v-2m-2-2h2v2h-2v-2m4 4h2v2h-2v-2m-2 0h-2v2h2v-2m2-4h2v2h-2v-2m-4-2h2v2h-2v-2z"/></svg>
+                        <span class="iconify w-4 h-4" data-icon="mdi:qrcode-scan"></span>
                         Verificación Directa &amp; Contacto Rápido
                     </h3>
                     <div class="grid grid-cols-2 gap-4 text-center">
@@ -1680,15 +1682,15 @@
 
             <div class="p-6 border-t border-[var(--line-color-dark)] flex flex-wrap gap-3">
                 <button id="print-cv-btn" type="button" class="flex-1 project-btn demo-btn justify-center text-xs font-mono py-2.5 cursor-pointer">
-                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 3H6v4h12V3m1 5H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3m-3 11H8v-5h8v5m3-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"/></svg>
+                    <span class="iconify w-4 h-4" data-icon="mdi:printer"></span>
                     <span data-scramble-text>IMPRIMIR / GUARDAR PDF</span>
                 </button>
                 <a href="mailto:thianetic@gmail.com?subject=Solicitud%20de%20CV%20-%20Thianetic" class="flex-1 project-btn code-btn justify-center text-xs font-mono py-2.5">
-                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0l-8 5-8-5h16m0 12H4V8l8 5 8-5v10z"/></svg>
+                    <span class="iconify w-4 h-4" data-icon="mdi:email-outline"></span>
                     <span data-scramble-text>SOLICITAR POR EMAIL</span>
                 </a>
                 <a href="https://linkedin.com/in/thianetic-dev" target="_blank" rel="noopener noreferrer" class="project-btn code-btn justify-center text-xs font-mono py-2.5 px-4">
-                    <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.99 0 1.8-.81 1.8-1.8 0-.99-.81-1.8-1.8-1.8-.99 0-1.8.81-1.8 1.8 0 .99.81 1.8 1.8 1.8m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+                    <span class="iconify w-4 h-4" data-icon="mdi:linkedin"></span>
                     <span data-scramble-text>LINKEDIN</span>
                 </a>
             </div>
@@ -1710,7 +1712,7 @@
                 <div class="flex items-center gap-3">
                     <span class="hidden sm:inline text-[11px] font-mono text-slate-400">ESC o "exit" para cerrar</span>
                     <button id="close-cli-modal" type="button" commandfor="cli-modal" command="close" class="text-slate-400 hover:text-emerald-400 transition-colors p-1" aria-label="Cerrar consola interactiva">
-                        <svg class="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                        <span class="iconify w-5 h-5" data-icon="mdi:close"></span>
                     </button>
                 </div>
             </div>
@@ -1740,5 +1742,8 @@
 
     <!-- ===== JAVASCRIPT MODULAR ===== -->
     <script type="module" src="js/main.js"></script>
+
+    <!-- ===== GOATCOUNTER ANALYTICS (Privacidad y Usuarios Únicos) ===== -->
+    <script data-goatcounter="https://thianetic.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
